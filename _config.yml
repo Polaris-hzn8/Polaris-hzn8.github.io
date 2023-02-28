@@ -103,5 +103,11 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: root@39.99.133.193:/www/wwwroot/hexo/hexo.git
+  repo: git@39.99.133.193:/www/repo/hexoBlog.git
   branch: master
+
+# 本地搜索
+search:
+  path: search.xml
+  field: all
+  content: true
