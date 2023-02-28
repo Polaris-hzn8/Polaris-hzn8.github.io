@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://polaris-hzn8.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -101,13 +101,14 @@ theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+
 deploy:
   type: git
-  repo: git@39.99.133.193:/www/repo/hexoBlog.git
-  branch: master
+  repository: git@github.com:Polaris-hzn8/Polaris-hzn8.github.io.git
+  branch: main
 
 # 本地搜索
 search:
   path: search.xml
-  field: all
+  field: post
   content: true
