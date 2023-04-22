@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Polaris-hzn8 - leetcode solution record</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Keep struggling, keep dream-chasing!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Polaris-hzn8">
+<meta property="og:url" content="http://39.99.133.193/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="Keep struggling, keep dream-chasing!">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="keyword1 keyword2 keyword3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/70149889"><link rel="canonical" href="http://39.99.133.193/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Polaris-hzn8',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-04-22 18:14:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Polaris-hzn8"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/readme/" title="算法刷题总结">算法刷题总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.745Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">OVERVIEW
+1.数组&#x2F;单链表系列算法
+双指针
+二分搜索
+滑动窗口
+回文串
+前缀和与差分数组
+
+先学习像数组、链表这种基本数据结构的常用算法，比如单链表翻转，前缀和数组，二分搜索等
+因为这些算法属于会者不难难者不会的类型，难度不大，学习它们不会花费太多时间。而且这些小而美的算法经常让你大呼精妙，能够有效培养你对算法的兴趣。
+单链表常考的技巧就是双指针，后文  单链表六大技巧 全给你总结好了，这些技巧就是会者不难，难者不会。
+比如判断单链表是否成环，拍脑袋的暴力解是什么？就是用一个 HashSet 之类的数据结构来缓存走过的节点，遇到重复的就说明有环对吧。但我们用快慢指针可以避免使用额外的空间，这就是聪明地穷举嘛。
+当然，对于找链表中点这种问题，使用双指针技巧只是显示你学过这个技巧，和遍历两次链表的常规解法从时间空间复杂度的角度来说都是差不多的。
+首先说二分搜索技巧，可以归为两端向中心的双指针。如果让你在数组中搜索元素，一个 for 循环穷举肯定能搞定对吧，但如果数组是有序的，二分搜索不就是一种更聪明的搜索方式么。
+后文  二分搜索框架详解 给你总结了二分搜索代码模板，保证不会出现搜索边界的问题。后文  二分搜索算法运用 给你总结了二分搜索相关题目的共性以及如何将二分搜索思想运用到实际算法中。
+类似的两端向中心的双指针技巧还有力扣上的 N 数之和系列问题，后文  一个函数秒杀所有 nSum 问题 讲了这些题目的共性，甭管几数之和，解法肯定要穷举所有的数字组合，然后看看那个数字组合的和等于目标和嘛。比较聪明的方式是先排序，利用双指针技巧快速计算结果。
+**再说  滑动窗口算法技巧**，典型的快慢双指针，快慢指针中间就是滑动的「窗口」，主要用于解决子串问题。
+文中最小覆盖子串这道题，让你寻找包含特定字符的最短子串，常规拍脑袋解法是什么？那肯定是类似字符串暴力匹配算法，用嵌套 for 循环穷举呗，平方级的复杂度。
+而滑动窗口技巧告诉你不用这么麻烦，可以用快慢指针遍历一次就求出答案，这就是教你聪明的穷举技巧。
+但是，就好像二分搜索只能运用在有序数组上一样，滑动窗口也是有其限制的，就是你必须明确的知道什么时候应该扩大窗口，什么时候该收缩窗口。
+比如后文  最大子数组问题 面对的问题就没办法用滑动窗口，因为数组中的元素存在负数，扩大或缩小窗口并不能保证窗口中的元素之 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92%E6%B1%82%E6%B3%95/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.745Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">斐波那契数列的递推与递归求法：
+
+
+斐波那契数列求法：递推（从前向后计算）、递归（从后向前计算），递归由于重复计算导致计算速度很慢——记忆化数组解决
+
+（1）递推求Fibonacci：1234567891011121314#include&lt;iostream&gt;using namespace std;long long num[50] = &#123;1, 1&#125;;int main()&#123;    for(int i = 2; i &lt; 50; ++i )&#123;        num[i] = num[i - 1] + num[i - 2];    &#125;    for(int i = 1; i &lt; 50; ++i)&#123;         cout &lt;&lt; i &lt;&lt; &quot; : &quot; &lt;&lt; num[i] &lt;&lt; endl;    &#125;    return 0;&#125;
+
+
+（2）递归求Fibonacci：1234567891011121314151617#include&lt;iostream&gt;using namespace std;long long func(int x)&#123;    if(x == 0 || x == 1)&#123;        return 1;    &#125;    return func(x - 1) + func(x - 2);&#125;int main()&#123;    for(int i = 1; i &lt; 50; ++i)&#123;        cout &lt;&lt; i &lt;&lt; &quot; : &quot; &lt;&lt; func(i) &lt;&lt; endl;    &#125;    return 0;&#125;
+
+
+
+注意：可以看到这里利用递归法求斐波那契数列在进行到30项时，每一项的运算时间已经达到秒级
+
+
+（3）递归求Fibonacci（记忆化数组优化）：
+递归法中存在的大量重复计算导致递归递归太深、运算速度降低，可以使用记忆数组优化程序
+
+
+定义一个记忆化数组用于存储运算过程中的中间值
+当发现数字没有计算过，将数字计算一遍并将其存入数组中
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/6.3%20%E6%90%9C%E7%B4%A2%E8%B5%B0%E5%9C%B0%E5%9B%BE%E9%97%AE%E9%A2%98/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.663Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">搜索走地图问题
+1.OJ535：
+2.OJ397：
+3.OJ536：
+
+4.OJ396：
+5.OJ398:
+
+OJ400：奇怪的象棋游戏OJ401：奇怪的象棋游戏升级版OJ303：矩阵距离（一）</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/6.4%20%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.663Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">搜索综合问题（下）
+1.OJ541：相遇问题*（深搜）
+
+	
+2.OJ542：奶酪
+
+
+
+3.LeetCode417：太平洋大西洋水流问题
+4.LeetCode529：扫雷游戏
+
+5.LeetCode934：最短的桥
+
+6.LeetCode967：连续差相同的数字
+7.LeetCode752：打开转盘锁
+8.LeetCode127：单词接龙
+9.层板等分衣柜&#x3D;&#x3D;题目描述&#x3D;&#x3D;：给定一个高度为2000mm的柜子空间，以及n个层板距离柜子底部的高度，满足移动层板位置使得层板等分衣柜空间，求所有移动层板的顺序。（层板号自下而上一次排列1、2、3、….n层板需要考虑空间位置，不能跨层板移动）
+
+要求：1 ≤ n ≤ 10、输出结果需要按照从小到大的顺序输出。
+1234567891011input:n = 3, zs = 50, 60, 1000output:3 2 1input:n = 4, zs = 50, 600, 700, 1000output:1, 4, 3, 24, 1, 3, 24, 3, 1, 24, 3, 2, 1
+
+&#x3D;&#x3D;思路分析&#x3D;&#x3D;：
+看起来就是每个层板都可以移到到任意位置，但只移动一次，同时不能跨越另一个板移动。
+有多种移动方案，题目要求你输出所有方案，并且按从小到大输出。
+就是一般你优先尝试移动序号低的版，看看能不能让它移到均分高度的地方。
+
+比如n&#x3D;3，zs&#x3D;50,60,1000。
+柜子被分割成4部分，位置应该是500、1000、1500，
+由于c3板子在1000这个位置，c2、c1是移动不到500这个位置的，
+所以先移动c3到1500，再移动c2到1000，最后移动c1到500。
+这样就等分了柜子高度了。
+
+这题其实就是先根据板子数量，找出等分位置。
+然后依次从序号小的那个板子开始判断能否移到到某个等分位置。
+不行的话，就判断下一个。
+复杂度不超过n^2，n小于10，可以直接遍历求解。
+但是也要考虑一种情况，就是例1里面，如果c2先移动到500，那么c1移动不到1000的，
+导致问题解不了了，这种情况也要考虑。
+
+
+像这个C1开始在50，要移动到500但是50-500之间有C2，不能动，1开头的都不行，
+然后再试C2,C2也不行，1000被C3占据，
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/6.1%20%E9%80%92%E5%BD%92%E4%B8%8E%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E9%97%AE%E9%A2%98/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.662Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">递归与排列组合问题
+1.OnlineJ240：图形打印Tags：递归
+当 n 为 1 时，图形如下图：
+1X
+
+当 n 为 2 时，图形如下图：
+123X X X X X
+
+当 n ≥ 2 时，图形规律如下：
+123图形n-1    图形n-1    图形n-1图形n-1    图形n-1
+
+给定 n 组数据，输出每组数据对应的图形。
+输入：
+输入共 n+1 行，前 n 行每行一个数，表示要输出的图形的大小，最后一行输入 −1 代表程序结束。（1 ≤ n ≤ 7）
+输出：
+每输入一个数输出一组图形，并在图形后的下一行输出一个 −。
+注意，图形后应补齐空格。
+123451234-1
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344X-X X X X X-X X   X X X     X X X   X X   X X       X       X X   X X   X X X     X X X   X X-X X   X X         X X   X X X     X           X     X X X   X X         X X   X X   X X               X X       X                 X       X X               X X   X X   X X         X X   X X X     X           X     X X X   X X         X X   X X         X X   X X                   X     X                   X X   X X                     X X                         X                         X X                     X X   X X                   X     X                   X X   X X         X X   X X         X X   X X X     X            ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/6.2%20%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8A%EF%BC%89/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.662Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">搜索综合问题（上）
+1.
+
+2.OJ81：小明回家（广搜）
+
+
+3.OJ538：图的遍历
+
+4.OJ402：奇怪的电梯（广搜）
+
+5.OJ530：警察找车（广搜）*
+
+
+6.OJ531：奇怪的电视
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/5.1%20OnlineJ%EF%BC%88%E4%B8%8A%EF%BC%89/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.661Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">OnlineJ（上）
+1.OnlineJ477：元音字母给定一个只包含大写字母 A − Z 的字符串，找到相邻两个元音字母之间间隔最大的距离。
+
+注：元音字母为 AEIOU
+
+参考代码&#x3D;&#x3D;思路&#x3D;&#x3D;：记录上一个元音字母的位置last，以及当前访问的元音字母的位置i，计算最大距离判断是否更新ans的结果。如此循环
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061//版本1：逻辑混乱bool check(char c) &#123;    if (c == &#x27;A&#x27; || c == &#x27;E&#x27; || c == &#x27;I&#x27; || c == &#x27;O&#x27; || c == &#x27;U&#x27;) return true;    return false;&#125;int func(string str) &#123;    int index[2];    int maxlen = 0;    int flag = 0;    for (int i = 0; i &lt; str.length(); ++i) &#123;        if (flag &amp;&amp; check(str[i])) &#123;            index[1] = i;            int newlen = index[1] - index[0];            if (newlen &gt; maxlen) maxlen = newlen;             index[0] = index[1];        &#125;        if (!flag &amp;&amp; check(str[i])) &#123;//第1个元音字母            index[0] = i;            flag = 1;        &#125;    &#125;    return maxlen;&#125;//版本2：对首个元音字母的处理 进行逻辑优 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/5.2%20OnlineJ%EF%BC%88%E4%B8%8B%EF%BC%89/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.661Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">OnlineJ（下）
+1.OnlineJ503：独木舟（贪心）一群人去旅行要租用独木舟，每艘独木舟最多乘两人，且所有独木舟有一个统一的载重限度。
+给出独木舟的载重限度和每个人的体重，现求最少需要租用多少独木舟。
+输入
+第一行一个整数 w，表示独木舟的载重量。（80 ≤ w ≤ 200）
+第二行一个整数 n，表示旅游人数。 （1 ≤ n ≤ 30000）
+接下来 n 行，每行一个数表示 ai，即每个人的重量 （5 ≤ ai ≤ w）
+输出
+接下来 n 行，每行一个数表示 ai，即每个人的重量 （5 ≤ ai ≤ w）
+12345678910111009902020305060708090
+
+16
+
+参考代码123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int weight[30005];int main() &#123;	//1.数据录入	int w;//独木舟载重量	int n;//旅游的人数	cin &gt;&gt; w &gt;&gt; n;	for (int i = 0; i &lt; n; ++i) cin &gt;&gt; weight[i];	sort(weight, weight + n);	//2.进行数据处理	int count = 0;	if (weight[0] * 2 &gt; w) &#123;//特殊情况处理		count = n;	&#125; else &#123;//一般情况处理		for (int i = 0; i &lt; n; ++i) &#123;			for (int j = n - 1; j &gt;= 0; --j) &#123;				if (weight[j] == 0) continue;				if ((weight[i] + weight[j]) &lt;= w || i == j) &#123;					count++;					weight[j] = 0;					weight[i] = 0;					break;				&#125;			&#125;		&#125;	&#125;	cout &lt;& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/4.2%20LeetcodeGroup2/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.660Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">Group2
+1.LeetCode53：最大子数组和tags：动态规划、分治、数组
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+子数组是数组中的一个连续部分。
+12345678class Solution &#123;public:    int maxSubArray(vector&lt;int&gt;&amp; nums) &#123;        int final = nums[0], ans = nums[0];        ans = max(nums[i], ans + nums[i]);        fin = max(fin, ans);    &#125;&#125;;
+
+这是一道典型的使用「动态规划」解决的问题，需要我们掌握动态规划问题设计状态的技巧（无后效性），
+并且需要知道如何推导状态转移方程，最后再去优化空间。
+（1）动态规划&lt;1&gt;问题理解「力扣」第 53 题（最大子序和）是「力扣」第 124 题（二叉树的最大路径和）的线性版本，它们的状态设计思想和状态转移是类似的，希望大家能够通过本题题解进一步体会状态是如何想到的（即子问题的定义需要从哪些方面考虑）。
+本题接的重点在「关键 1：理解题意」和「关键 2：如何定义子问题（如何定义状态）」和「最后再谈谈「无后效性」。
+关键 1：理解题意
+题目要我们找出和最大的连续子数组的值是多少，「连续」是关键字，连续很重要，不是子序列。
+题目只要求返回结果，不要求得到最大的连续子数组是哪一个。这样的问题通常可以使用「动态规划」解决。
+关键 2：如何定义子问题（如何定义状态）
+设计状态思路：把不确定的因素确定下来，进而把子问题定义清楚，把子问题定义得简单。动态规划的思想通过解决了一个一个简单的问题，进而把简单的问题的解组成了复杂的问题的解。
+友情提示：上面这句话大家姑且这么一看，脑子里有个印象，没有那么绝对。可能不同的人看会有不同的理解。如果我以后讲解的动态规划的设计思想与这里讲解的「设计状态思路」不一样的，我会再和大家说明。如果讲解有误导的地方，还请大家指出。
+
+我们 不知道和最大的连续子数组一定会选哪一个数，那么我们可以求出 所有 经过输入数组的某一个数的连续子数组的最大和。
+例如，示例 1 输入数组是 [-2,1,-3, ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/22/algorithm/kkb/4.1%20LeetcodeGroup1/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-22T09:49:24.659Z" title="Created 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="content">Group1
+1.LeetCode01：两数之和给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+你可以按任意顺序返回答案。
+
+（1）暴力法1234567891011121314class Solution &#123;public:    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;        int i, j;        for (i = 0; i &lt; nums.size(); ++i) &#123;            for (j = i + 1; j &lt; nums.size(); ++j) &#123;                if (nums[i] + nums[j] == target) &#123;                    return &#123;i, j&#125;;                &#125;            &#125;        &#125;        return &#123;i, j&#125;;    &#125;&#125;;
+
+（2）二分查找思想：sort排序 + 二分查找
+
+使用for循环遍历数组中的每一个数字
+
+在for循环内部，使用target值减去当前遍历的数字值获取配对值ret，使用二分查找该数字ret
+
+如果找到该数字则直接输出其下标(初始若有序的情况下)
+
+实际是无序的！难点在于如何联系被sort打乱下标后的vec与未打乱的nums，并从其中找出目标数字的下标？
+ 1234for (int j = 0; j &lt; n; j++) &#123;    if (nums[j] == vec[i] || nums[j] == ret) result.push_back(j);    if(result.size() == 2) return result;&#125;
+
+1234567891011121314151617181920212223242526272829303132//自己 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luo Chenhao</div><div class="author-info__description">Keep struggling, keep dream-chasing!</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://leetcode.cn/u/polaris-hzn8/" target="_blank" title="Leetcode"><i class="fas fa-bolt"></i></a><a class="social-icon" href="https://blog.csdn.net/weixin_49167174" target="_blank" title="CSDN"><i class="fas fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn"></i><span>Announcement</span></div><div class="announcement_content">This is a leetcode solution website for personal, wish you a nice day.</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%8C%E5%88%86/"><span class="card-category-list-name">二分</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/"><span class="card-category-list-name">位运算</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8F%8C%E6%8C%87%E9%92%88/"><span class="card-category-list-name">双指针</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">排序算法</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/"><span class="card-category-list-name">数学知识</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="card-category-list-name">数据结构</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E8%B0%88/"><span class="card-category-list-name">杂谈</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A2%98/"><span class="card-category-list-name">杂题</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 1.45em; color: rgb(173, 186, 171)">位运算</a><a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" style="font-size: 1.15em; color: rgb(78, 188, 32)">前缀和与差分</a><a href="/tags/%E5%89%91%E6%8C%87offerII/" style="font-size: 1.45em; color: rgb(11, 87, 157)">剑指offerII</a><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 1.15em; color: rgb(89, 36, 114)">双指针</a><a href="/tags/%E5%A4%A7%E6%95%B4%E6%95%B0%E5%8A%A0%E6%B3%95/" style="font-size: 1.15em; color: rgb(95, 30, 39)">大整数加法</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" style="font-size: 1.15em; color: rgb(150, 35, 64)">归并排序</a><a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 1.15em; color: rgb(80, 132, 141)">快速幂</a><a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 1.15em; color: rgb(92, 10, 134)">快速排序</a><a href="/tags/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" style="font-size: 1.15em; color: rgb(153, 56, 167)">扩展欧几里得算法</a><a href="/tags/%E6%95%B4%E6%95%B0%E9%99%A4%E6%B3%95/" style="font-size: 1.15em; color: rgb(100, 71, 109)">整数除法</a><a href="/tags/%E6%9C%B4%E7%B4%A0%E4%BA%8C%E5%88%86/" style="font-size: 1.35em; color: rgb(28, 27, 47)">朴素二分</a><a href="/tags/%E6%A0%88/" style="font-size: 1.15em; color: rgb(43, 169, 108)">栈</a><a href="/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" style="font-size: 1.25em; color: rgb(173, 110, 180)">欧拉函数</a><a href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96%E4%B8%8E%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/" style="font-size: 1.15em; color: rgb(172, 85, 29)">离散化与区间合并</a><a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 1.15em; color: rgb(138, 176, 63)">链表</a><a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 1.15em; color: rgb(87, 140, 158)">队列</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">36</div></div><div class="webinfo-item"><div class="item-name">Run time :</div><div class="item-count" id="runtimeshow" data-publishDate="2023-04-22T10:14:25.152Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">63.2k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-22T10:14:25.206Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">keep coding and keep focus.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

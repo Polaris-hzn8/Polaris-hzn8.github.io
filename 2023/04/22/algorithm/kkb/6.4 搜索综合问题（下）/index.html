@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Polaris-hzn8 | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="搜索综合问题（下） 1.OJ541：相遇问题*（深搜）  	 2.OJ542：奶酪    3.LeetCode417：太平洋大西洋水流问题 4.LeetCode529：扫雷游戏  5.LeetCode934：最短的桥  6.LeetCode967：连续差相同的数字 7.LeetCode752：打开转盘锁 8.LeetCode127：单词接龙 9.层板等分衣柜&#x3D;&#x3D;题目描述&amp;#x3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Polaris-hzn8">
+<meta property="og:url" content="http://39.99.133.193/2023/04/22/algorithm/kkb/6.4%20%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="搜索综合问题（下） 1.OJ541：相遇问题*（深搜）  	 2.OJ542：奶酪    3.LeetCode417：太平洋大西洋水流问题 4.LeetCode529：扫雷游戏  5.LeetCode934：最短的桥  6.LeetCode967：连续差相同的数字 7.LeetCode752：打开转盘锁 8.LeetCode127：单词接龙 9.层板等分衣柜&#x3D;&#x3D;题目描述&amp;#x3">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-04-22T09:49:24.663Z">
+<meta property="article:modified_time" content="2023-04-22T09:49:24.664Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="keyword1 keyword2 keyword3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/70149889"><link rel="canonical" href="http://39.99.133.193/2023/04/22/algorithm/kkb/6.4%20%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Polaris-hzn8',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-22 17:49:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Polaris-hzn8"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">No title</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-22T09:49:24.663Z" title="Created 2023-04-22 17:49:24">2023-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-04-22T09:49:24.664Z" title="Updated 2023-04-22 17:49:24">2023-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">737</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>2min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="搜索综合问题（下）"><a href="#搜索综合问题（下）" class="headerlink" title="搜索综合问题（下）"></a>搜索综合问题（下）</h1><hr>
+<h4 id="1-OJ541：相遇问题-（深搜）"><a href="#1-OJ541：相遇问题-（深搜）" class="headerlink" title="1.OJ541：相遇问题*（深搜）"></a>1.OJ541：相遇问题*（深搜）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401182858551.png" alt="image-20210401182858551"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401183655110.png" alt="image-20210401183655110"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401183950525.png" alt="image-20210401183950525">	</p>
+<h4 id="2-OJ542：奶酪"><a href="#2-OJ542：奶酪" class="headerlink" title="2.OJ542：奶酪"></a>2.OJ542：奶酪</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401184933513.png" alt="image-20210401184933513"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401190924349.png" alt="image-20210401190924349"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401191245176.png" alt="image-20210401191245176"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401191429821.png" alt="image-20210401191429821"></p>
+<h4 id="3-LeetCode417：太平洋大西洋水流问题"><a href="#3-LeetCode417：太平洋大西洋水流问题" class="headerlink" title="3.LeetCode417：太平洋大西洋水流问题"></a>3.LeetCode417：太平洋大西洋水流问题</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401192955802.png" alt="image-20210401192955802"></p>
+<h4 id="4-LeetCode529：扫雷游戏"><a href="#4-LeetCode529：扫雷游戏" class="headerlink" title="4.LeetCode529：扫雷游戏"></a>4.LeetCode529：扫雷游戏</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401193331806.png" alt="image-20210401193331806"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401194705931.png" alt="image-20210401194705931"></p>
+<h4 id="5-LeetCode934：最短的桥"><a href="#5-LeetCode934：最短的桥" class="headerlink" title="5.LeetCode934：最短的桥"></a>5.LeetCode934：最短的桥</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401195913580.png" alt="image-20210401195913580"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401200241409.png" alt="image-20210401200241409"></p>
+<h4 id="6-LeetCode967：连续差相同的数字"><a href="#6-LeetCode967：连续差相同的数字" class="headerlink" title="6.LeetCode967：连续差相同的数字"></a>6.LeetCode967：连续差相同的数字</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401203202693.png" alt="image-20210401203202693"></p>
+<h4 id="7-LeetCode752：打开转盘锁"><a href="#7-LeetCode752：打开转盘锁" class="headerlink" title="7.LeetCode752：打开转盘锁"></a>7.LeetCode752：打开转盘锁</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401203126441.png" alt="image-20210401203126441"></p>
+<h4 id="8-LeetCode127：单词接龙"><a href="#8-LeetCode127：单词接龙" class="headerlink" title="8.LeetCode127：单词接龙"></a>8.LeetCode127：单词接龙</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\Polaris\AppData\Roaming\Typora\typora-user-images\image-20210401203422614.png" alt="image-20210401203422614"></p>
+<h4 id="9-层板等分衣柜"><a href="#9-层板等分衣柜" class="headerlink" title="9.层板等分衣柜"></a>9.层板等分衣柜</h4><p>&#x3D;&#x3D;题目描述&#x3D;&#x3D;：给定一个高度为2000mm的柜子空间，以及n个层板距离柜子底部的高度，满足移动层板位置使得层板等分衣柜空间，求所有移动层板的顺序。（层板号自下而上一次排列1、2、3、….n层板需要考虑空间位置，不能跨层板移动）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/assets/image-20221128224152140.png" alt="image-20221128224152140"></p>
+<p>要求：<code>1 ≤ n ≤ 10</code>、输出结果需要按照<font color='#BAOC2F'>从小到大的顺序</font>输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">n = <span class="number">3</span>, zs = <span class="number">50</span>, <span class="number">60</span>, <span class="number">1000</span></span><br><span class="line">output:</span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line">input:</span><br><span class="line">n = <span class="number">4</span>, zs = <span class="number">50</span>, <span class="number">600</span>, <span class="number">700</span>, <span class="number">1000</span></span><br><span class="line">output:</span><br><span class="line"><span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span></span><br><span class="line"><span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span></span><br><span class="line"><span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;思路分析&#x3D;&#x3D;：</p>
+<p>看起来就是每个层板都可以移到到任意位置，但只移动一次，同时不能跨越另一个板移动。</p>
+<p>有多种移动方案，题目要求你输出所有方案，并且按从小到大输出。</p>
+<p>就是一般你优先尝试移动序号低的版，看看能不能让它移到均分高度的地方。</p>
+<hr>
+<p>比如n&#x3D;3，zs&#x3D;50,60,1000。</p>
+<p>柜子被分割成4部分，位置应该是500、1000、1500，</p>
+<p>由于c3板子在1000这个位置，c2、c1是移动不到500这个位置的，</p>
+<p>所以先移动c3到1500，再移动c2到1000，最后移动c1到500。</p>
+<p>这样就等分了柜子高度了。</p>
+<hr>
+<p>这题其实就是先根据板子数量，找出等分位置。</p>
+<p>然后依次从序号小的那个板子开始判断能否移到到某个等分位置。</p>
+<p>不行的话，就判断下一个。</p>
+<p>复杂度不超过n^2，n小于10，可以直接遍历求解。</p>
+<p>但是也要考虑一种情况，就是例1里面，如果c2先移动到500，那么c1移动不到1000的，</p>
+<p>导致问题解不了了，这种情况也要考虑。</p>
+<hr>
+<ol>
+<li>像这个C1开始在50，要移动到500但是50-500之间有C2，不能动，1开头的都不行，</li>
+<li>然后再试C2,C2也不行，1000被C3占据，</li>
+<li>然后再移动C3，C3移动完再移动C1,还是不行，再移动C2，这时C2可以了，最后移动C1,所以顺序是321</li>
+</ol>
+<p>先根据原有高度对应板子可以移到的分位点（比如最高板子只能是移到最上面的分位点，因为最上面的板子位置永远是最高的，同理第i高的板子只能移到第i高的分位点）枚举所有排列情况（最多1024种）然后遍历O(n)考虑排列是否合法，就是看这n个板子高度不能有位于要排的板子和要排到的分位点之间</p>
+<h4 id="（1）暴力法："><a href="#（1）暴力法：" class="headerlink" title="（1）暴力法："></a>（1）暴力法：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://39.99.133.193">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://39.99.133.193/2023/04/22/algorithm/kkb/6.4%20%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89/">http://39.99.133.193/2023/04/22/algorithm/kkb/6.4 搜索综合问题（下）/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="null">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/22/algorithm/kkb/6.1%20%E9%80%92%E5%BD%92%E4%B8%8E%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E9%97%AE%E9%A2%98/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/04/22/algorithm/kkb/6.3%20%E6%90%9C%E7%B4%A2%E8%B5%B0%E5%9C%B0%E5%9B%BE%E9%97%AE%E9%A2%98/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luo Chenhao</div><div class="author-info__description">Keep struggling, keep dream-chasing!</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://leetcode.cn/u/polaris-hzn8/" target="_blank" title="Leetcode"><i class="fas fa-bolt"></i></a><a class="social-icon" href="https://blog.csdn.net/weixin_49167174" target="_blank" title="CSDN"><i class="fas fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn"></i><span>Announcement</span></div><div class="announcement_content">This is a leetcode solution website for personal, wish you a nice day.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E7%BB%BC%E5%90%88%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="toc-text">搜索综合问题（下）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-OJ541%EF%BC%9A%E7%9B%B8%E9%81%87%E9%97%AE%E9%A2%98-%EF%BC%88%E6%B7%B1%E6%90%9C%EF%BC%89"><span class="toc-text">1.OJ541：相遇问题*（深搜）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-OJ542%EF%BC%9A%E5%A5%B6%E9%85%AA"><span class="toc-text">2.OJ542：奶酪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-LeetCode417%EF%BC%9A%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98"><span class="toc-text">3.LeetCode417：太平洋大西洋水流问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-LeetCode529%EF%BC%9A%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F"><span class="toc-text">4.LeetCode529：扫雷游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-LeetCode934%EF%BC%9A%E6%9C%80%E7%9F%AD%E7%9A%84%E6%A1%A5"><span class="toc-text">5.LeetCode934：最短的桥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-LeetCode967%EF%BC%9A%E8%BF%9E%E7%BB%AD%E5%B7%AE%E7%9B%B8%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97"><span class="toc-text">6.LeetCode967：连续差相同的数字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-LeetCode752%EF%BC%9A%E6%89%93%E5%BC%80%E8%BD%AC%E7%9B%98%E9%94%81"><span class="toc-text">7.LeetCode752：打开转盘锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-LeetCode127%EF%BC%9A%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99"><span class="toc-text">8.LeetCode127：单词接龙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E5%B1%82%E6%9D%BF%E7%AD%89%E5%88%86%E8%A1%A3%E6%9F%9C"><span class="toc-text">9.层板等分衣柜</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%9A%B4%E5%8A%9B%E6%B3%95%EF%BC%9A"><span class="toc-text">（1）暴力法：</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">keep coding and keep focus.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
