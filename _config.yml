@@ -4,16 +4,16 @@
 
 # Site
 title: Polaris-hzn8
-subtitle: 'this is a subtitle'
-description: 'this is a description'
+subtitle: 'leetcode solution record'
+description: 'Keep struggling, keep dream-chasing!'
 keywords: keyword1 keyword2 keyword3
 author: Luo Chenhao 
 language: en
 timezone: 'Asia/Shanghai'
 
-# URL
+# URL https://github.com/Polaris-hzn8
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://polaris-hzn8.github.io/
+url: 'http://39.99.133.193/'
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -112,3 +112,4 @@ search:
   path: search.xml
   field: post
   content: true
+
