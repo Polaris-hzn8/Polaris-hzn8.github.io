@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>STL练习 | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="STL练习 1.OnlineJ378：字符串括号匹配给出一个字符串，判断其中的左右圆括号是否匹配， 注：需同时判断左右圆括号 ( 和  ) ，左右中括号 [ 和 ]，左右大括号 &amp;#123; 和 &amp;#125; 不需要考虑括号之间的优先级的问题，也就是说，小括号包含大括号，也是被允许的 输入： 一行一个字符串，以字符@为结尾 输出： 若匹配，输出 YES，若不匹配，则输出 NO 1a(cc[])bb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL练习">
+<meta property="og:url" content="http://39.99.133.193/2023/03/09/algorithm/kkbalgorithmI/3.2STL%E5%AE%B9%E5%99%A8%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="STL练习 1.OnlineJ378：字符串括号匹配给出一个字符串，判断其中的左右圆括号是否匹配， 注：需同时判断左右圆括号 ( 和  ) ，左右中括号 [ 和 ]，左右大括号 &amp;#123; 和 &amp;#125; 不需要考虑括号之间的优先级的问题，也就是说，小括号包含大括号，也是被允许的 输入： 一行一个字符串，以字符@为结尾 输出： 若匹配，输出 YES，若不匹配，则输出 NO 1a(cc[])bb">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-03-09T15:08:00.000Z">
+<meta property="article:modified_time" content="2023-04-23T03:25:50.430Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="kkbtraining">
+<meta property="article:tag" content="STL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/70149889"><link rel="canonical" href="http://39.99.133.193/2023/03/09/algorithm/kkbalgorithmI/3.2STL%E5%AE%B9%E5%99%A8%E7%BB%83%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'STL练习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-23 11:25:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Polaris-hzn8"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">STL练习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-09T15:08:00.000Z" title="Created 2023-03-09 23:08:00">2023-03-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-04-23T03:25:50.430Z" title="Updated 2023-04-23 11:25:50">2023-04-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>17min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="STL练习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="STL练习"><a href="#STL练习" class="headerlink" title="STL练习"></a>STL练习</h1><hr>
+<h3 id="1-OnlineJ378：字符串括号匹配"><a href="#1-OnlineJ378：字符串括号匹配" class="headerlink" title="1.OnlineJ378：字符串括号匹配"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/377">1.OnlineJ378：字符串括号匹配</a></h3><p>给出一个字符串，判断其中的左右圆括号是否匹配，</p>
+<p>注：需同时判断左右圆括号 <code>(</code> 和  <code>)</code> ，左右中括号 <code>[</code> 和 <code>]</code>，左右大括号 <code>&#123;</code> 和 <code>&#125;</code></p>
+<p>不需要考虑括号之间的优先级的问题，也就是说，小括号包含大括号，也是被允许的</p>
+<p><strong>输入</strong>：</p>
+<p>一行一个字符串，以字符@为结尾</p>
+<p><strong>输出</strong>：</p>
+<p>若匹配，输出 YES，若不匹配，则输出 NO</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">a</span>(cc[])<span class="built_in">bbb</span>()@ YES</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">a</span>(cc[)]<span class="built_in">bbb</span>()@ NO</span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string str)</span> </span>&#123;</span><br><span class="line">  stack&lt;<span class="type">char</span>&gt; stack;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; str.<span class="built_in">length</span>(); ++i) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (str[i]) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;&#123;&#x27;</span>:</span><br><span class="line">	  	stack.<span class="built_in">push</span>(str[i]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">	  	<span class="keyword">if</span> (stack.<span class="built_in">empty</span>() || stack.<span class="built_in">top</span>() != <span class="string">&#x27;(&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        stack.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">	  	<span class="keyword">if</span> (stack.<span class="built_in">empty</span>() || stack.<span class="built_in">top</span>() != <span class="string">&#x27;&#123;&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        stack.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">	  	<span class="keyword">if</span> (stack.<span class="built_in">empty</span>() || stack.<span class="built_in">top</span>() != <span class="string">&#x27;[&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        stack.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stack.<span class="built_in">empty</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string str;</span><br><span class="line">	cin &gt;&gt; str;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">isValid</span>(str)) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;YES&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;NO&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-OnlineJ265：括号画家"><a href="#2-OnlineJ265：括号画家" class="headerlink" title="2.OnlineJ265：括号画家"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/265">2.OnlineJ265：括号画家</a></h3><p>Candela 是一名漫画家，她有一个奇特的爱好，就是在纸上画括号。</p>
+<p>这一天，刚刚起床的 Candela 画了一排括号序列，其中包含小括号 <code>()</code>、中括号 <code>[]</code> 和大括号 <code>&#123;&#125;</code>，总长度为 N。</p>
+<p>这排随意绘制的括号序列显得杂乱无章，于是 Candela 定义了什么样的括号序列是美观的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>空的括号序列是美观的；</span><br><span class="line"><span class="number">2.</span>若括号序列 A 是美观的，则括号序列 (A)、[A]、&#123;A&#125; 也是美观的；</span><br><span class="line"><span class="number">3.</span>若括号序列 A、B 都是美观的，则括号序列 AB 也是美观的；</span><br></pre></td></tr></table></figure>
+
+<p>例如 <code>[()&#123;&#125;]()</code> 是美观的括号序列，而 <code>)(&#123;)[&#125;](</code> 则不是。</p>
+<p>现在 Candela 想在她绘制的括号序列中找出其中连续的一段，满足这段子序列是美观的并且长度尽量大。你能帮帮她吗？</p>
+<p><strong>输入</strong>：</p>
+<p>1 个长度为 N 的括号序列。(5 ≤ N ≤ 10000)</p>
+<p><strong>输出</strong>：</p>
+<p>一个整数，表示<font color='#BAOC2F'>最长的</font>美观的<font color='#BAOC2F'>连续子序列的长度</font>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[[]]&#123;&#125;]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-1"><a href="#参考代码-1" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">stack&lt;<span class="type">char</span>&gt; stack1;</span><br><span class="line">stack&lt;<span class="type">int</span>&gt; 	stack2;</span><br><span class="line">string str;</span><br><span class="line"><span class="type">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ansUpdate</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	stack1.<span class="built_in">pop</span>();</span><br><span class="line">	stack2.<span class="built_in">pop</span>();</span><br><span class="line">	ans = <span class="built_in">max</span>(ans, i - stack2.<span class="built_in">top</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">stack12Clear</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!stack1.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		stack1.<span class="built_in">pop</span>();</span><br><span class="line">		stack2.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	stack1.<span class="built_in">push</span>(<span class="string">&#x27;#&#x27;</span>);</span><br><span class="line">	stack2.<span class="built_in">push</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; str;</span><br><span class="line">	stack1.<span class="built_in">push</span>(<span class="string">&#x27;#&#x27;</span>);</span><br><span class="line">	stack2.<span class="built_in">push</span>(<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; str.<span class="built_in">length</span>(); ++i) &#123;</span><br><span class="line">		<span class="keyword">switch</span> (str[i]) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;&#123;&#x27;</span>:</span><br><span class="line">			stack1.<span class="built_in">push</span>(str[i]);</span><br><span class="line">			stack2.<span class="built_in">push</span>(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">			<span class="keyword">if</span> (stack1.<span class="built_in">top</span>() == <span class="string">&#x27;(&#x27;</span>) <span class="built_in">ansUpdate</span>(i);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">stack12Clear</span>(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">			<span class="keyword">if</span> (stack1.<span class="built_in">top</span>() == <span class="string">&#x27;&#123;&#x27;</span>) <span class="built_in">ansUpdate</span>(i);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">stack12Clear</span>(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">			<span class="keyword">if</span> (stack1.<span class="built_in">top</span>() == <span class="string">&#x27;[&#x27;</span>) <span class="built_in">ansUpdate</span>(i);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">stack12Clear</span>(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-OnlineJ379：仓库日志"><a href="#3-OnlineJ379：仓库日志" class="headerlink" title="3.OnlineJ379：仓库日志"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/379">3.OnlineJ379：仓库日志</a></h3><p>某仓库购入新的货物并将一部分老货物发出，这个过程会有软件对数据以日志形式保存，规则如下：</p>
+<p>该日志记录了两类操作：</p>
+<p>第一类操作为入库操作，以及该次入库的货物数量；</p>
+<p>第二类操作为出库操作。</p>
+<p>这些记录都严格按时间顺序排列。入库和出库的规则为<font color='#BAOC2F'>先进后出</font>，即<font color='#BAOC2F'>每次出库操作货物</font>为当前<font color='#BAOC2F'>在仓库里所有货物中最晚入库</font>的货物。</p>
+<p>为了便于分析，现在加入了第三类查询操作，每次查询时<font color='#BAOC2F'>输出当前仓库数量最多的货物的数量</font>。</p>
+<p><strong>输入</strong>：</p>
+<p>包含 N+1行：</p>
+<p> 第一行为 1 个正整数 N，对应于日志内所含操作的总数。</p>
+<p> 接下来的 N 行，分别属于以下三种格式之一：</p>
+<ul>
+<li>0 X ：一次入库操作，正整数 X 表示该次入库的货物的数量</li>
+<li>1 ：一次出库操作，（就当时而言）最后入库的货物出库</li>
+<li>2 ：一次查询操作，要求分析程序输出当前仓库内数量最多的货物的数量</li>
+</ul>
+<p> 当仓库为空时你应该忽略出库操作，当仓库为空查询时你应该输出 0。</p>
+<p> 初始时仓库状态为空。</p>
+<p><strong>输出</strong>：</p>
+<p>输出行数等于日志中查询操作的次数。每行为一个正整数，表示查询结果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">13</span></span><br><span class="line"><span class="number">0</span> <span class="number">1</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">0</span> <span class="number">4</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stack1;<span class="comment">//存储仓库货物的数量</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stack2;<span class="comment">//存储当前仓库内数量最多的货物数量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">		<span class="keyword">switch</span> (x) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>:<span class="comment">//入库操作（入栈操作）</span></span><br><span class="line">				<span class="type">int</span> num;</span><br><span class="line">				cin &gt;&gt; num;</span><br><span class="line">				stack1.<span class="built_in">push</span>(num);</span><br><span class="line">				<span class="keyword">if</span> (stack1.<span class="built_in">size</span>() == <span class="number">1</span>) stack2.<span class="built_in">push</span>(num);</span><br><span class="line">				<span class="keyword">else</span> stack2.<span class="built_in">push</span>(<span class="built_in">max</span>(stack2.<span class="built_in">top</span>(), num));</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:<span class="comment">//出库操作（出栈操作）</span></span><br><span class="line">				<span class="keyword">if</span> (!stack1.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">					stack1.<span class="built_in">pop</span>();</span><br><span class="line">					stack2.<span class="built_in">pop</span>();</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:<span class="comment">//仓库查询操作（获取栈顶元素）</span></span><br><span class="line">				<span class="keyword">if</span> (!stack2.<span class="built_in">empty</span>()) cout &lt;&lt; stack2.<span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">				<span class="keyword">else</span> cout &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-OnlineJ569：溶液模拟器"><a href="#4-OnlineJ569：溶液模拟器" class="headerlink" title="4.OnlineJ569：溶液模拟器"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/569">4.OnlineJ569：溶液模拟器</a></h3><p>小 Y 虽然有很多溶液，但是还是没有办法配成想要的溶液，因为万一倒错了就没有办法挽回了。</p>
+<p>他从网上下载了一个溶液配制模拟器：模拟器在计算机中构造一种虚拟溶液，然后可以虚拟地向当前溶液中加入一定浓度、一定质量的这种溶液，模拟器会快速地<font color='#BAOC2F'>算出倒入后虚拟溶液的浓度和质量</font>。</p>
+<p>模拟器的使用步骤如下：</p>
+<ol>
+<li><p>为模拟器设置一个初始质量和浓度 V<sub>0</sub>、C<sub>0</sub>%（0 ≤ C<sub>0</sub> ≤ 1000）</p>
+</li>
+<li><p>进行一系列的操作，模拟器支持的两种操作：</p>
+<p> 一种是 P(v, c) 操作，表示向当前的虚拟溶液中加入质量为 v 、浓度为 c 的溶液；</p>
+<p> 另一种是 Z 操作，即撤销上一步 P 操作。</p>
+</li>
+</ol>
+<p><strong>输入</strong>：</p>
+<p>第 1 行两个整数 V<sub>0</sub> 、C<sub>0</sub>。</p>
+<p> 第 2 行 1 个整数 n ，n ≤ 10000，表示操作数。</p>
+<p> 接下来的 n 行，每行一条操作，格式为：P v c 或 Z。当只剩下初始溶液的时候，再撤销就没有用了。</p>
+<p> 任意时刻质量都不会超过 2<sup>31</sup> − 1。</p>
+<p><strong>输出</strong>：</p>
+<p>输出 n 行，每行两个数 V<sub>i</sub>、C<sub>i</sub>，之间用一个空格隔开，其中 V<sub>i</sub> 为整数，C<sub>i</sub> 为实数（保留 55 位小数）。</p>
+<p>其中，第 i 行表示第 i 次操作后的溶液质量和浓度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> <span class="number">100</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">P <span class="number">100</span> <span class="number">0</span></span><br><span class="line">Z</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">200</span> <span class="number">50.00000</span></span><br><span class="line"><span class="number">100</span> <span class="number">100.00000</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-2"><a href="#参考代码-2" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">    <span class="type">double</span> n;<span class="comment">//溶质的摩尔质量</span></span><br><span class="line">    <span class="type">double</span> v;<span class="comment">//溶液的体积</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">double</span>  n0, v0, c0;<span class="comment">//初始溶质摩尔质量、初始溶液体积、初始溶液浓度(百分比值)</span></span><br><span class="line">    cin &gt;&gt; v0 &gt;&gt; c0;</span><br><span class="line">    n0 = v0 * (c0 / <span class="number">100</span>);<span class="comment">//计算溶质的摩尔质量</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    stack&lt;node&gt; stack;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        cin &gt;&gt; c;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;P&#x27;</span>) &#123;<span class="comment">//混合操作</span></span><br><span class="line">            <span class="type">double</span> nt, vt, ct;</span><br><span class="line">            cin &gt;&gt; vt &gt;&gt; ct;</span><br><span class="line">            nt = vt * (ct / <span class="number">100</span>);</span><br><span class="line">            v0 += vt;</span><br><span class="line">            n0 += nt;</span><br><span class="line">            stack.<span class="built_in">push</span>((node)&#123;nt, vt&#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">//撤销操作</span></span><br><span class="line">            <span class="keyword">if</span> (stack.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                n0 -= stack.<span class="built_in">top</span>().n;</span><br><span class="line">                v0 -= stack.<span class="built_in">top</span>().v;</span><br><span class="line">                stack.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %.5f\n&quot;</span>, (<span class="type">int</span>)v0, n0 / v0 * <span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-OnlineJ382：报数（queue）"><a href="#5-OnlineJ382：报数（queue）" class="headerlink" title="5.OnlineJ382：报数（queue）"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/382">5.OnlineJ382：报数（queue）</a></h3><p>N 个人围成一圈，编号分别为 1,2,3……N 第一个人从 1 报数，按照编号顺序依次报数，</p>
+<p>报 M 的人会离开队伍，然后下一个人<font color='#BAOC2F'>会继续从 1 开始报数</font>，直到剩下一人，剩下的人的编号是多少？</p>
+<p><strong>输入</strong>：</p>
+<p>共一行两个数 N 和 M</p>
+<p><strong>输出</strong>：</p>
+<p>输出一个数表示最后一人的编号。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-3"><a href="#参考代码-3" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; que;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//队列模拟约瑟夫环</span></span><br><span class="line">    <span class="type">int</span> n, m; cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) que.<span class="built_in">push</span>(i);</span><br><span class="line">    <span class="type">int</span> now = <span class="number">1</span>;<span class="comment">//更新报1的位置</span></span><br><span class="line">    <span class="keyword">while</span>(que.<span class="built_in">size</span>() != <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (now != m) &#123;</span><br><span class="line">            que.<span class="built_in">push</span>(que.<span class="built_in">front</span>());</span><br><span class="line">            now++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            now = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        que.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; que.<span class="built_in">front</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-OnlineJ577：讲话模式（map）"><a href="#6-OnlineJ577：讲话模式（map）" class="headerlink" title="6.OnlineJ577：讲话模式（map）"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/577">6.OnlineJ577：讲话模式（map）</a></h3><p>每个人讲话都有口头禅，现在给出一个字符串，需要求出其中<font color='#BAOC2F'>出现次数最多的单词</font>。</p>
+<p><strong>输入</strong>：</p>
+<p>输入一行，若干个长度小于或等于 10 的只包含大小写字母的字符串。</p>
+<p><strong>输出</strong>：</p>
+<p>输出一行，为出现次数最多的单词和它出现的次数，以一个空格隔开。如果出现次数最多的单词有多个，则<font color='#BAOC2F'>输出字典序最小的那个</font>。这个单词必须<font color='#BAOC2F'>完全以小写的形式输出</font>。注意，所说的单词不区分大小写字母。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can a can can a can It can</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">can <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-4"><a href="#参考代码-4" class="headerlink" title="参考代码"></a>参考代码</h4><p>&#x3D;&#x3D;思路&#x3D;&#x3D;：</p>
+<ol>
+<li>解法1：定义两个变量string、int，轮回最终保留一个出现次数最多的结果，如果有多个则保留字典序最小的单词。</li>
+<li>解法2：当处理完所有的数据后，遍历一遍数组保留最终的结果。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">map&lt;string, <span class="type">int</span>&gt; mp;</span><br><span class="line">string ans;<span class="comment">//最终答案</span></span><br><span class="line"><span class="type">int</span> count;<span class="comment">//答案出现的次数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string t;</span><br><span class="line">	<span class="comment">//大小写转换</span></span><br><span class="line">	<span class="keyword">while</span> (cin &gt;&gt; t) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; t.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">			<span class="keyword">if</span> (t[i] &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; t[i] &lt;= <span class="string">&#x27;Z&#x27;</span>) &#123;</span><br><span class="line">				t[i] += (<span class="string">&#x27;a&#x27;</span> - <span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		mp[t]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//数据处理 使用有序map</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> it = mp.<span class="built_in">begin</span>(); it != mp.<span class="built_in">end</span>(); ++it) &#123;</span><br><span class="line">		<span class="keyword">if</span> (it-&gt;second &gt; count) &#123;</span><br><span class="line">			ans = it-&gt;first;</span><br><span class="line">			count = it-&gt;second;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; count &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-OnlineJ566：上网统计（unordered-map）"><a href="#7-OnlineJ566：上网统计（unordered-map）" class="headerlink" title="7.OnlineJ566：上网统计（unordered_map）"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/566">7.OnlineJ566：上网统计（unordered_map）</a></h3><p>在一个网络系统中有 N 个用户、 M 次上网记录。每个用户可以自己注册一个用户名，每个用户名只包含小写字母且长度小于 1000 的字符串，每次上网日志里都会有记录，现在请统计每个用户每次浏览了多少个网页。注意，有可能有用户没有访问记录。</p>
+<p><strong>输入</strong>：</p>
+<p>第 1 行包含两个正整数 N （1 ≤ N ≤ 1000） 和 M （1 ≤ M ≤ 5000）。</p>
+<p> 第 2 ~ M+1 行，每行包含 2 个字符串，分别表示用户名和浏览的网页名。</p>
+<p><strong>输出</strong>：</p>
+<p>共 x 行，x 表示有访问记录的用户数量，</p>
+<p>每行的第一个字符串时用户名，接下来的若干字符串是这个用户依次浏览的网页名(之间用一个空格隔开)。</p>
+<p>按照<font color='#BAOC2F'>用户名出现的次序</font>排序输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">7</span></span><br><span class="line">goodstudyer bookshopa</span><br><span class="line">likespacea spaceweb</span><br><span class="line">goodstudyer bookshopb</span><br><span class="line">likespaceb spaceweb</span><br><span class="line">likespacec spaceweb</span><br><span class="line">likespacea juiceshop</span><br><span class="line">gameplayer gameweb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">goodstudyer bookshopa bookshopb</span><br><span class="line">likespacea spaceweb juiceshop</span><br><span class="line">likespaceb spaceweb</span><br><span class="line">likespacec spaceweb</span><br><span class="line">gameplayer gameweb</span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-5"><a href="#参考代码-5" class="headerlink" title="参考代码"></a>参考代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> cnt;<span class="comment">//当前用户访问记录所在的行数</span></span><br><span class="line"><span class="type">int</span> n;<span class="comment">//用户的个数</span></span><br><span class="line"><span class="type">int</span> recordNum;<span class="comment">//上网记录的条数</span></span><br><span class="line">unordered_map&lt;string, <span class="type">int</span>&gt; mp;<span class="comment">//用于记录vector在第几行的信息（unordered_map满足按用户名出现的次序进行输出）</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; recordNum;</span><br><span class="line">	vector&lt;vector&lt;string&gt;&gt; <span class="built_in">vec</span>(n, vector&lt;string&gt;&#123;&#125;);<span class="comment">//用二维数组存储数据</span></span><br><span class="line">	<span class="comment">//1.数据处理 及存储</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; recordNum; ++i) &#123;</span><br><span class="line">		string username, siteinfo;</span><br><span class="line">		cin &gt;&gt; username &gt;&gt; siteinfo;</span><br><span class="line">		<span class="keyword">if</span> (mp.<span class="built_in">count</span>(username) == <span class="number">0</span>) &#123;<span class="comment">//如果在map集中的没有username该用户（该用户第一次访问）</span></span><br><span class="line">			mp[username] = cnt;<span class="comment">//当前用户访问记录所在的vec二维数组中的行数</span></span><br><span class="line">			vec[cnt].<span class="built_in">push_back</span>(username);</span><br><span class="line">			vec[cnt].<span class="built_in">push_back</span>(siteinfo);</span><br><span class="line">			cnt++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//该用户已有访问记录 则直接加入原有访问记录的vecotr中</span></span><br><span class="line">			vec[mp[username]].<span class="built_in">push_back</span>(siteinfo);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//2.输出结果</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; vec[i].<span class="built_in">size</span>(); ++j) &#123;</span><br><span class="line">			<span class="keyword">if</span> (j) cout &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">			cout &lt;&lt; vec[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="8-OnlineJ573：桐桐的新闻系统（p-queue）"><a href="#8-OnlineJ573：桐桐的新闻系统（p-queue）" class="headerlink" title="8.OnlineJ573：桐桐的新闻系统（p_queue）"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/573">8.OnlineJ573：桐桐的新闻系统（p_queue）</a></h3><p>桐桐为期末的计算机作业设计了一套新闻系统，他把这套新闻系统称为 Argus。使用这套系统的用户可以向这套系统注册，然后这套系统就会以用户<font color='#BAOC2F'>要求发送新闻的时间间隔向用户发送一次新闻</font>。</p>
+<ul>
+<li>向 Argus 注册的指令具有这样的格式：Register Qnum Period</li>
+<li>Qnum （0 &lt; Qnum ≤ 30000） 是用户的 ID，Period（0 &lt; Period ≤ 3000）是间隔。注册后 Period 秒，结果会第一次到达。</li>
+<li>所有的用户都有不同的 Qnum。</li>
+</ul>
+<p>桐桐测试了一段时间后，想知道系统前 K 次给谁发送新闻了。如果同一时间发送多个新闻，以 Qnum 的升序排列。</p>
+<p><strong>输入</strong>：</p>
+<p>第一部分是注册指令，每条一行。指令数不超过 1000。此部分以 “ # ” 结束。</p>
+<p>第二部分仅一行一个整数 K，K ≤ 10000。</p>
+<p><strong>输出</strong>：</p>
+<p>输出前 K 个新闻发送到的用户的 Qnum，每行一个。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Register <span class="number">2004</span> <span class="number">200</span></span><br><span class="line">Register <span class="number">2005</span> <span class="number">300</span></span><br><span class="line">#</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2004</span></span><br><span class="line"><span class="number">2005</span></span><br><span class="line"><span class="number">2004</span></span><br><span class="line"><span class="number">2004</span></span><br><span class="line"><span class="number">2005</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考代码-6"><a href="#参考代码-6" class="headerlink" title="参考代码"></a>参考代码</h4><p>&#x3D;&#x3D;思路&#x3D;&#x3D;：每次取时间最小的进行输出，<font color='#BAOC2F'>同为时间最小时再按照ID进行排序</font>，故应该使用优先队列进行处理。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">	<span class="type">int</span> id;</span><br><span class="line">	<span class="type">int</span> offset;<span class="comment">//获得新闻的时间</span></span><br><span class="line">	<span class="type">int</span> next;<span class="comment">//下一次获得新闻的时间（排序依据）</span></span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> node &amp;t) <span class="type">const</span> &#123;<span class="comment">//重载小于号 实现大于号的功能(自定义优先队列的排序规则)</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>-&gt;next == t.next) <span class="keyword">return</span> <span class="keyword">this</span>-&gt;id &gt; t.id;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>-&gt;next &gt; t.next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;node&gt; que;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	string str;</span><br><span class="line">	<span class="comment">//1.初始化设置</span></span><br><span class="line">	<span class="keyword">while</span> (cin &gt;&gt; str) &#123;</span><br><span class="line">		<span class="keyword">if</span> (str == <span class="string">&quot;#&quot;</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="type">int</span> id, offset;</span><br><span class="line">		cin &gt;&gt; id &gt;&gt; offset;</span><br><span class="line">		que.<span class="built_in">push</span>((node)&#123;id, offset, offset&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//2.输出前n个新闻发送到的用户的Qnum</span></span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		node temp = que.<span class="built_in">top</span>();</span><br><span class="line">		que.<span class="built_in">pop</span>();</span><br><span class="line">		cout &lt;&lt; temp.id &lt;&lt; endl;<span class="comment">//输出</span></span><br><span class="line">		temp.next += temp.offset;<span class="comment">//数据更新</span></span><br><span class="line">		que.<span class="built_in">push</span>(temp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="9-OnlineJ385：海港（queue）"><a href="#9-OnlineJ385：海港（queue）" class="headerlink" title="9.OnlineJ385：海港（queue）"></a><a target="_blank" rel="noopener" href="https://oj.haizeix.com/problem/385">9.OnlineJ385：海港（queue）</a></h3><p>小李是一个海港的海关工作人员，每天都有许多船只到达海港，船上通常有很多来自不同国家的乘客。</p>
+<p>小李对这些到达海港的船只非常感兴趣，他按照时间记录下了到达海港的每一艘船只情况；对于第 i 艘到达的船，他记录了这艘船到达的时间 ti (单位：秒)，船上的乘 客数 ki，以及每名乘客的国籍 xi,1, xi,2,…, xi,k。</p>
+<p>小李统计了 n 艘船的信息，希望你帮忙计算出以每一艘船到达时间为止的 24 小时( 24 小时&#x3D; 86400 秒）内所有<font color='#BAOC2F'>乘船到达的乘客</font>来自<font color='#BAOC2F'>多少个不同的国家</font>。</p>
+<p>形式化地讲，你需要计算 n 条信息。对于输出的第 i 条信息，你需要统计满足 ti − 86400 &lt; tp ≤ ti 的船只 p，在所有的 xp,j 中，总共有多少个不同的数。</p>
+<p><strong>输入</strong>：</p>
+<p>第一行输入一个正整数 n，表示小李统计了 n 艘船的信息。</p>
+<p>接下来 n 行，每行描述一艘船的信息：前两个整数 ti 和 ki 分别表示这艘船到达海港的时间和船上的乘客数量，接下来 ki 个整数 xi,j 表示船上乘客的国籍。</p>
+<p>保证输入的 ti 是递增的，单位是秒；表示从小李第一次上班开始计时，这艘船在第 ti 秒到达海港。</p>
+<p><strong>输出</strong>：</p>
+<p>输出 n 行，第 i 行输出一个整数表示第 i 艘船到达后的统计信息。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//样例输入1</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">10</span> <span class="number">1</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//样例输出1</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一艘船在第 1 秒到达海港，最近 24 小时到达的船是第一艘船，共有 4 个乘客， 分别是来自国家 4,1,2,2，共来自 3 个不同的国家</li>
+<li>第二艘船在第 2 秒到达海港，最近 24 小时到达的船是第一艘船和第二艘船，共有 4+2&#x3D;6 个乘客，分别是来自国家 4,1,2,2,2,3，共来自 4 个不同的国家</li>
+<li>第三艘船在第 10 秒到达海港，最近 24 小时到达的船是第一艘船、第二艘船和第 三艘船，共有 4+2+1&#x3D;7 个乘客，分别是来自国家 4,1,2,2,2,3,3，共来自 4 个不同的国家</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//样例输入2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">86401</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"><span class="number">86402</span> <span class="number">1</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//样例输出2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一艘船在第 1 秒到达海港，最近 24 小时到达的船是第一艘船，共有 4 个乘客，分别是来自国家 1,2,2,3，共来自 3 个不同的国家</li>
+<li>第二艘船在第 3 秒到达海港，最近 24 小时到达的船是第一艘船和第二艘船，共有 4+2&#x3D;6 个乘客，分别是来自国家 1,2,2,3,2,3，共来自 3 个不同的国家</li>
+<li>第三艘船在第 86401 秒到达海港，最近 24 小时到达的船是第二艘船和第三艘船，共有 2+2&#x3D;4 个乘客，分别是来自国家 2,3,3,4，共来自 3 个不同的国家</li>
+<li>第四艘船在第 86402 秒到达海港，最近 24 小时到达的船是第二艘船、第三艘船和第四艘船，共有 2+2+1&#x3D;5 个乘客，分别是来自国家 2,3,3,4,5，共来自 4 个不同的国家</li>
+</ul>
+<h4 id="参考代码-7"><a href="#参考代码-7" class="headerlink" title="参考代码"></a>参考代码</h4><p>&#x3D;&#x3D;思路&#x3D;&#x3D;：</p>
+<ol>
+<li>对船进行队列存储（船上有几个人，每个人来自的国家，来的时间），对人进行队列存储（来自国家，来的时间）</li>
+<li>开一个num数组记录每个国家的人数</li>
+<li>维护一个cnt变量用于记录当前有几个国家的人在</li>
+<li>每次来一艘船，需要让一天前的人离开，让新来的入队</li>
+<li>输出cnt</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://39.99.133.193">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://39.99.133.193/2023/03/09/algorithm/kkbalgorithmI/3.2STL%E5%AE%B9%E5%99%A8%E7%BB%83%E4%B9%A0/">http://39.99.133.193/2023/03/09/algorithm/kkbalgorithmI/3.2STL容器练习/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="null">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/kkbtraining/">kkbtraining</a><a class="post-meta__tags" href="/tags/STL/">STL</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/08/algorithm/kkbalgorithmI/3.1STL%E5%AE%B9%E5%99%A8%E7%AE%80%E4%BB%8B/" title="STL容器简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">STL容器简介</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/10/algorithm/kkbalgorithmI/4.1LeetCode%E5%85%A5%E9%97%A8%E7%BB%841/" title="LeetCode入门组1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">LeetCode入门组1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/03/08/algorithm/kkbalgorithmI/3.1STL%E5%AE%B9%E5%99%A8%E7%AE%80%E4%BB%8B/" title="STL容器简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-08</div><div class="title">STL容器简介</div></div></a></div><div><a href="/2023/03/01/algorithm/kkbalgorithmI/1.1Euler1%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="Euler1基础算法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="title">Euler1基础算法</div></div></a></div><div><a href="/2023/03/02/algorithm/kkbalgorithmI/1.2%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92%E6%B1%82%E6%B3%95/" title="斐波那契数列的递推与递归求法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-02</div><div class="title">斐波那契数列的递推与递归求法</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luo Chenhao</div><div class="author-info__description">Keep struggling, keep dream-chasing!</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://leetcode.cn/u/polaris-hzn8/" target="_blank" title="Leetcode"><i class="fas fa-bolt"></i></a><a class="social-icon" href="https://blog.csdn.net/weixin_49167174" target="_blank" title="CSDN"><i class="fas fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn"></i><span>Announcement</span></div><div class="announcement_content">This is a leetcode solution website for personal, wish you a nice day.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#STL%E7%BB%83%E4%B9%A0"><span class="toc-text">STL练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-OnlineJ378%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D"><span class="toc-text">1.OnlineJ378：字符串括号匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-OnlineJ265%EF%BC%9A%E6%8B%AC%E5%8F%B7%E7%94%BB%E5%AE%B6"><span class="toc-text">2.OnlineJ265：括号画家</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-1"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-OnlineJ379%EF%BC%9A%E4%BB%93%E5%BA%93%E6%97%A5%E5%BF%97"><span class="toc-text">3.OnlineJ379：仓库日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88"><span class="toc-text">参考答案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-OnlineJ569%EF%BC%9A%E6%BA%B6%E6%B6%B2%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-text">4.OnlineJ569：溶液模拟器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-2"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-OnlineJ382%EF%BC%9A%E6%8A%A5%E6%95%B0%EF%BC%88queue%EF%BC%89"><span class="toc-text">5.OnlineJ382：报数（queue）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-3"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-OnlineJ577%EF%BC%9A%E8%AE%B2%E8%AF%9D%E6%A8%A1%E5%BC%8F%EF%BC%88map%EF%BC%89"><span class="toc-text">6.OnlineJ577：讲话模式（map）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-4"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-OnlineJ566%EF%BC%9A%E4%B8%8A%E7%BD%91%E7%BB%9F%E8%AE%A1%EF%BC%88unordered-map%EF%BC%89"><span class="toc-text">7.OnlineJ566：上网统计（unordered_map）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-5"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-OnlineJ573%EF%BC%9A%E6%A1%90%E6%A1%90%E7%9A%84%E6%96%B0%E9%97%BB%E7%B3%BB%E7%BB%9F%EF%BC%88p-queue%EF%BC%89"><span class="toc-text">8.OnlineJ573：桐桐的新闻系统（p_queue）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-6"><span class="toc-text">参考代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-OnlineJ385%EF%BC%9A%E6%B5%B7%E6%B8%AF%EF%BC%88queue%EF%BC%89"><span class="toc-text">9.OnlineJ385：海港（queue）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BB%A3%E7%A0%81-7"><span class="toc-text">参考代码</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">keep coding and keep focus.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
