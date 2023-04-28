@@ -11,9 +11,10 @@ author: Luo Chenhao
 language: en
 timezone: 'Asia/Shanghai'
 
-# URL https://github.com/Polaris-hzn8
+# URL https://github.com/Polaris-hzn8/Polaris-hzn8.github.io
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: 'http://39.99.133.193/'
+url: http://Polaris-hzn8.github.io
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

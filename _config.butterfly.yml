@@ -253,7 +253,7 @@ post_pagination: true
 
 # Displays outdated notice for a post (文章過期提醒)
 noticeOutdate:
-  enable: true
+  enable: false
   style: flat # style: simple/flat
   limit_day: 500 # When will it be shown
   position: top # position: top/bottom
@@ -477,10 +477,10 @@ microsoft_clarity:
 # Google Adsense (谷歌廣告)
 google_adsense:
   enable: false
-  auto_ads: true
+  auto_ads: false
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
   client:
-  enable_page_level_ads: true
+  enable_page_level_ads: false
 
 # Insert ads manually (手動插入廣告)
 # ad:
@@ -537,7 +537,9 @@ tag_ui: index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://s2.loli.net/2023/04/22/GX1O2WduLAik7qe.jpg)
+# background: url(http://s2.loli.net/2023/04/28/UqH13bXwzANkWoy.jpg)
+background: '-webkit-linear-gradient(0deg,rgba(247, 149, 51, 0.1) 0,rgba(243, 112, 85, 0.1) 15%,rgba(239, 78, 123, 0.1) 30%,rgba(161, 102, 171, 0.1) 44%,rgba(80, 115, 184, 0.1) 58%,rgba(16, 152, 173, 0.1) 72%,rgba(7, 179, 155, 0.1) 86%,rgba(109, 186, 130, 0.1) 100%)'
+# background: "#999999"
 
 # Footer Background
 footer_bg: true
@@ -697,8 +699,10 @@ aside:
     sort_order: # Don't modify the setting unless you know how it works
   card_categories:
     enable: true
-    limit: 8 # if set 0 will show all
+    limit: 10 # if set 0 will show all
     expand: none # none/true/false
+    orderby: name
+    order: 1
     sort_order: # Don't modify the setting unless you know how it works
   card_tags:
     enable: true
@@ -731,7 +735,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: true
-  publish_date:
+  publish_date: 9/9/2022 00:00:00 
 
 # Aside widget - Newest Comments
 newest_comments:
