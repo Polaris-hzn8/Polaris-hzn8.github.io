@@ -5905,7 +5905,7 @@ blockquote.pullquote.right {
 }
 #footer-wrap,
 #footer-wrap a {
-  background-color: #fff;
+background-color
   color: #808080;
 }
 #page-header #site-title {
@@ -5934,7 +5934,7 @@ blockquote.pullquote.right {
 #post-info .post-title,
 .meta-firstline,
 .meta-secondline {
-  color: #fff;
+color
   text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
 }
 #page-header.not-home-page {
