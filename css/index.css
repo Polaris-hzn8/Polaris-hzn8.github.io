@@ -3670,9 +3670,6 @@ h1.page-title + .tag-cloud-list {
 #nav a {
   color: var(--light-grey);
 }
-#nav a:hover {
-  color: var(--white);
-}
 #nav .site-name {
   font-weight: bold;
 }
@@ -5948,4 +5945,7 @@ background-color
 }
 #page-header #post-info {
   bottom: 70px;
+}
+#post-info #post-meta a {
+  color: #fff;
 }
