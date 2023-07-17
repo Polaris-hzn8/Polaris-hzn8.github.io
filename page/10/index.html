@@ -1,0 +1,462 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Polaris-hzn8 - leetcode solution record</title><meta name="author" content="Polaris-hzn8"><meta name="copyright" content="Polaris-hzn8"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="https:&#x2F;&#x2F;leetcode.cn&#x2F;u&#x2F;polaris-hzn8&#x2F;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Polaris-hzn8">
+<meta property="og:url" content="http://polaris-hzn8.github.io/page/10/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="https:&#x2F;&#x2F;leetcode.cn&#x2F;u&#x2F;polaris-hzn8&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:author" content="Polaris-hzn8">
+<meta property="article:tag" content="keyword1 keyword2 keyword3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/70149889"><link rel="canonical" href="http://polaris-hzn8.github.io/page/10/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Polaris-hzn8","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Polaris-hzn8',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-07-17 19:36:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><div class="aplayer no-destroy" data-id="8840588853" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">53</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background: -webkit-linear-gradient(0deg,rgba(247, 149, 51, 0.1) 0,rgba(243, 112, 85, 0.1) 15%,rgba(239, 78, 123, 0.1) 30%,rgba(161, 102, 171, 0.1) 44%,rgba(80, 115, 184, 0.1) 58%,rgba(16, 152, 173, 0.1) 72%,rgba(7, 179, 155, 0.1) 86%,rgba(109, 186, 130, 0.1) 100%)"><nav id="nav"><span id="blog-info"><a href="/" title="Polaris-hzn8"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Polaris-hzn8</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/algorithm/kkbalgorithmI/4.leetcode/6.%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" title="删除有序数组中的重复项">删除有序数组中的重复项</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-11T04:08:00.000Z" title="Created 2023-03-11 12:08:00">2023-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A63/">难度3</a></span></div><div class="content">删除有序数组中的重复项
+
+原题链接：https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
+
+不要使用额外的空间，你必须在 原地修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+1.双指针1234567891011121314class Solution &#123;public:    int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123;        if (nums.size() == 0) return 0;        int black = 0;        for (int red = 1; red &lt; nums.size(); ++red) &#123;            if (nums[red] != nums[black]) &#123;                black++;                nums[black] = nums[red];            &#125;        &#125;        return black + 1;    &#125;&#125;;
+
+
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/algorithm/kkbalgorithmI/4.leetcode/5.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/" title="最长公共前缀">最长公共前缀</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-11T03:08:00.000Z" title="Created 2023-03-11 11:08:00">2023-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A63/">难度3</a></span></div><div class="content">最长公共前缀
+
+原题链接：https://leetcode.cn/problems/longest-common-prefix/
+
+编写一个函数来查找字符串数组中的最长公共前缀。
+如果不存在公共前缀，返回空字符串。
+1.substr解法1：暴力循环 + substr字符串截取
+runtime beats 73.15 % of cpp submissions
+memory usage beats 27.86 % of cpp submissions (9 MB)
+12345678910111213class Solution &#123;public:    string longestCommonPrefix(vector&lt;string&gt;&amp; strs) &#123;        if (strs.size() == 0) return &quot;&quot;;        string ans = strs[0];        for (int i = 1; i &lt; strs.size(); ++i) &#123;            int index = 0;            for (;index &lt; max(strs[i].length(), ans.length()) &amp;&amp; ans[index] == strs[i][index]; ++index);            ans = strs[i].substr(0, index);        &#125;        return ans;    &#125;&#125;;
+
+2.+&#x3D;操作解法2：暴力循环 + 字符串的+&#x3D;操作（取消了对substr的引用，性能更优）
+runtime beats 73.15 % of cpp submissions
+memory usage beats 92.63 % of cpp submissions (8.8 MB)
+1234567891011121314151617181920class Solution &#123;public:    string longestCommonPrefix(vector&lt;string&gt;&amp; strs) &#123;    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/algorithm/kkbalgorithmI/4.leetcode/4.%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/" title="罗马数字转整数">罗马数字转整数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-11T02:08:00.000Z" title="Created 2023-03-11 10:08:00">2023-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A63/">难度3</a></span></div><div class="content">罗马数字转整数
+
+原题链接：https://leetcode.cn/problems/roman-to-integer/
+
+罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。
+12345678字符          数值I             1V             5X             10L             50C             100D             500M             1000
+
+例如， 罗马数字 2 写做 II ，即为两个并列的 1 。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII 而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值。同样地数字9表示为 IX。
+这个特殊的规则只适用于以下六种情况：
+
+I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
+C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+
+给定一个罗马数字，将其转换成整数。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344class Solution &#123;public:    int romanToInt(string s) &#123;        int ans = 0;        for (int i = 0; i &lt; s.length(); ++i) &#123;            if (s[i] == &#x27;I&#x27;) &#123;                //特殊判断                if (s[i + 1] == &#x27;V&#x27; || s[i + 1] == &#x27;X&#x27;) &#123;                    ans += (s[i + 1] == &#x27;V&#x27 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/algorithm/kkbalgorithmI/4.leetcode/3.%E5%9B%9E%E6%96%87%E6%95%B0/" title="回文数">回文数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-11T01:08:00.000Z" title="Created 2023-03-11 09:08:00">2023-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A61/">难度1</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a></span></div><div class="content">回文数
+
+原题链接：https://leetcode.cn/problems/palindrome-number/
+
+给你一个整数 x ，如果 x 是一个回文整数，返回 true；否则返回 false。
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+
+提示：-231 &lt;&#x3D; x &lt;&#x3D; 231 - 1
+
+1.整数反转利用整数反转的思想，来处理回文数字问题
+12345678910111213class Solution &#123;public:    bool isPalindrome(int x) &#123;        if (x &lt; 0) return false;        long long ans = 0;        long long raw = x;        while (x) &#123;            ans = ans * 10 + x % 10;            x /= 10;        &#125;        return raw == ans;    &#125;&#125;;
+
+2.字符串反转1234567891011121314class Solution &#123;public:    bool isPalindrome(int x) &#123;        if (x &lt; 0) return false;        string raw = to_string(x);        string ans = raw;        for (int i = 0, j = raw.length() - 1; i &lt; j; ++i, --j) &#123;            char c = ans[i];            ans[i] = ans[j];            ans[j] = c;        &#125;        return raw == ans;    &#125;&#125;;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/algorithm/kkbalgorithmI/4.leetcode/2.%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/" title="整数反转">整数反转</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-11T00:08:00.000Z" title="Created 2023-03-11 08:08:00">2023-03-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A61/">难度1</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">算法技巧</a></span></div><div class="content">整数反转
+
+原题链接：https://leetcode.cn/problems/reverse-integer/
+
+给你一个 32 位的有符号整数 x ，返回其数字部分反转后的结果。
+如果反转后整数超过 32 位的有符号整数的范围 [−231, 231 − 1] ，就返回 0。
+假设环境不允许存储 64 位整数（有符号或无符号）（只允许使用int类型的变量）
+
+提示：-231 &lt;&#x3D; x &lt;&#x3D; 231 - 1
+
+1234input:120output:21input:0output:0
+
+123456789101112131415161718class Solution &#123;public:    int reverse(int x) &#123;        int ans = 0;        while (x) &#123;            if (ans &gt; INT_MAX / 10 || ans &lt; INT_MIN / 10 ||                ans == INT_MAX / 10 &amp;&amp; x % 10 &gt; 7 ||                ans == INT_MIN / 10 &amp;&amp; x % 10 &lt; -8            ) &#123;                ans = 0;                break;            &#125;            ans = ans * 10 + x % 10;            x /= 10;        &#125;        return ans;    &#125;&#125;;
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/10/algorithm/kkbalgorithmI/4.leetcode/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" title="两数之和">两数之和</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-10T15:08:00.000Z" title="Created 2023-03-10 23:08:00">2023-03-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BB%BC%E5%90%88/">综合</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BA%8C%E5%88%86/">二分</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%9A%BE%E5%BA%A62/">难度2</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a></span></div><div class="content">两数之和
+
+原题链接：https://leetcode.cn/problems/two-sum/
+
+给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+你可以按任意顺序返回答案。
+
+1.暴力法1234567891011121314class Solution &#123;public:    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;        int i, j;        for (i = 0; i &lt; nums.size(); ++i) &#123;            for (j = i + 1; j &lt; nums.size(); ++j) &#123;                if (nums[i] + nums[j] == target) &#123;                    return &#123;i, j&#125;;                &#125;            &#125;        &#125;        return &#123;i, j&#125;;    &#125;&#125;;
+
+2.二分查找思想：sort排序 + 二分查找
+
+使用for循环遍历数组中的每一个数字
+
+在for循环内部，使用target值减去当前遍历的数字值获取配对值ret，使用二分查找该数字ret
+
+如果找到该数字则直接输出其下标(初始若有序的情况下)
+
+实际是无序的！难点在于如何联系被sort打乱下标后的vec与未打乱的nums，并从其中找出目标数字的下标？
+ 1234for (int j = 0; j &lt; n; j++) &#123;    if (nums[j] == vec[i] || nums[j] == ret) result.push_back(j);    if(result.size() == 2) return result;&#125;
+
+12345678910111213141516171819202122 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/09/algorithm/kkbalgorithmI/3.stl/2.%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/" title="字符串括号匹配">字符串括号匹配</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-09T15:08:00.000Z" title="Created 2023-03-09 23:08:00">2023-03-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a></span></div><div class="content">字符串括号匹配
+
+原题链接：https://oj.haizeix.com/problem/377
+
+给出一个字符串，判断其中的左右圆括号是否匹配，
+注：需同时判断左右圆括号 ( 和  ) ，左右中括号 [ 和 ]，左右大括号 &#123; 和 &#125;
+不需要考虑括号之间的优先级的问题，也就是说，小括号包含大括号，也是被允许的
+输入：
+一行一个字符串，以字符@为结尾
+输出：
+若匹配，输出 YES，若不匹配，则输出 NO
+样例：
+1a(cc[])bbb()@ YES
+
+1a(cc[)]bbb()@ NO
+
+代码1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;string&gt;#include&lt;stack&gt;using namespace std;bool isValid(string str) &#123;  stack&lt;char&gt; stack;  for (int i = 0; i &lt; str.length(); ++i) &#123;    switch (str[i]) &#123;      case &#x27;(&#x27;:      case &#x27;[&#x27;:      case &#x27;&#123;&#x27;:	  	stack.push(str[i]);        break;      case &#x27;)&#x27;:	  	if (stack.empty() || stack.top() != &#x27;(&#x27;) return false;        stack.pop();        break;      case &#x27;&#125;&#x27;:	  	if (stack.empty() || stack.top() != &#x27;&#123;&#x27;) return false;        stack.pop();        break;      case &#x27;]&#x27;:	  	if (stack.empty() || stack.top() != &# ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/09/algorithm/kkbalgorithmI/3.stl/3.%E6%8B%AC%E5%8F%B7%E7%94%BB%E5%AE%B6/" title="括号画家">括号画家</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-09T15:08:00.000Z" title="Created 2023-03-09 23:08:00">2023-03-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a></span></div><div class="content">括号画家
+
+原题链接：https://oj.haizeix.com/problem/265
+
+Candela 是一名漫画家，她有一个奇特的爱好，就是在纸上画括号。
+这一天，刚刚起床的 Candela 画了一排括号序列，其中包含小括号 ()、中括号 [] 和大括号 &#123;&#125;，总长度为 N。
+这排随意绘制的括号序列显得杂乱无章，于是 Candela 定义了什么样的括号序列是美观的。
+1231.空的括号序列是美观的；2.若括号序列 A 是美观的，则括号序列 (A)、[A]、&#123;A&#125; 也是美观的；3.若括号序列 A、B 都是美观的，则括号序列 AB 也是美观的；
+
+例如 [()&#123;&#125;]() 是美观的括号序列，而 )(&#123;)[&#125;]( 则不是。
+现在 Candela 想在她绘制的括号序列中找出其中连续的一段，满足这段子序列是美观的并且长度尽量大。你能帮帮她吗？
+输入：
+1 个长度为 N 的括号序列。(5 ≤ N ≤ 10000)
+输出：
+一个整数，表示最长的美观的连续子序列的长度。
+样例：
+1[[[[]]&#123;&#125;]]
+
+110
+
+代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;stack&gt;#include&lt;string&gt;using namespace std;stack&lt;char&gt; stack1;stack&lt;int&gt; 	stack2;string str;int ans;void ansUpdate(int i) &#123;	stack1.pop();	stack2.pop();	ans = max(ans, i - stack2.top());&#125;void stack12Clear(int i) &#123;	while (!stack1.empty()) &#123;		stack1.pop();		stack2.pop();	&#125;	stack1.push(&#x27;#&#x27;);	stack2.pus ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/09/algorithm/kkbalgorithmI/3.stl/4.%E4%BB%93%E5%BA%93%E6%97%A5%E5%BF%97/" title="仓库日志">仓库日志</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-09T15:08:00.000Z" title="Created 2023-03-09 23:08:00">2023-03-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a></span></div><div class="content">仓库日志
+
+原题链接：https://oj.haizeix.com/problem/379
+
+某仓库购入新的货物并将一部分老货物发出，这个过程会有软件对数据以日志形式保存，规则如下：
+该日志记录了两类操作：
+第一类操作为入库操作，以及该次入库的货物数量；
+第二类操作为出库操作。
+这些记录都严格按时间顺序排列。入库和出库的规则为先进后出，即每次出库操作货物为当前在仓库里所有货物中最晚入库的货物。
+为了便于分析，现在加入了第三类查询操作，每次查询时输出当前仓库数量最多的货物的数量。
+输入：
+包含 N+1行：
+ 第一行为 1 个正整数 N，对应于日志内所含操作的总数。
+ 接下来的 N 行，分别属于以下三种格式之一：
+
+0 X ：一次入库操作，正整数 X 表示该次入库的货物的数量
+1 ：一次出库操作，（就当时而言）最后入库的货物出库
+2 ：一次查询操作，要求分析程序输出当前仓库内数量最多的货物的数量
+
+ 当仓库为空时你应该忽略出库操作，当仓库为空查询时你应该输出 0。
+ 初始时仓库状态为空。
+输出：
+输出行数等于日志中查询操作的次数。每行为一个正整数，表示查询结果。
+样例：
+1234567891011121314130 10 220 40 221211212
+
+1234524410
+
+代码12345678910111213141516171819202122232425262728293031323334#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;stack&lt;int&gt; stack1;//存储仓库货物的数量stack&lt;int&gt; stack2;//存储当前仓库内数量最多的货物数量int main() &#123;	int n;	cin &gt;&gt; n;	for (int i = 0; i &lt; n; ++i) &#123;		int x; cin &gt;&gt; x;		switch (x) &#123;			case 0://入库操作（入栈操作）				int num;				cin &gt;&gt; num;				stack1.push(num);				if (stack1.size() == 1) stack2.push(num);				else ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/09/algorithm/kkbalgorithmI/3.stl/5.%E8%AE%B2%E8%AF%9D%E6%A8%A1%E5%BC%8F/" title="讲话模式">讲话模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-03-09T15:08:00.000Z" title="Created 2023-03-09 23:08:00">2023-03-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/kkbtrainingI/">kkbtrainingI</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%9F%A5%E6%89%BE/">查找</a></span></div><div class="content">讲话模式
+
+原题链接：https://oj.haizeix.com/problem/577
+
+每个人讲话都有口头禅，现在给出一个字符串，需要求出其中出现次数最多的单词。
+输入：
+输入一行，若干个长度小于或等于 10 的只包含大小写字母的字符串。
+输出：
+输出一行，为出现次数最多的单词和它出现的次数，以一个空格隔开。如果出现次数最多的单词有多个，则输出字典序最小的那个。这个单词必须完全以小写的形式输出。注意，所说的单词不区分大小写字母。
+样例：
+1Can a can can a can It can
+
+1can 5
+
+代码
+解法1：定义两个变量string、int，轮回最终保留一个出现次数最多的结果，如果有多个则保留字典序最小的单词。
+解法2：当处理完所有的数据后，遍历一遍数组保留最终的结果。
+
+123456789101112131415161718192021222324252627282930#include&lt;iostream&gt;#include&lt;map&gt;#include&lt;string&gt;using namespace std;map&lt;string, int&gt; mp;string ans;//最终答案int count;//答案出现的次数int main() &#123;	string t;	//大小写转换	while (cin &gt;&gt; t) &#123;		for (int i = 0; i &lt; t.size(); ++i) &#123;			if (t[i] &gt;= &#x27;A&#x27; &amp;&amp; t[i] &lt;= &#x27;Z&#x27;) &#123;				t[i] += (&#x27;a&#x27; - &#x27;A&#x27;);			&#125;		&#125;		mp[t]++;	&#125;	//数据处理 使用有序map	for (auto it = mp.begin(); it != mp.end(); ++it) &#123;		if (it-&gt;second &gt; count) &#123;			ans = it-&gt;first;			count = it-&gt;second;		&#125;	&#125;	cout &lt;&lt;  ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/9/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/#content-inner">14</a><a class="extend next" rel="next" href="/page/11/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Polaris-hzn8</div><div class="author-info__description">https://leetcode.cn/u/polaris-hzn8/</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">132</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">53</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn"></i><span>Announcement</span></div><div class="announcement_content">This is a leetcode solution website for personal, wish you a nice day.</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/default/"><span class="card-category-list-name">default</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%8C%E5%88%86/"><span class="card-category-list-name">二分</span><span class="card-category-list-count">16</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"><span class="card-category-list-name">二分查找</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/"><span class="card-category-list-name">位运算</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"><span class="card-category-list-name">动态规划</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8F%8C%E6%8C%87%E9%92%88/"><span class="card-category-list-name">双指针</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%97%E7%AC%A6%E4%B8%B2/"><span class="card-category-list-name">字符串</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">总结</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">排序算法</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/"><span class="card-category-list-name">数学知识</span><span class="card-category-list-count">6</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/acwing/" style="font-size: 1.36em; color: rgb(103, 12, 172)">acwing</a><a href="/tags/kkbtraining/" style="font-size: 1.38em; color: rgb(184, 126, 168)">kkbtraining</a><a href="/tags/kkbtrainingI/" style="font-size: 1.45em; color: rgb(35, 68, 150)">kkbtrainingI</a><a href="/tags/sort/" style="font-size: 1.24em; color: rgb(14, 192, 26)">sort</a><a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.27em; color: rgb(30, 121, 85)">二分</a><a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" style="font-size: 1.29em; color: rgb(89, 138, 161)">二分答案</a><a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 1.15em; color: rgb(145, 193, 34)">优先队列</a><a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 1.27em; color: rgb(89, 113, 135)">位运算</a><a href="/tags/%E5%88%86%E6%B2%BB/" style="font-size: 1.15em; color: rgb(0, 106, 143)">分治</a><a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" style="font-size: 1.15em; color: rgb(63, 72, 29)">前缀和与差分</a><a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.22em; color: rgb(173, 52, 9)">动态规划</a><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 1.4em; color: rgb(107, 120, 200)">双指针</a><a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 1.17em; color: rgb(176, 87, 183)">哈希</a><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 1.31em; color: rgb(20, 156, 46)">哈希表</a><a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.27em; color: rgb(79, 74, 126)">字符串</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" style="font-size: 1.17em; color: rgb(63, 50, 112)">归并排序</a><a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 1.15em; color: rgb(110, 97, 133)">快速幂</a><a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 1.15em; color: rgb(159, 49, 128)">快速排序</a><a href="/tags/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" style="font-size: 1.15em; color: rgb(4, 28, 112)">扩展欧几里得算法</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 1.17em; color: rgb(130, 113, 27)">排序算法</a><a href="/tags/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/" style="font-size: 1.24em; color: rgb(127, 73, 137)">数学知识</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.43em; color: rgb(40, 114, 90)">数据结构</a><a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 1.24em; color: rgb(136, 148, 168)">数组</a><a href="/tags/%E6%96%B9%E5%90%91%E6%95%B0%E7%BB%84/" style="font-size: 1.15em; color: rgb(10, 193, 6)">方向数组</a><a href="/tags/%E6%9E%9A%E4%B8%BE/" style="font-size: 1.33em; color: rgb(50, 112, 164)">枚举</a><a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 1.17em; color: rgb(89, 14, 77)">查找</a><a href="/tags/%E6%A0%88/" style="font-size: 1.27em; color: rgb(94, 78, 46)">栈</a><a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 1.31em; color: rgb(133, 95, 172)">模拟</a><a href="/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" style="font-size: 1.15em; color: rgb(79, 51, 161)">欧拉函数</a><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 1.27em; color: rgb(184, 4, 196)">滑动窗口</a><a href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96%E4%B8%8E%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6/" style="font-size: 1.15em; color: rgb(80, 16, 151)">离散化与区间合并</a><a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 1.22em; color: rgb(66, 31, 147)">算法技巧</a><a href="/tags/%E8%B4%A8%E6%95%B0%E4%B8%8E%E7%BA%A6%E6%95%B0/" style="font-size: 1.15em; color: rgb(36, 172, 137)">质数与约数</a><a href="/tags/%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/" style="font-size: 1.31em; color: rgb(11, 106, 6)">递推与递归</a><a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 1.33em; color: rgb(200, 188, 166)">链表</a><a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 1.2em; color: rgb(177, 103, 76)">队列</a><a href="/tags/%E9%9A%BE%E5%BA%A61/" style="font-size: 1.2em; color: rgb(33, 80, 117)">难度1</a><a href="/tags/%E9%9A%BE%E5%BA%A62/" style="font-size: 1.31em; color: rgb(84, 153, 71)">难度2</a><a href="/tags/%E9%9A%BE%E5%BA%A64/" style="font-size: 1.27em; color: rgb(179, 145, 90)">难度4</a><a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 1.24em; color: rgb(22, 167, 119)">高精度</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">132</div></div><div class="webinfo-item"><div class="item-name">Run time :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-09-08T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">84k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-07-17T11:36:01.884Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: -webkit-linear-gradient(0deg,rgba(247, 149, 51, 0.1) 0,rgba(243, 112, 85, 0.1) 15%,rgba(239, 78, 123, 0.1) 30%,rgba(161, 102, 171, 0.1) 44%,rgba(80, 115, 184, 0.1) 58%,rgba(16, 152, 173, 0.1) 72%,rgba(7, 179, 155, 0.1) 86%,rgba(109, 186, 130, 0.1) 100%)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Polaris-hzn8</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">keep coding and keep focus.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (false) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (false) {
+    typedJSFn.init(["日拱一卒无有尽,功不唐捐终入海."])
+  } else {
+    document.getElementById("subtitle").innerHTML = '日拱一卒无有尽,功不唐捐终入海.'
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
