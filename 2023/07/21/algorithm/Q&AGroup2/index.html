@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Q&amp;AGroup2 | Polaris-hzn8</title><meta name="author" content="Polaris-hzn8"><meta name="copyright" content="Polaris-hzn8"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Q&amp;AGroup2 一、C&#x2F;C++相关1.语言基础 static、const 作用？ 引用与指针作用以及区别？ 如何避免野指针？ malloc、free 和 new、delete 区别？ extern 有什么作用？ 简述 strcpy、sprintf 与 memcpy 的区别？ c&#x2F;c++ 中强制类型转换使用场景？ 什么时候生成默认构造函数？ 什么时候生产默认拷贝构造函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Q&amp;AGroup2">
+<meta property="og:url" content="http://polaris-hzn8.github.io/2023/07/21/algorithm/Q&AGroup2/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="Q&amp;AGroup2 一、C&#x2F;C++相关1.语言基础 static、const 作用？ 引用与指针作用以及区别？ 如何避免野指针？ malloc、free 和 new、delete 区别？ extern 有什么作用？ 简述 strcpy、sprintf 与 memcpy 的区别？ c&#x2F;c++ 中强制类型转换使用场景？ 什么时候生成默认构造函数？ 什么时候生产默认拷贝构造函">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-07-21T09:32:00.000Z">
+<meta property="article:modified_time" content="2023-07-21T09:38:10.493Z">
+<meta property="article:author" content="Polaris-hzn8">
+<meta property="article:tag" content="Q&amp;A">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/70149889"><link rel="canonical" href="http://polaris-hzn8.github.io/2023/07/21/algorithm/Q&amp;AGroup2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Polaris-hzn8","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Q&AGroup2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-21 17:38:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><div class="aplayer no-destroy" data-id="8840588853" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">134</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: linear-gradient(450deg,rgba(247, 149, 51, 0.1) 0,rgba(243, 112, 85, 0.1) 15%,rgba(239, 78, 123, 0.1) 30%,rgba(161, 102, 171, 0.1) 44%,rgba(80, 115, 184, 0.1) 58%,rgba(16, 152, 173, 0.1) 72%,rgba(7, 179, 155, 0.1) 86%,rgba(109, 186, 130, 0.1) 100%)"><nav id="nav"><span id="blog-info"><a href="/" title="Polaris-hzn8"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Q&amp;AGroup2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-07-21T09:32:00.000Z" title="Created 2023-07-21 17:32:00">2023-07-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-07-21T09:38:10.493Z" title="Updated 2023-07-21 17:38:10">2023-07-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>6min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Q&amp;AGroup2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Q-amp-AGroup2"><a href="#Q-amp-AGroup2" class="headerlink" title="Q&amp;AGroup2"></a>Q&amp;AGroup2</h1><hr>
+<h3 id="一、C-x2F-C-相关"><a href="#一、C-x2F-C-相关" class="headerlink" title="一、C&#x2F;C++相关"></a>一、C&#x2F;C++相关</h3><h4 id="1-语言基础"><a href="#1-语言基础" class="headerlink" title="1.语言基础"></a>1.语言基础</h4><ol>
+<li>static、const 作用？</li>
+<li>引用与指针作用以及区别？</li>
+<li>如何避免野指针？</li>
+<li>malloc、free 和 new、delete 区别？</li>
+<li>extern 有什么作用？</li>
+<li>简述 strcpy、sprintf 与 memcpy 的区别？</li>
+<li>c&#x2F;c++ 中强制类型转换使用场景？</li>
+<li>什么时候生成默认构造函数？</li>
+<li>什么时候生产默认拷贝构造函数？</li>
+<li>什么是深拷贝？什么是浅拷贝？</li>
+</ol>
+<h4 id="2-STL"><a href="#2-STL" class="headerlink" title="2.STL"></a>2.STL</h4><ol>
+<li>vector 底层实现原理？</li>
+<li>vector 内存增长机制？</li>
+<li>vector 的 reserve 和 resize 的区别？</li>
+<li>vector 的元素类型为什么不能是引用？</li>
+<li>list 的底层实现原理？</li>
+<li>deque 的底层实现原理？</li>
+<li>什么时候使用 vector、list、以及 deque？</li>
+<li>priority_queue 的底层实现原理？</li>
+<li>multiset 的底层实现原理？红黑树原理？</li>
+<li>unordered_map的底层实现原理？哈希表原理？</li>
+<li>迭代器底层实现原理？以及有哪些种类？</li>
+<li>迭代器失效？连续和非连续存储容器的失效？</li>
+<li>STL 容器的线程安全性？</li>
+</ol>
+<h4 id="3-面向对象"><a href="#3-面向对象" class="headerlink" title="3.面向对象"></a>3.面向对象</h4><ol>
+<li>面对对象的三大特征？</li>
+<li>简述多态实现原理？</li>
+<li>怎么解决菱形继承？</li>
+<li>function,lambda,bind之间的关系</li>
+<li>c++ 类型推导用法</li>
+<li>关键字override,final的作用</li>
+<li>继承下的构造函数和析构函数执行顺序？</li>
+<li>虚函数表和虚函数表指针(vptr)的创建时机？</li>
+<li>虚析构函数的作用？</li>
+<li>智能指针种类以及使用场景？</li>
+<li>c++ 11 用过哪些特性？</li>
+<li>动态库和静态库的区别？</li>
+<li>左值引用与右值引用的区别？右值引用意义?</li>
+</ol>
+<h3 id="二、数据结构与算法"><a href="#二、数据结构与算法" class="headerlink" title="二、数据结构与算法"></a>二、数据结构与算法</h3><ol>
+<li>用两个栈实现队列？</li>
+<li>包含 min 函数的栈？</li>
+<li>队列的最大值？</li>
+<li>用一个栈实现另一个栈的排序？</li>
+<li>如何仅用递归函数和栈操作逆序一个栈？</li>
+<li>链表中倒数第 k 个节点？</li>
+<li>链表中环的入口节点？</li>
+<li>反转链表？</li>
+<li>从尾到头打印链表？</li>
+<li>两个链表的第一个公共节点？</li>
+<li>第一个只出现一次的字符？</li>
+<li>最长不含重复字符的子字符串？</li>
+<li>字符串的排列？</li>
+<li>反转字符串？</li>
+<li>把数字翻译成字符串？</li>
+<li>重建二叉树？</li>
+<li>二叉树的下一个节点？</li>
+<li>树的子结构？</li>
+<li>二叉树的镜像？</li>
+<li>对称的二叉树？</li>
+<li>从上到下打印二叉树？</li>
+<li>序列化二叉树？</li>
+<li>二叉树的深度？</li>
+<li>二叉树第 k 大节点？</li>
+<li>树中两个节点的最低公共祖先？</li>
+<li>剪绳子？</li>
+<li>二进制中 1 的个数？</li>
+<li>矩阵的最小路径和？</li>
+<li>换钱的方法数？</li>
+<li>换钱的最少货币数？</li>
+<li>最长公共子序列问题？</li>
+<li>最长公共子串问题？</li>
+<li>数组中的最长连续序列？</li>
+<li>最长递增子序列？</li>
+<li>最小编辑代价？</li>
+</ol>
+<h3 id="三、操作系统"><a href="#三、操作系统" class="headerlink" title="三、操作系统"></a>三、操作系统</h3><h4 id="1-进程线程"><a href="#1-进程线程" class="headerlink" title="1.进程线程"></a>1.进程线程</h4><ol>
+<li>进程和线程的区别？</li>
+<li>操作系统中进程与线程切换过程？</li>
+<li>请描述整个系统调用过程？</li>
+<li>后台进程有什么特点？</li>
+<li>进程间通信有哪几种方式？</li>
+<li>操作系统中进程调度策略有哪几种？</li>
+<li>线程同步的方式？</li>
+<li>CAS 是一种什么样的同步机制？</li>
+<li>CPU 是怎么执行指令的？</li>
+</ol>
+<h4 id="2-内存"><a href="#2-内存" class="headerlink" title="2.内存"></a>2.内存</h4><ol>
+<li>用户态和核心态的区别？</li>
+<li>内存管理有哪几种方式？</li>
+<li>malloc 是如何分配内存的</li>
+<li>页面置换算法有哪些？</li>
+<li>谈谈 cpu cache 一致性工作原理</li>
+<li>写文件时进程宕机，数据会丢失吗</li>
+<li>磁盘调度算法有哪些</li>
+</ol>
+<h3 id="四、MYSQL"><a href="#四、MYSQL" class="headerlink" title="四、MYSQL"></a>四、MYSQL</h3><ol>
+<li>数据库三大范式？</li>
+<li>MySQL cpu 飙升，该怎么处理？</li>
+<li>如何定位以及优化 SQL 语句的性能问题？</li>
+<li>什么是视图？为什么要使用视图？</li>
+<li>SQL 语句在 MySQL 是如何执行的？</li>
+<li>索引在哪些情况下会失效？</li>
+<li>索引的目的和代价分别是什么？</li>
+<li>主键索引和唯一索引的区别？</li>
+<li>聚集索引和非聚集索引的区别？</li>
+<li>什么是覆盖索引？原理是什么？</li>
+<li>什么是回表查询？原理是什么？</li>
+<li>什么是最左匹配规则？原理是什么？</li>
+<li>什么是索引下推？原理是什么?</li>
+<li>InnoDB 与 MyISAM 的区别？</li>
+<li>索引为什么要用 B+树而不是二叉树或者B树？</li>
+<li>数据库事务的四个特性以及含义？</li>
+<li>脏读，幻读，不可重复读出现的原因原理？</li>
+<li>不可重复读与幻读的区别？</li>
+<li>SQL 注入原理？如何避免 SQL 注入？</li>
+<li>MySQL 死锁问题产生的原因以及如何解决？</li>
+<li>MVCC 底层原理？</li>
+<li>MySQL 主从复制原理？</li>
+<li>MySQL 分库分表？</li>
+</ol>
+<h3 id="五、网络编程"><a href="#五、网络编程" class="headerlink" title="五、网络编程"></a>五、网络编程</h3><ol>
+<li>简述 Reactor 网络编程模型？</li>
+<li>比较 Reactor 和 Proactor 的区别？</li>
+<li>连接断开有哪几种判定方式？</li>
+<li>接收客户端连接有几种方式？</li>
+<li>为什么用户态需要设置读写缓冲区？</li>
+<li>水平触发和边缘触发的区别？</li>
+<li>CLOSE_WAIT 和 TIME_WAIT是什么？</li>
+<li>TCP 三次握手的过程？为啥不可两次握手？</li>
+<li>TCP 四次挥手的过程？</li>
+<li>什么是连接的半打开，半关闭状态？</li>
+<li>UDP和TCP的区别</li>
+<li>描述输入网址到网页显示整个流程</li>
+<li>linux系统如何收发网络包</li>
+<li>TCP是如何保证可靠性的</li>
+<li>什么是MTU、MSS以及为什么要有MSS</li>
+</ol>
+<h3 id="六、设计模式"><a href="#六、设计模式" class="headerlink" title="六、设计模式"></a>六、设计模式</h3><ol>
+<li>面对对象中有哪些设计原则？</li>
+<li>开闭原则，哪些原则与它相关，分别的关系？</li>
+<li>什么是里氏替换原则？</li>
+<li>什么是迪米特原则？</li>
+<li>什么是依赖倒置原则？</li>
+<li>单例模式多线程？</li>
+<li>什么是工厂模式？什么是抽象工厂？</li>
+<li>什么是代理模式？应用场景是什么？</li>
+<li>什么是装饰器模式？应用场景是什么？</li>
+<li>什么是组合模式？应用场景是什么？</li>
+<li>什么是责任链模式？应用场景是什么？</li>
+<li>什么是模版方法？应用场景是什么？</li>
+<li>什么是策略模式？应用场景是什么？</li>
+<li>什么是观察者模式？应用场景是什么？</li>
+</ol>
+<h3 id="七、Redis"><a href="#七、Redis" class="headerlink" title="七、Redis"></a>七、Redis</h3><ol>
+<li>什么是 redis？redis 的应用场景？</li>
+<li>redis 的对象类型有哪些？</li>
+<li>相同数量的数据hash与zset 存储占用情况？</li>
+<li>基于 redis 实现限流功能有哪几种方式？</li>
+<li>redis 为什么是单线程？这里单线程指什么？</li>
+<li>redis 怎么实现分布式锁？有哪些缺陷？</li>
+<li>redis 怎么做高可用？</li>
+<li>redis不同的持久化机制都有什么优缺点？</li>
+<li>什么是缓存雪崩、缓存穿透、缓存击穿？</li>
+<li>redis 淘汰策略有哪些？</li>
+<li>分析 redis 的事务？</li>
+<li>简述 redis 高可用的方案？</li>
+<li>简述 redis cluster 集群的原理？</li>
+</ol>
+<h3 id="八、Kafka"><a href="#八、Kafka" class="headerlink" title="八、Kafka"></a>八、Kafka</h3><ol>
+<li>kafka 是什么？解决了什么问题？</li>
+<li>zookeeper 对于 kafka 的作用是什么？</li>
+<li>kafka 如何判断一个节点是否还活着？</li>
+<li>简述 kafka 的 ack 三种机制？</li>
+<li>如何控制消费的位置？</li>
+<li>在分布式场景下如何保证消息的顺序消费？</li>
+<li>kafka 的高可用机制是什么？</li>
+<li>kafka 如何减少数据丢失？</li>
+<li>kafka 如何确保不消费重复数据？</li>
+<li>kafka 如何维护消费状态的？</li>
+</ol>
+<h3 id="九、docker"><a href="#九、docker" class="headerlink" title="九、docker"></a>九、docker</h3><ol>
+<li>什么是 docker 镜像？</li>
+<li>什么是 docker 容器？</li>
+<li>docker 容器有几种状态？</li>
+<li>DockerFile中的命令COPY和ADD命令的区别?</li>
+<li>容器与主机之间的数据拷贝命令?</li>
+<li>解释一下 dockerfile 的 ONBUILD 指令?</li>
+<li>如何在生产中监控 docker?</li>
+<li>构建 docker 镜像应该遵循哪些原则?</li>
+<li>容器退出后通过ps命令查看不到数据会丢失么</li>
+</ol>
+<h3 id="十、分布式理论"><a href="#十、分布式理论" class="headerlink" title="十、分布式理论"></a>十、分布式理论</h3><ol>
+<li>什么是 CAP 理论？</li>
+<li>什么是 Base 理论？</li>
+<li>什么是 2PC（两阶段提交）?</li>
+<li>什么是 Raft 协议？ 解决了什么问题？</li>
+</ol>
+<h3 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h3><ol>
+<li>2G内存在20亿个整数中找出现次数最多的数</li>
+<li>100亿个URL中重复词汇的TopK问题</li>
+<li>40亿个非负整数中找到未出现的数？</li>
+<li>40亿个非负整数中算中位数和找出现两次的数</li>
+<li>岛问题</li>
+<li>redis 和 mysql 缓存一致性</li>
+<li>请求页面置换策略有哪些方式？区别是什么？</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://Polaris-hzn8.github.io">Polaris-hzn8</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://polaris-hzn8.github.io/2023/07/21/algorithm/Q&amp;AGroup2/">http://polaris-hzn8.github.io/2023/07/21/algorithm/Q&amp;AGroup2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="null">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Q-A/">Q&amp;A</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/07/17/algorithm/normal/kw-linklist/1.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%89%80%E6%9C%89%E5%80%BC%E4%B8%BAx%E7%9A%84%E5%85%83%E7%B4%A0/" title="删除链表中所有值为x的元素"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">删除链表中所有值为x的元素</div></div></a></div><div class="next-post pull-right"><a href="/2023/07/21/algorithm/Q&amp;AGroup1/" title="Q&amp;AGroup1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Q&amp;AGroup1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/07/21/algorithm/Q&AGroup1/" title="Q&amp;AGroup1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-21</div><div class="title">Q&amp;AGroup1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Polaris-hzn8</div><div class="author-info__description">https://leetcode.cn/u/polaris-hzn8/</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">134</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn"></i><span>Announcement</span></div><div class="announcement_content">This is a leetcode solution website for personal, wish you a nice day.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Q-amp-AGroup2"><span class="toc-text">Q&amp;AGroup2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81C-x2F-C-%E7%9B%B8%E5%85%B3"><span class="toc-text">一、C&#x2F;C++相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80"><span class="toc-text">1.语言基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-STL"><span class="toc-text">2.STL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">3.面向对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-text">二、数据结构与算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">三、操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B"><span class="toc-text">1.进程线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%86%85%E5%AD%98"><span class="toc-text">2.内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81MYSQL"><span class="toc-text">四、MYSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">五、网络编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">六、设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81Redis"><span class="toc-text">七、Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81Kafka"><span class="toc-text">八、Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81docker"><span class="toc-text">九、docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="toc-text">十、分布式理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-text">设计方案</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background: linear-gradient(450deg,rgba(247, 149, 51, 0.1) 0,rgba(243, 112, 85, 0.1) 15%,rgba(239, 78, 123, 0.1) 30%,rgba(161, 102, 171, 0.1) 44%,rgba(80, 115, 184, 0.1) 58%,rgba(16, 152, 173, 0.1) 72%,rgba(7, 179, 155, 0.1) 86%,rgba(109, 186, 130, 0.1) 100%)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Polaris-hzn8</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">keep coding and keep focus.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
