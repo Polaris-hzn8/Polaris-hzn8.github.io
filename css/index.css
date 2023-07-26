@@ -316,8 +316,8 @@ hr:before,
 .list-beauty li:before,
 .category-lists ul li:before {
   position: absolute;
-  top: 0.67em;
-  left: 0;
+  top: 0.75em;
+  left: 15px;
   width: 0.43em;
   height: 0.43em;
   border: 0.215em solid #666;
@@ -5947,4 +5947,25 @@ background-color
 }
 #post-info #post-meta a {
   color: #fff;
+}
+.category-lists ul li {
+  padding-left: 35px;
+  margin: 10px 20px;
+  background-color: #f0ffff;
+  border-radius: 1rem;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.category-lists ul li:hover {
+  color: #fff;
+  background-color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+  -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
+  -o-transform: translateX(5px);
+  -ms-transform: translateX(5px);
+  transform: translateX(5px);
 }
