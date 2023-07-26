@@ -115,7 +115,7 @@ search:
   field: post
   content: true
 
-aplayer:
-  meting: true
-  asset_inject: false
+# aplayer:
+#   meting: true
+#   asset_inject: false
   

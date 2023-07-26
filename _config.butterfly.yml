@@ -169,13 +169,13 @@ post_meta:
   page: # Home Page
     date_type: created # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
-    categories: false # true or false 主頁是否顯示分類
+    categories: true # true or false 主頁是否顯示分類
     tags: true # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
-    categories: false # true or false 文章頁是否顯示分類
+    categories: true # true or false 文章頁是否顯示分類
     tags: true # true or false 文章頁是否顯示標籤
     label: true # true or false 顯示描述性文字
 
@@ -533,7 +533,7 @@ theme_color:
 # The position of site info, eg: 300px/300em/300rem/10% (主頁標題距離頂部距離)
 index_site_info_top: 
 # The height of top_img, eg: 300px/300em/300rem (主頁top_img高度)
-index_top_img_height: 
+index_top_img_height: 300px
 
 # The user interface setting of category and tag page (category和tag頁的UI設置)
 # index - same as Homepage UI (index 值代表 UI將與首頁的UI一樣)
@@ -650,7 +650,7 @@ hr_icon:
 subtitle:
   enable: true
   # Typewriter Effect (打字效果)
-  effect: true
+  effect: false
   loop: false
   # Customize typed.js (配置typed.js)
   # https://github.com/mattboldt/typed.js/#customization
@@ -661,9 +661,12 @@ subtitle:
   # source: 2  調用一句網（簡體） https://yijuzhan.com/
   # source: 3  調用今日詩詞（簡體） https://www.jinrishici.com/
   # subtitle 會先顯示 source , 再顯示 sub 的內容
-  source: 1
+  source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub: 
+   - 日拱一卒无有尽,功不唐捐终入海.
+   # - 人生如棋局.
+   # - If the youth time spent in idle, then recall the years will be a sad tragedy.
 
 
 
@@ -848,7 +851,7 @@ pjax:
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
-  enable: true
+  enable: false
   per_page: false
 
 # Snackbar (Toast Notification 彈窗)
