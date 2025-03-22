@@ -1,0 +1,702 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第二章：线性表 | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第二章：线性表 一、线性表线性表：具有相同特性的数据元素的一个有限序列，数据元素的个数定义为表的长度。 线性表ADT的定义如下： 1234567891011ADT List &amp;#123;    数据对象:    	D &#x3D; &amp;#123;ai | ai属于Element, (i &#x3D; 1, 2, ..., n)&amp;#125;    数据关系:    	R &#x3D; &amp;#123;&lt;ai-1, ai&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章：线性表">
+<meta property="og:url" content="https://polaris-hzn8.github.io/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="第二章：线性表 一、线性表线性表：具有相同特性的数据元素的一个有限序列，数据元素的个数定义为表的长度。 线性表ADT的定义如下： 1234567891011ADT List &amp;#123;    数据对象:    	D &#x3D; &amp;#123;ai | ai属于Element, (i &#x3D; 1, 2, ..., n)&amp;#125;    数据关系:    	R &#x3D; &amp;#123;&lt;ai-1, ai&gt;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-02-28T14:08:00.000Z">
+<meta property="article:modified_time" content="2025-03-22T03:54:08.585Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="datestructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第二章：线性表",
+  "url": "https://polaris-hzn8.github.io/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/",
+  "image": "https://avatars.githubusercontent.com/u/70149889",
+  "datePublished": "2023-02-28T14:08:00.000Z",
+  "dateModified": "2025-03-22T03:54:08.585Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Luo Chenhao",
+      "url": "https://polaris-hzn8.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第二章：线性表',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a><a class="nav-page-title" href="/"><span class="site-name">第二章：线性表</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第二章：线性表</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-02-28T14:08:00.000Z" title="Created 2023-02-28 22:08:00">2023-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-22T03:54:08.585Z" title="Updated 2025-03-22 11:54:08">2025-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">6.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>27mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-22 11:54:08&quot;}" hidden></div><h1 id="第二章：线性表"><a href="#第二章：线性表" class="headerlink" title="第二章：线性表"></a>第二章：线性表</h1><hr>
+<h3 id="一、线性表"><a href="#一、线性表" class="headerlink" title="一、线性表"></a>一、线性表</h3><p>线性表：具有<font color='#BAOC2F'>相同特性的数据元素</font>的一个<font color='#BAOC2F'>有限序列</font>，数据元素的个数定义为表的长度。</p>
+<p>线性表ADT的定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ADT List &#123;</span><br><span class="line">    数据对象:</span><br><span class="line">    	D = &#123;ai | ai属于Element, (i = <span class="number">1</span>, <span class="number">2</span>, ..., n)&#125;</span><br><span class="line">    数据关系:</span><br><span class="line">    	R = &#123;&lt;ai<span class="number">-1</span>, ai&gt; | ai<span class="number">-1</span>, ai属于D, (i = <span class="number">1</span>, <span class="number">2</span>, ..., n)&#125;</span><br><span class="line">    基本操作:</span><br><span class="line">    	<span class="built_in">InitList</span>(&amp;L);</span><br><span class="line">    	<span class="built_in">DestroyList</span>(&amp;L);</span><br><span class="line">    	<span class="built_in">ListInsert</span>(&amp;L, i, e);</span><br><span class="line">    	<span class="built_in">ListDelete</span>(&amp;L, i, &amp;e);</span><br><span class="line">&#125; ADT List</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、线性表的顺序表示"><a href="#二、线性表的顺序表示" class="headerlink" title="二、线性表的顺序表示"></a>二、线性表的顺序表示</h3><h4 id="1-顺序表定义："><a href="#1-顺序表定义：" class="headerlink" title="1.顺序表定义："></a>1.顺序表定义：</h4><p>顺序存储结构：将<font color='#BAOC2F'>逻辑上相邻的数据元素</font>存储在<font color='#BAOC2F'>物理上相邻的存储单元中</font>的存储结构（逻辑上相邻，物理上也相邻）</p>
+<p>&#x3D;&#x3D;顺序表的特点&#x3D;&#x3D;：</p>
+<ol>
+<li>线性表顺序存储结构必须<font color='#BAOC2F'>占用一片连续的存储空间</font>，</li>
+<li>知道某个元素的存储位置就<font color='#BAOC2F'>可以计算其他元素的存储位置</font>，</li>
+<li>顺序表：随机存取</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220826110610003.png" alt="image-20220826110610003"></p>
+<h4 id="2-顺序表存储表示："><a href="#2-顺序表存储表示：" class="headerlink" title="2.顺序表存储表示："></a>2.顺序表存储表示：</h4><p>根据顺序表的地址连续、依次存放、随机存储、类型相同等特点，可以用高级语言中的数组来表示顺序表这种数据结构。</p>
+<p>关于数组的内存分配有两种方式（顺序表初始化）：</p>
+<ol>
+<li><p>数组静态分配：数组的大小和空间初始固定，一旦空间占满再加入新的数据就会发生溢出，进而导致程序崩溃。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    ElemType elem[MaxSize];<span class="comment">//顺序表最大长度(容量)</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//顺序表目前长度</span></span><br><span class="line">&#125; SqList;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组动态分配：数组的存储空间是动态分配的，一旦空间占满就会另外开辟一块更大的存储空间，替换原来的存储空间（扩容）。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    ElemType *elem;<span class="comment">//顺序表最大长度(容量)</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//顺序表目前长度</span></span><br><span class="line">&#125; SqList;</span><br><span class="line"></span><br><span class="line">SqList L;</span><br><span class="line">L.data = (ElemType*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(ElemType)*MaxSize)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>补充：C与Cpp对于内存动态分配语句中的函数说明</p>
+<ol>
+<li><p>c动态内存分配：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>malloc(n)</td>
+<td>开辟n字节长度的地址空间，并返回这段空间的首地址</td>
+</tr>
+<tr>
+<td>sizeof(x)</td>
+<td>计算变量x的长度</td>
+</tr>
+<tr>
+<td>free(p)</td>
+<td>释放指针p所指变量的存储空间（彻底删除一个变量）</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>cpp动态存储分配：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>new T()</td>
+<td>申请用于存储T类型对象的内存空间，并按照初值列表进行赋值<br />如果执行成功则返回T类型的指针（指向新分配的内存），<br />否则返回0（NULL）</td>
+<td>int *p &#x3D; new int(10);<br />int *p &#x3D; new int;</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>释放指针p所指向的内存，指针p必须是new操作的返回值</td>
+<td>delete p;</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+</blockquote>
+<h4 id="3-顺序表基本操作："><a href="#3-顺序表基本操作：" class="headerlink" title="3.顺序表基本操作："></a>3.顺序表基本操作：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数返回结果状态码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INFEASIBLE -1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OVERFLOW -2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Status是函数的类型，其值是函数结果状态码</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> ElemType;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（1）简单操作："><a href="#（1）简单操作：" class="headerlink" title="（1）简单操作："></a>（1）简单操作：</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//操作1：初始化一个空的顺序表</span></span><br><span class="line"><span class="function">Status <span class="title">InitSqList</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.为顺序表分配内存空间</span></span><br><span class="line">    L.elem = <span class="keyword">new</span> ElemType[MAXSIZE];</span><br><span class="line">    <span class="keyword">if</span> (!L.elem) &#123;</span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);<span class="comment">//内存分配失败，则直接返回</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        L.length = <span class="number">0</span>;<span class="comment">//内存分配成功，则设定目前顺序表的长度为0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//操作2：顺序表取值(按下标查找)</span></span><br><span class="line"><span class="function">Status <span class="title">GetElem</span><span class="params">(SqList L, <span class="type">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span> || i &gt; L.length) <span class="keyword">return</span> ERROR;<span class="comment">//非法取值</span></span><br><span class="line">    e = L.elem[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//操作3：顺序表清空</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ClearList</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    L.length = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//操作4：顺序表销毁</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DestroyList</span><span class="params">(SqList &amp;L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(L.elem) <span class="keyword">delete</span> L.elem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）顺序表查找操作："><a href="#（2）顺序表查找操作：" class="headerlink" title="（2）顺序表查找操作："></a>（2）顺序表查找操作：</h5><p>从表的一端考试逐个进行记录的<font color='#BAOC2F'>关键字和给定值</font>的比较（逐个遍历），如果找到则返回该元素的位置序号，否则返回0</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">LocateElem</span><span class="params">(SqList L, ElemType e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; L.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.elemp[i] == e) <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最好情况：查找的元素就在表头，需要比较1次时间复杂度为O(1)</li>
+<li>最坏情况：查找的元素在表位 or 不存在，需要比较n次时间复杂度为O(n)</li>
+<li>平均情况：需要比较(n + 1) &#x2F; 2次时间复杂度为O(n)，因此线性表按值查找的平均时间复杂度为<font color='#BAOC2F'>O(n)</font></li>
+</ul>
+<h5 id="（3）顺序表插入操作："><a href="#（3）顺序表插入操作：" class="headerlink" title="（3）顺序表插入操作："></a>（3）顺序表插入操作：</h5><p>算法思想：</p>
+<ol>
+<li>判断插入位置i是否合法，否则返回ERROR</li>
+<li>判断顺序表的存储空间是否已满，否则返回ERROR</li>
+<li>将第<code>n~i</code>位元素依次向后移动一个位置，空出第i位置▲</li>
+<li>将插入元素e放入到插入位置▲</li>
+<li>修改顺序表目前长度+1，插入成功返回OK▲</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">SqListInsert</span><span class="params">(SqList &amp;L, <span class="type">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span> || i &gt; L.length + <span class="number">1</span>) <span class="keyword">return</span> ERROR;<span class="comment">//非法插入</span></span><br><span class="line">    <span class="keyword">if</span> (L.length == MAXSIZE) <span class="keyword">return</span> ERROR;<span class="comment">//顺序表已满</span></span><br><span class="line">    <span class="comment">//1.将插入元素及其之后的元素后移</span></span><br><span class="line">    <span class="keyword">for</span> (j = L.length - <span class="number">1</span>; j &gt;= i - <span class="number">1</span>; --j) &#123;</span><br><span class="line">        L.elem[j + <span class="number">1</span>] = L.elem[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.将插入元素e放入到插入位置</span></span><br><span class="line">    L.elem[i - <span class="number">1</span>] = e;</span><br><span class="line">    <span class="comment">//3.修改顺序表目前长度</span></span><br><span class="line">    L.length++;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最好情况：在顺序表尾插入(i &#x3D; n + 1)，元素后移执行语句不执行，时间复杂度为O(1)</li>
+<li>最坏情况：在顺序表头插入(i &#x3D; n)，元素后移语句将执行n次，时间复杂度为O(n)</li>
+<li>平均情况：元素后移语句平均需要执行n &#x2F; 2次，顺序表插入算法的平均时间复杂度为<font color='#BAOC2F'>O(n)</font></li>
+</ul>
+<h5 id="（4）顺序表删除操作："><a href="#（4）顺序表删除操作：" class="headerlink" title="（4）顺序表删除操作："></a>（4）顺序表删除操作：</h5><p>算法思想：</p>
+<ol>
+<li>判断删除位置i是否合法，否则返回ERROR</li>
+<li>将将要删除的元素保存到e中▲</li>
+<li>将第<code>i+1~n</code>位的元素依次向前移动一个位置▲</li>
+<li>修改顺序表目前长度-1，删除成功返回OK▲</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">SqListDelete</span><span class="params">(SqList &amp;L, <span class="type">int</span> i, Elemtype &amp;e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span> || i &gt; L.length) <span class="keyword">return</span> ERROR;<span class="comment">//非法删除</span></span><br><span class="line">    <span class="comment">//1.将将要删除的元素保存到e中</span></span><br><span class="line">    e = L.elem[i - <span class="number">1</span>];</span><br><span class="line">    <span class="comment">//2.将删除元素之后的元素向前移动</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt;= L.length - <span class="number">1</span>; ++j) &#123;</span><br><span class="line">        L.elem[j - <span class="number">1</span>] = L.elem[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.修改顺序表目前长度</span></span><br><span class="line">    L.length--;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最好情况：删除表尾元素(i &#x3D; n)，元素前移执行语句不执行，时间复杂度为O(1)</li>
+<li>最坏情况：删除表头元素(i &#x3D; n)，元素前移语句将执行n - 1次，时间复杂度为O(n)</li>
+<li>平均情况：元素前移语句平均需要执行(n - 1)&#x2F;2次，顺序表删除算法的平均时间复杂度为<font color='#BAOC2F'>O(n)</font></li>
+</ul>
+<h5 id="（5）总结："><a href="#（5）总结：" class="headerlink" title="（5）总结："></a>（5）总结：</h5><p>顺序表优点：</p>
+<ol>
+<li>存储密度大</li>
+<li>可以随机存取表中任意元素</li>
+<li>算法效率：查找&#x2F;插入&#x2F;删除算法的平均时间复杂度都为O(n)，空间复杂度为O(1)</li>
+</ol>
+<p>顺序表缺点：</p>
+<ol>
+<li>浪费存储空间</li>
+<li>在插入&#x2F;删除某一元素时，需要移动大量元素</li>
+<li>属于静态存储形式，数据元素的个数不能自由扩充</li>
+</ol>
+<h4 id="4-Cpp中的参数传递："><a href="#4-Cpp中的参数传递：" class="headerlink" title="4.Cpp中的参数传递："></a>4.Cpp中的参数传递：</h4><p>参数传递的方式有两种：值传递与地址传递（参数为指针变量&#x2F;数组名、引用类型）</p>
+<h5 id="（1）值传递："><a href="#（1）值传递：" class="headerlink" title="（1）值传递："></a>（1）值传递：</h5><p>值传递：将实参的值传送给函数局部工作区相应的副本中，函数使用该副本执行必要的功能（函数修改的是副本的值，实参不改变）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">float</span> m, <span class="type">float</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> temp = n;</span><br><span class="line">    m = n;</span><br><span class="line">    n = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> a, b;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="built_in">swap</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）地址传递（指针变量）"><a href="#（2）地址传递（指针变量）" class="headerlink" title="（2）地址传递（指针变量）"></a>（2）地址传递（指针变量）</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.形参变化不影响实参（实际交换了指针变量）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap1</span><span class="params">(<span class="type">float</span> *m, <span class="type">float</span> *n)</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> *temp = m;</span><br><span class="line">    m = n;</span><br><span class="line">    n = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.形参变化影响实参（实际交换了指针所指向的ab值）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap2</span><span class="params">(<span class="type">float</span> *m, <span class="type">float</span> *n)</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> temp = *m;</span><br><span class="line">    *m = *n;</span><br><span class="line">    *n = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> a, b;</span><br><span class="line">    <span class="type">float</span> *p1, *p2;</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    p1 = &amp;a; p2 = &amp;b;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">swap1</span>(p1, p2);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用swap1方法：形参变化不影响实参（实际交换了指针变量）&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">swap2</span>(p1, p2);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用swap2方法：形参变化影响实参（实际交换了指针所指向的ab值）&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828203035778.png" alt="image-20220828203035778"></p>
+<h5 id="（3）地址传递（数组名）"><a href="#（3）地址传递（数组名）" class="headerlink" title="（3）地址传递（数组名）"></a>（3）地址传递（数组名）</h5><p>如果传递的参数是数组的首地址，对<font color='#BAOC2F'>形参数组</font>所做的任何操作<font color='#BAOC2F'>都将反应到实参数组中</font>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.传递数组地址,且数组地址使用char b[]接收</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func1</span><span class="params">(<span class="type">char</span> temp[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">strcpy</span>(temp, <span class="string">&quot;Rewrite by func1, address access by char temp[].&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.传递数组地址,且数组地址使用char *b接收</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func2</span><span class="params">(<span class="type">char</span> *temp)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">strcpy</span>(temp, <span class="string">&quot;Rewrite by func2, address access by char *temp.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//注意：数组地址即为数组首个元素的地址,故char b[]与char *b作用相同</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">50</span>] = <span class="string">&quot;this is a test!&quot;</span>;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func1</span>(a);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func2</span>(a);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828210418913.png" alt="image-20220828210418913"></p>
+<h5 id="（4）地址传递（引用类型-amp-）"><a href="#（4）地址传递（引用类型-amp-）" class="headerlink" title="（4）地址传递（引用类型&amp;）"></a>（4）地址传递（引用类型&amp;）</h5><p>引用：为实际对象提供了一个<font color='#BAOC2F'>替代的名字</font>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">float</span> &amp;m, <span class="type">float</span> &amp;n)</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> temp = m;</span><br><span class="line">    m = n;</span><br><span class="line">    n = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">float</span> a, b;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="built_in">swap</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、线性表的链式表示"><a href="#三、线性表的链式表示" class="headerlink" title="三、线性表的链式表示"></a>三、线性表的链式表示</h3><h4 id="1-链表定义："><a href="#1-链表定义：" class="headerlink" title="1.链表定义："></a>1.链表定义：</h4><p>链式存储结构：结点在存储器中的位置是任意的（逻辑上相邻的数据元素在物理上不一定相邻）</p>
+<p>链表特点：</p>
+<ol>
+<li>链表中<font color='#BAOC2F'>结点在存储器中的位置是任意的</font>，</li>
+<li>访问链表时<font color='#BAOC2F'>只能通过头指针进入</font>并通过每个结点的指针域依次向后顺序扫描。</li>
+<li>链表：顺序存取</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828222621031.png" alt="image-20220828222621031"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828212417045.png" alt="image-20220828212417045"></p>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>头指针</td>
+<td>是<font color='#BAOC2F'>指向链表中第一个结点</font>的指针</td>
+</tr>
+<tr>
+<td>头结点</td>
+<td>链表首元结点之前<font color='#BAOC2F'>附设</font>的一个结点</td>
+</tr>
+<tr>
+<td>首元结点</td>
+<td>链表中存储<font color='#BAOC2F'>第一个数据元素</font>a1的结点</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：链表中头结点中并不存储元素，<font color='#BAOC2F'>首元结点才是第一个存储元素</font>的结点！</p>
+</blockquote>
+<p>&#x3D;&#x3D;问题1：头结点设置的好处？&#x3D;&#x3D;</p>
+<ol>
+<li><p>便于首元结点的统一处理</p>
+<p> 首元结点的地址保存在<font color='#BAOC2F'>头结点的指针中</font>，所以在链表的第一个位置上的操作与其他位置上的结点操作相同（<font color='#BAOC2F'>省去首结点特判处理</font>）</p>
+</li>
+<li><p>便于空表和非空表的统一处理</p>
+<p> 无论链表是否为空，头指针都是指向头结点的非空指针（空表和非空表的处理相同）</p>
+</li>
+</ol>
+<blockquote>
+<p>注：这些优点只有在实际编程实现顺序表中才能真正体会，需要自己实现一遍顺序表的结构！</p>
+</blockquote>
+<p>&#x3D;&#x3D;问题2：头结点数据域中存放的是什么？&#x3D;&#x3D;</p>
+<p>头结点的数据域可以为空，也可以存放线性表的长度、或者其他附加信息（但是该结点不能计入链表的长度length）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828213417820.png" alt="image-20220828213417820"></p>
+<h4 id="2-链表存储表示："><a href="#2-链表存储表示：" class="headerlink" title="2.链表存储表示："></a>2.链表存储表示：</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828213630629.png" alt="image-20220828213630629"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    ElemType data;<span class="comment">//数据域</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> *next;<span class="comment">//指针域（指向结点的指针）</span></span><br><span class="line">&#125;Node, *LinkList;<span class="comment">//LinkList为指向结构体Node的指针类型（为头指针使用）</span></span><br><span class="line"></span><br><span class="line">LinkList L;<span class="comment">//1.定义链表L（开辟链表头指针）</span></span><br><span class="line">Node *p;<span class="comment">//2.定义指向结点的指针p</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-链表简单操作："><a href="#3-链表简单操作：" class="headerlink" title="3.链表简单操作："></a>3.链表简单操作：</h4><h5 id="（1）链表初始化："><a href="#（1）链表初始化：" class="headerlink" title="（1）链表初始化："></a>（1）链表初始化：</h5><p>单链表初始化即为<font color='#BAOC2F'>构造一个空表</font>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828221628897.png" alt="image-20220828221628897"></p>
+<ol>
+<li>生成一个新结点作为头结点，用头指针L指向头结点</li>
+<li>将头结点的指针域置为NULL</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitLinkList</span><span class="params">(LinkList &amp;L)</span> </span>&#123;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(Node));<span class="comment">//L = new Node;</span></span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）链表置空："><a href="#（2）链表置空：" class="headerlink" title="（2）链表置空："></a>（2）链表置空：</h5><p>空链表：链表仍然存在，但链表中<font color='#BAOC2F'>没有元素</font>称为空链表（头指针和头结点仍然存在）</p>
+<p>算法思路：依次释放所有结点，并将头结点指针域设置为空</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828224003111.png" alt="image-20220828224003111"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ClearLinkList</span><span class="params">(LinkList &amp;L)</span> </span>&#123;</span><br><span class="line">    Node *p, *q;</span><br><span class="line">    p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;<span class="comment">//没有到达表尾则循环删除结点</span></span><br><span class="line">        q = p-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> p;</span><br><span class="line">        p = q;</span><br><span class="line">    &#125;</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;<span class="comment">//头结点指针域为空</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）链表判空："><a href="#（3）链表判空：" class="headerlink" title="（3）链表判空："></a>（3）链表判空：</h5><p>空链表：链表仍然存在，但链表中<font color='#BAOC2F'>没有元素</font>称为空链表（头指针和头结点仍然存在）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">ListEmpty</span><span class="params">(LinkList L)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L-&gt;next) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//L中还有元素非空表，则返回0</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//L中没有元素为空表，则返回1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（4）求链表表长："><a href="#（4）求链表表长：" class="headerlink" title="（4）求链表表长："></a>（4）求链表表长：</h5><p>算法思路：从首结点开始，依次计数所有结点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828224804428.png" alt="image-20220828224804428"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">LinkListLength</span><span class="params">(LinkList L)</span> </span>&#123;<span class="comment">//返回L中的数据元素个数</span></span><br><span class="line">    Node *p;</span><br><span class="line">    p = L-&gt;next;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（5）链表销毁："><a href="#（5）链表销毁：" class="headerlink" title="（5）链表销毁："></a>（5）链表销毁：</h5><blockquote>
+<p>注：销毁单链表<font color='#BAOC2F'>不可通过直接把头指针置空实现</font>，而是要依次释放所有的结点（<font color='#BAOC2F'>包括头结点</font>）</p>
+</blockquote>
+<p>算法思路：从头指针开始，依次释放掉所有结点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220828225233345.png" alt="image-20220828225233345"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">DestroyLinkList</span><span class="params">(LinkList &amp;L)</span> </span>&#123;</span><br><span class="line">    Node *p;</span><br><span class="line">    <span class="keyword">while</span>(L) &#123;</span><br><span class="line">        p = L;</span><br><span class="line">        L = L-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-链表重要操作："><a href="#4-链表重要操作：" class="headerlink" title="4.链表重要操作："></a>4.链表重要操作：</h4><h5 id="（1）头插法建立链表："><a href="#（1）头插法建立链表：" class="headerlink" title="（1）头插法建立链表："></a>（1）头插法建立链表：</h5><p>&#x3D;&#x3D;头插法图示&#x3D;&#x3D;：将新元素<font color='#BAOC2F'>插入到链表的头部</font>（与<font color='#BAOC2F'>结点的插入操作</font>十分相似）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220901174928820.png" alt="image-20220901174928820"></p>
+<p>采用头插法建立单链表时，读入数据的顺序与生成链表的元素顺序是相反的（故这里需要<font color='#BAOC2F'>从e结点开始倒序输入</font>才能建立正序的链表）。</p>
+<p>&#x3D;&#x3D;头插法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>建立一个空表</li>
+<li>生成新结点，将读入数据存放到新结点的数据域中</li>
+<li>依次将新结点插入到链表数据结点的最前端</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220901175614840.png" alt="image-20220901175614840"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//for循环写法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateLinkList</span><span class="params">(LinkList &amp;L, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    L = <span class="keyword">new</span> Node; L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">        p = <span class="keyword">new</span> Node;</span><br><span class="line">        cin &gt;&gt; p-&gt;data;</span><br><span class="line">        p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        p-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//while循环写法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateLinkList</span><span class="params">(LinkList &amp;L)</span> </span>&#123;</span><br><span class="line">    L = <span class="keyword">new</span> Node; L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x != <span class="number">9999</span>) &#123;<span class="comment">//输入9999表示结束插入</span></span><br><span class="line">        p = <span class="keyword">new</span> Node;</span><br><span class="line">        p-&gt;data = x;</span><br><span class="line">        p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        p-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = p;</span><br><span class="line">        </span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）尾插法建立链表："><a href="#（2）尾插法建立链表：" class="headerlink" title="（2）尾插法建立链表："></a>（2）尾插法建立链表：</h5><p>&#x3D;&#x3D;尾插法图示&#x3D;&#x3D;：将新元素<font color='#BAOC2F'>插入到链表的尾部</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220901184639962.png" alt="image-20220901184639962"></p>
+<p>采用尾插法建立单链表时，读入数据的顺序与生成链表的元素顺序是相同的（但是需要多增加一个尾指针<code>r</code>，使其始终指向尾结点）。</p>
+<p>&#x3D;&#x3D;尾插法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>建立一个空表，创建尾指针r指向链表尾结点（开始时r同L均指向头结点）</li>
+<li>生成新结点，将读入数据存放到新结点的数据域中</li>
+<li>依次将新结点插入到链表数据结点的尾部</li>
+<li>尾指针指向新节点</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220901183358245.png" alt="image-20220901183358245"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//for循环写法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateLinkList</span><span class="params">(LinkList &amp;L, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    L = <span class="keyword">new</span> Node; L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    Node *r = L;<span class="comment">//创建尾指针初始时指向头结点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        Node *p = <span class="keyword">new</span> Node;</span><br><span class="line">        cin &gt;&gt; p-&gt;data;</span><br><span class="line">        p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        r-&gt;next = p;</span><br><span class="line">        r = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//while循环写法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateLinkList</span><span class="params">(LinkList &amp;L)</span> </span>&#123;</span><br><span class="line">    L = <span class="keyword">new</span> Node; L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    Node *r = L;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x != <span class="number">9999</span>) &#123;<span class="comment">//输入9999表示结束插入</span></span><br><span class="line">        p = <span class="keyword">new</span> Node;</span><br><span class="line">        p-&gt;data = x;</span><br><span class="line">        p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        r-&gt;next = p;</span><br><span class="line">        r = p;</span><br><span class="line">        </span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）按序查找元素："><a href="#（3）按序查找元素：" class="headerlink" title="（3）按序查找元素："></a>（3）按序查找元素：</h5><p>根据单链表中元素的下标<code>i</code>，从指定位置获取数据（返回元素值or结点的地址）。</p>
+<p>&#x3D;&#x3D;算法图示&#x3D;&#x3D;：从链表的头指针出发，顺着链域next逐个结点向下搜索，直至搜索到第<code>i</code>个结点为止（链表不是随机存取的结构）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903165348952.png" alt="image-20220903165348952"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>从第1个结点<code>L-&gt;next</code>顺链扫描，用指针p指向当前扫描到的结点（初始化为<code>p = L-&gt;next</code>）</li>
+<li><code>j</code>做计数器累计当前扫描过的结点数（初始化<code>j=1</code>）</li>
+<li>当p指向扫描到的下一结点，计数器<code>j+1</code></li>
+<li>当<code>j==i</code>时，p所指的结点就是要寻找的第<code>i</code>个结点</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法1:返回需要查找结点的值</span></span><br><span class="line"><span class="function">Status <span class="title">GetElem</span><span class="params">(LinkList L, <span class="type">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">    Node *p = L-&gt;next;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &amp;&amp; j &lt; i) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!p || j &gt; i) <span class="keyword">return</span> ERROR;<span class="comment">//非法查找</span></span><br><span class="line">    e = p-&gt;data;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法2:返回需要查找结点</span></span><br><span class="line"><span class="function">Node *<span class="title">GetElem</span><span class="params">(LinkList L, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    Node *p = L-&gt;next;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span>) <span class="keyword">return</span> L;<span class="comment">//如果i=0则返回头结点</span></span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;<span class="comment">//非法查找</span></span><br><span class="line">    <span class="keyword">while</span> (p &amp;&amp; j &lt; i) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（4）按值查找元素："><a href="#（4）按值查找元素：" class="headerlink" title="（4）按值查找元素："></a>（4）按值查找元素：</h5><p>根据<font color='#BAOC2F'>指定数据获取该数据所在的位置</font>（返回元素下标or结点的地址）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903173124453.png" alt="image-20220903173124453"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法1:返回需要查找结点的下标</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">LocateElem</span><span class="params">(LinkList L, ElemType e)</span> </span>&#123;</span><br><span class="line">    p = L-&gt;next;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span> &amp;&amp; p-&gt;data != e) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;<span class="comment">//非法查找</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法2:返回需要查找的结点</span></span><br><span class="line"><span class="function">Node *<span class="title">LocateElem</span><span class="params">(LinkList L, ElemType e)</span> </span>&#123;</span><br><span class="line">    Node *p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span> &amp;&amp; p-&gt;data != e) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（5）按序插入："><a href="#（5）按序插入：" class="headerlink" title="（5）按序插入："></a>（5）按序插入：</h5><p>&#x3D;&#x3D;算法图示&#x3D;&#x3D;：</p>
+<p>在第<code>i</code>个结点前插入值为e的新结点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903174322777.png" alt="image-20220903174322777"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>首先找到a<sub>i-1</sub>的存储位置<code>p</code></li>
+<li>生成一个数据域为e的新节点<code>s</code></li>
+<li>插入新的结点：①新结点的指针域指向结点a<sub>i</sub>：<code>s-&gt;next = p-&gt;next;</code>，②结点a<sub>i-1</sub>的指针域指向新结点：<code>p-&gt;next = s;</code></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903173744252.png" alt="image-20220903173744252"></p>
+<blockquote>
+<p>注：链表插入操作中的步骤①和步骤②是有先后顺序的，如果<font color='#BAOC2F'>交换顺序</font>将导致a<sub>i</sub>的<font color='#BAOC2F'>地址丢失</font>。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">LinkListInsert</span><span class="params">(LinkList &amp;L, <span class="type">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">    Node *p = L;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//1.寻找第i个结点，将指针p指向其前驱</span></span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span> j &lt; i - <span class="number">1</span>) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span> || j &gt; i <span class="number">-1</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.生成新的结点s并为其数据域赋值</span></span><br><span class="line">    Node *s = <span class="keyword">new</span> Node; s-&gt;data = e;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3.进行结点插入操作</span></span><br><span class="line">    s-&gt;next = p-&gt;next;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（6）按序删除："><a href="#（6）按序删除：" class="headerlink" title="（6）按序删除："></a>（6）按序删除：</h5><p>&#x3D;&#x3D;算法图示&#x3D;&#x3D;：</p>
+<p>删除第i个结点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903175838541.png" alt="image-20220903175838541"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>首先找到a<sub>i-1</sub>的存储位置<code>p</code>，并保存要删除的a<sub>i</sub>值</li>
+<li>令<code>p-&gt;next</code>指向a<sub>i+1</sub></li>
+<li>释放结点a<sub>i</sub>的空间</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903180106219.png" alt="image-20220903180106219"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Delete</span><span class="params">(LinkList &amp;L, <span class="type">int</span> i, ElemType &amp;e)</span> </span>&#123;</span><br><span class="line">    Node *p = L; <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//1.寻找第i个结点，将指针p指向其前驱</span></span><br><span class="line">    <span class="keyword">while</span> (p-&gt;next != <span class="literal">NULL</span> &amp;&amp; j &lt; i - <span class="number">1</span>) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;next == <span class="literal">NULL</span> || j &gt; i - <span class="number">1</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.保存元素值后进行删除操作</span></span><br><span class="line">    Node *q = p-&gt;next;</span><br><span class="line">    p-&gt;next = q-&gt;next;</span><br><span class="line">    e = q-&gt;data;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3.释放已经删除结点的内存</span></span><br><span class="line">    <span class="keyword">delete</span> q;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（7）按值删除："><a href="#（7）按值删除：" class="headerlink" title="（7）按值删除："></a>（7）按值删除：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221123174352480.png" alt="image-20221123174352480"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//while循环判定后 删除指定元素</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Delete</span><span class="params">(LinkList &amp;L, <span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    Node *p = L;</span><br><span class="line">    <span class="keyword">while</span> (p-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;next-&gt;data == x) &#123;</span><br><span class="line">            Node *q = p-&gt;next;</span><br><span class="line">            p-&gt;next = q-&gt;next;</span><br><span class="line">            <span class="keyword">delete</span> q;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;next != <span class="literal">NULL</span>) p = p-&gt;next;<span class="comment">//若p指针指向尾元素则不进行自增操作（否则将p指针置空导致访问p-&gt;next非法空间）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-循环链表："><a href="#5-循环链表：" class="headerlink" title="5.循环链表："></a>5.循环链表：</h4><h5 id="（1）循环链表："><a href="#（1）循环链表：" class="headerlink" title="（1）循环链表："></a>（1）循环链表：</h5><p>循环链表是一种头尾相接的链表（表中<font color='#BAOC2F'>最后一个结点的指针域</font>指向<font color='#BAOC2F'>头结点</font>，整个链表形成一个环形）</p>
+<p>循环链表的优点是从表中任一结点出发，均可找到表中的其他结点。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903181243967.png" alt="image-20220903181243967"></p>
+<p>由于循环链表中没有NULL指针，故涉及遍历操作时终止条件就不再是判断<code>p</code>或<code>p-&gt;next</code>是否为空，而是判断它们<font color='#BAOC2F'>是否等于头指针</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903181603258.png" alt="image-20220903181603258"></p>
+<h5 id="（2）循环链表合并："><a href="#（2）循环链表合并：" class="headerlink" title="（2）循环链表合并："></a>（2）循环链表合并：</h5><p>&#x3D;&#x3D;算法图示&#x3D;&#x3D;：</p>
+<p>将两<font color='#BAOC2F'>个带尾指针的循环链表</font>进行合并（将Tb合并在Ta）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903185237547.png" alt="image-20220903185237547"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<blockquote>
+<p>注：对链表的操作常常是在<font color='#BAOC2F'>表的首位位置上</font>进行的。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903185718208.png" alt="image-20220903185718208"></p>
+<ol>
+<li>创建指针p保存表头结点<code>Node *p = La-&gt;next;</code></li>
+<li>将Lb首元结点连接到La的表尾<code>La-&gt;next = Lb-&gt;next-&gt;next;</code></li>
+<li>释放Lb的表头结点<code>delete Lb-&gt;next;</code></li>
+<li>将Lb的尾结点指针指向La的表头<code>Lb-&gt;next = p;</code></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LinkList <span class="title">LinkListConnect</span><span class="params">(LinkList La, LinkList Lb)</span> </span>&#123;</span><br><span class="line">    Node *p = La-&gt;next;</span><br><span class="line">    La-&gt;next = Lb-&gt;next-&gt;next;</span><br><span class="line">    <span class="keyword">delete</span> Lb-&gt;next;</span><br><span class="line">    Lb-&gt;next = p;</span><br><span class="line">    <span class="keyword">return</span> Lb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：循环链表不设置头指针而<font color='#BAOC2F'>仅设置尾指针</font>，从而使得操作效率更高。循环链表合并的时间复杂度为O(1)</p>
+</blockquote>
+<h4 id="6-双向链表："><a href="#6-双向链表：" class="headerlink" title="6.双向链表："></a>6.双向链表：</h4><h5 id="（1）双向链表："><a href="#（1）双向链表：" class="headerlink" title="（1）双向链表："></a>（1）双向链表：</h5><p>在单链表的每个结点里再增加一个<font color='#BAOC2F'>指向其直接前驱</font>的指针域prior，称为双向链表。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903190906758.png" alt="image-20220903190906758"></p>
+<ul>
+<li>在双向链表中有些操作如ListLength、GetElem等仅涉及一个方向的指针，故其算法与线性链表相同。</li>
+<li>在双向链表中的插入insert、删除delete，则需要<font color='#BAOC2F'>同时修改两个方向上的指针</font>（两者的操作时间复杂度均为O(n)）</li>
+</ul>
+<h5 id="（2）双向链表插入："><a href="#（2）双向链表插入：" class="headerlink" title="（2）双向链表插入："></a>（2）双向链表插入：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903191228765.png" alt="image-20220903191228765"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//核心操作</span></span><br><span class="line">s-&gt;prior = p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next = s;</span><br><span class="line">s-&gt;next = p;</span><br><span class="line">p-&gt;prior = s;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DoubleLinkListInsert</span><span class="params">(DuLinkList &amp;L, <span class="type">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//在带头结点的双向链表L的第i个位置插入元素e</span></span><br><span class="line">    <span class="keyword">if</span> ((Node *p = <span class="built_in">GetElem</span>(L, i)) == <span class="literal">NULL</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    Node *s = <span class="keyword">new</span> Node;</span><br><span class="line">    s-&gt;data = e;</span><br><span class="line">    </span><br><span class="line">    s-&gt;prior = p-&gt;prior;</span><br><span class="line">	p-&gt;prior-&gt;next = s;</span><br><span class="line">	s-&gt;next = p;</span><br><span class="line">	p-&gt;prior = s;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）双向链表删除："><a href="#（3）双向链表删除：" class="headerlink" title="（3）双向链表删除："></a>（3）双向链表删除：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220903192354470.png" alt="image-20220903192354470"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//核心操作</span></span><br><span class="line">p-&gt;prior-&gt;next = p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior = p-&gt;prior;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DoubleLinkListDelete</span><span class="params">(DuLinkList &amp;L, <span class="type">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//删除带头结点的双向链表L的第i个元素，并用e返回</span></span><br><span class="line">    <span class="keyword">if</span> ((Node *p = <span class="built_in">GetElem</span>(L, i)) == <span class="literal">NULL</span>) <span class="keyword">return</span> ERROR;</span><br><span class="line">    e = p-&gt;data;</span><br><span class="line">    </span><br><span class="line">    p-&gt;prior-&gt;next = p-&gt;next;</span><br><span class="line">	p-&gt;next-&gt;prior = p-&gt;prior;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;各种链表间时间效率对比：&#x3D;&#x3D;</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220416082256365.png" alt="image-20220416082256365"></p>
+<h3 id="四、顺序表与链表的比较："><a href="#四、顺序表与链表的比较：" class="headerlink" title="四、顺序表与链表的比较："></a>四、顺序表与链表的比较：</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220416082816346.png" alt="image-20220416082816346"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220416082955287.png" alt="image-20220416082955287"></p>
+<h3 id="五、线性表应用"><a href="#五、线性表应用" class="headerlink" title="五、线性表应用"></a>五、线性表应用</h3><h4 id="1-线性表的合并"><a href="#1-线性表的合并" class="headerlink" title="1.线性表的合并"></a>1.线性表的合并</h4><h5 id="（1）无序表的合并："><a href="#（1）无序表的合并：" class="headerlink" title="（1）无序表的合并："></a>（1）无序表的合并：</h5><p>&#x3D;&#x3D;问题描述&#x3D;&#x3D;：利用两个线性表La和Lb分别表示两个集合A与B，现要求一个新的集合A &#x3D; A∪B（无序）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904171324204.png" alt="image-20220904171324204"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>依次取出Lb中的每个元素</li>
+<li>在La中查找取出的该Lb元素</li>
+<li>如果查找不到则将其插入到La中的最后位置</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">union</span><span class="params">(List &amp;La, List Lb)</span> </span>&#123;</span><br><span class="line">    La_len = <span class="built_in">ListLength</span>(La);</span><br><span class="line">    Lb_len = <span class="built_in">ListLength</span>(Lb);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= Lb_len; ++i) &#123;</span><br><span class="line">        <span class="built_in">GetElem</span>(Lb, i, e);<span class="comment">//查找元素</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">LocateElem</span>(La, e != <span class="literal">NULL</span>)) &#123;</span><br><span class="line">            <span class="built_in">ListInsert</span>(&amp;La, ++La_len, e);<span class="comment">//如果没有查找到元素则进行插入操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//算法复杂度为O(ListLength(La))*O(ListLength(Lb))</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）有序表的合并："><a href="#（2）有序表的合并：" class="headerlink" title="（2）有序表的合并："></a>（2）有序表的合并：</h5><p>&#x3D;&#x3D;问题描述&#x3D;&#x3D;：已知线性表La和Lb中的数据元素按值非递减有序排列，现要求将La和Lb归并为一个新的线性表Lc，且元素仍非递减有序。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904171407520.png" alt="image-20220904171407520"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li>创建一个空表Lc</li>
+<li>依次从La或Lb中<font color='#BAOC2F'>摘取</font>元素较小的结点，插入到Lc表的最后直至其中一个表变成空表为止。</li>
+<li>继续将La或Lb其中一个表的剩余结点插入在Lc表的最后</li>
+</ol>
+<p>&#x3D;&#x3D;顺序表实现有序表的合并&#x3D;&#x3D;：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MergeList</span><span class="params">(SqList La, SqList Lb, SqList &amp;Lc)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.准备指向有序数组首元素的各个指针</span></span><br><span class="line">    pa = La.elem;</span><br><span class="line">    pb = Lb.elem;</span><br><span class="line">    pc = Lc.elem;</span><br><span class="line">    Lc.length = La.length + Lb.length;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.准备指向有序数组尾元素的指针</span></span><br><span class="line">    paLast = La.elem + La.length - <span class="number">1</span>;</span><br><span class="line">    pbLast = Lb.elem + Lb.length - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3.依次摘取两表中较小的结点进行插入操作</span></span><br><span class="line">    <span class="keyword">while</span> (pa &lt;= paLast &amp;&amp; pb &lt;= pbLast) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*pa &lt;= *pb) &#123;</span><br><span class="line">            *pc++ = *pa++; <span class="comment">//*pc = *pa; pc++; pa++;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            *pc++ = *pb++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//4.将某一个表中剩余的元素全部添加到Lc中</span></span><br><span class="line">    <span class="keyword">while</span> (pa &lt;= paLast) *pc++ = *pa++;<span class="comment">//Lb到达表尾，将La中的元素全部加入Lc</span></span><br><span class="line">    <span class="keyword">while</span> (pb &lt;= pbLast) *pc++ = *pb++;<span class="comment">//La到达表尾，将Lb中的元素全部加入Lc</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//算法时间复杂度为O(ListLength(La)) + O(ListLength(Lb))</span></span><br><span class="line"><span class="comment">//算法空间复杂度为O(ListLength(La)) + O(ListLength(Lb))</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;链表实现有序表合并&#x3D;&#x3D;：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MergeList</span><span class="params">(LinkList &amp;La, LinkList &amp;Lb, LinkList &amp;Lc)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Stage1</span></span><br><span class="line">    pa = La-&gt;next;</span><br><span class="line">    pb = Lb-&gt;next;</span><br><span class="line">    pc = Lc = La;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Stage2 &amp; Stage3</span></span><br><span class="line">    <span class="keyword">while</span> (pa != <span class="literal">NULL</span> &amp;&amp; pb != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pa-&gt;data &lt;= pb-&gt;data) &#123;</span><br><span class="line">            pc-&gt;next = pa;</span><br><span class="line">            pc = pa;</span><br><span class="line">            pa = pa-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            pc-&gt;next = pb;</span><br><span class="line">            pc = pb;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Stage4</span></span><br><span class="line">    pc-&gt;next = pa ? pa : pb;</span><br><span class="line">    <span class="keyword">delete</span> Lb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//算法时间复杂度O(ListLength(La) + ListLength(Lb))</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904182930068.png" alt="image-20220904182930068"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904182943760.png" alt="image-20220904182943760"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904183002395.png" alt="image-20220904183002395"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220904183011135.png" alt="image-20220904183011135"></p>
+<h4 id="2-线性表其他应用："><a href="#2-线性表其他应用：" class="headerlink" title="2.线性表其他应用："></a>2.线性表其他应用：</h4><h5 id="（1）密集多项式："><a href="#（1）密集多项式：" class="headerlink" title="（1）密集多项式："></a>（1）密集多项式：</h5><p>多项式的运算：实现两个多项式加&#x2F;减&#x2F;乘运算</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905163727135.png" alt="image-20220905163727135"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905164106557.png" alt="image-20220905164106557"></p>
+<h5 id="（2）稀疏多项式："><a href="#（2）稀疏多项式：" class="headerlink" title="（2）稀疏多项式："></a>（2）稀疏多项式：</h5><p>如果同样按照密集多项式的存储方式来存储稀疏多项式，会导致出现空间严重浪费的情况，故<font color='#BAOC2F'>增加一个指数存储项</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905170843696.png" alt="image-20220905170843696"></p>
+<p>&#x3D;&#x3D;算法步骤&#x3D;&#x3D;：</p>
+<ol>
+<li><p>创建一个新的数组c（用于存储多项式运算的结果多项式）</p>
+</li>
+<li><p>分别从头遍历比较数组a和数组b中的每一项</p>
+<p> 若指数相同则将对应的系数相加，若其和不为零则在c中增加一个新的项（和为零则丢弃）</p>
+<p> 若指数不同则将较小的项复制到c中</p>
+</li>
+<li><p>当一个多项式遍历完成时，将另一个剩余项依次复制到c中即可</p>
+</li>
+</ol>
+<h5 id="（3）稀疏多项式操作："><a href="#（3）稀疏多项式操作：" class="headerlink" title="（3）稀疏多项式操作："></a>（3）稀疏多项式操作：</h5><p>&#x3D;&#x3D;存储方式的改进&#x3D;&#x3D;：按照密集多项式的存储方式并<font color='#BAOC2F'>增加一个指数存储项</font>来存储稀疏多项式还是有不足，可以改用<font color='#BAOC2F'>链式存储结构</font>来存储。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905171803172.png" alt="image-20220905171803172"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905172014060.png" alt="image-20220905172014060"></p>
+<p>&#x3D;&#x3D;稀疏多项式创建&#x3D;&#x3D;：</p>
+<ul>
+<li>创建一个只有头结点的空链表</li>
+<li>根据多项式的项的个数n，循环n次执行以下操作：<ol>
+<li>生成一个新节点<code>*s</code></li>
+<li>输入多项式当前项的系数和指数，赋给新的结点<code>*s</code>的数据域</li>
+<li>设置一个前驱指针<code>pre</code>用于指向<font color='#BAOC2F'>待找到的第1个大于输入项指数</font>的结点的前驱，<code>pre</code>初始值指向头结点</li>
+<li>指针q初始化指向首元结点</li>
+<li>循链向下逐个比较<font color='#BAOC2F'>链表中当前结点</font>与<font color='#BAOC2F'>输入项的指数</font>，找到<font color='#BAOC2F'>第1个大于输入项指数</font>的结点<code>*q</code></li>
+<li>将输入项结点<code>*s</code>插入到结点<code>*q</code>之前</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreatePolyn</span><span class="params">(Polynomial &amp;Po, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    Po = <span class="keyword">new</span> PNode; Po-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        PNode *s = <span class="keyword">new</span> PNode;</span><br><span class="line">        cin &gt;&gt; s-&gt;coef &gt;&gt; s-&gt;expn;<span class="comment">//输入指数与系数</span></span><br><span class="line">        </span><br><span class="line">        PNode *pre = Po;</span><br><span class="line">        q = Po-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (q != <span class="literal">NULL</span> &amp;&amp; q-&gt;expn &lt; s-&gt;expn) &#123;</span><br><span class="line">            pre = q;</span><br><span class="line">            q = q-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        s-&gt;next = q;</span><br><span class="line">        pre-&gt;next = s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;稀疏多项式相加操作&#x3D;&#x3D;：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220416124501790.png" alt="image-20220416124501790"></p>
+<h5 id="（3）图书信息管理："><a href="#（3）图书信息管理：" class="headerlink" title="（3）图书信息管理："></a>（3）图书信息管理：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220905175035603.png" alt="image-20220905175035603"></p>
+<ol>
+<li>线性表中数据元素的类型可以为简单类型，也可以为复杂类型</li>
+<li>许多实际应用问题所涉及的基本操作有很大的相似性，不应为每个具体应用单独编写程序。</li>
+<li>从<font color='#BAOC2F'>具体应用</font>中抽象出<font color='#BAOC2F'>共性的逻辑结构和基本操作</font>（抽象数据类型），然后实现其存储结构和基本操作。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Book</span> &#123;</span><br><span class="line">    <span class="type">char</span> id[<span class="number">20</span>];<span class="comment">//ISBN</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">50</span>];<span class="comment">//书名</span></span><br><span class="line">    <span class="type">int</span> price;<span class="comment">//定价</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺序表</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    Book *data;</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">&#125; BookSqList;</span><br><span class="line"></span><br><span class="line"><span class="comment">//链表</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LNode</span> &#123;</span><br><span class="line">    Book data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LNode</span> *next;</span><br><span class="line">&#125; LNode, *BookLinkList;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/">https://polaris-hzn8.github.io/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/datestructure/">datestructure</a></div><div class="post-share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/02/28/dataStructure/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA/" title="第一章：绪论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第一章：绪论</div></div><div class="info-2"><div class="info-item-1">第一章：绪论 一、基本概念1.Data数据Data数据：是能够输入计算机且能被计算机处理的各种符号的集合。 Data数据包括：  数值型数据：整数、实数 非数值型数据：文字、图像、图形、声音等  2.DataElement数据元素DataElement数据元素（元素&#x2F;记录&#x2F;结点&#x2F;顶点）：是Data数据的基本单位，在计算机程序中通常被作为一个整体进行考虑和处理  3.DataItem数据项DataItem数据项：是构成数据元素的不可分割的最小单位。   数据三者之间的关系：数据 &gt; 数据元素  &gt;...</div></div></div></a><a class="pagination-related" href="/2023/02/27/dataStructure/10.%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E6%8E%92%E5%BA%8F/" title="第八章排序"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-27</div><div class="info-item-2">第八章排序</div></div><div class="info-2"><div class="info-item-1">第八章：排序    分类标准 类别1 类别2    按存储介质 内部排序：数据量不大数据在内存，无需内外存交换数据 外部排序：数据量较大数据在外存（文件排序）   按比较器个数 串行排序：单处理机（同一时刻比较一对元素） 并行排序：多处理机（同一时刻比较多对元素）   按主要操作 比较排序：使用比较的方法，包括插入排序、交换排序、选择排序、归并排序 基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置   按辅助空间 原地排序：辅助空间用量为O(1) 非原地排序   按稳定性 稳定排序：使任何数值相等的元素，排序以后相对次序不变 非稳定排序   按自然性 自然排序：输入数据越有序，排序的速度越快 非自然排序    外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 排序稳定性只对结构类型的数据排序有意义，例如student类型 排序方法是否稳定，并不能衡量一个排序算法的优劣  123456//案例中使用的数据结构#define MAXLENGTH 50typedef struct &#123;    int...</div></div></div></a><a class="pagination-related" href="/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/" title="第四章：串与数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第四章：串与数组</div></div><div class="info-2"><div class="info-item-1">第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(&amp;T, S1, S2);    	SubString(&amp;Sub, S, pos, len);    	StrCopy(&amp;T, S);        StrEmpty(S);    	ClearString(&amp;S);    	Index(S, T, pos);//字符串匹配算法        Replace(&amp;S, T, V);    	StrInsert(&amp;S, pos, T);    	StrDelete(&amp;S, pos, len);    	DestroyString(&amp;S);&#125; ADT...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-text">第二章：线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-text">一、线性表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA"><span class="toc-text">二、线性表的顺序表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-text">1.顺序表定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA%EF%BC%9A"><span class="toc-text">2.顺序表存储表示：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">3.顺序表基本操作：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">（1）简单操作：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">（2）顺序表查找操作：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">（3）顺序表插入操作：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">（4）顺序表删除操作：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">（5）总结：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Cpp%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%9A"><span class="toc-text">4.Cpp中的参数传递：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%9A"><span class="toc-text">（1）值传递：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%92%EF%BC%88%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%EF%BC%89"><span class="toc-text">（2）地址传递（指针变量）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%92%EF%BC%88%E6%95%B0%E7%BB%84%E5%90%8D%EF%BC%89"><span class="toc-text">（3）地址传递（数组名）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%92%EF%BC%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-amp-%EF%BC%89"><span class="toc-text">（4）地址传递（引用类型&amp;）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%93%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA"><span class="toc-text">三、线性表的链式表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%93%BE%E8%A1%A8%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-text">1.链表定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%93%BE%E8%A1%A8%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA%EF%BC%9A"><span class="toc-text">2.链表存储表示：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%93%BE%E8%A1%A8%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">3.链表简单操作：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%93%BE%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="toc-text">（1）链表初始化：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E9%93%BE%E8%A1%A8%E7%BD%AE%E7%A9%BA%EF%BC%9A"><span class="toc-text">（2）链表置空：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%93%BE%E8%A1%A8%E5%88%A4%E7%A9%BA%EF%BC%9A"><span class="toc-text">（3）链表判空：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E6%B1%82%E9%93%BE%E8%A1%A8%E8%A1%A8%E9%95%BF%EF%BC%9A"><span class="toc-text">（4）求链表表长：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E9%93%BE%E8%A1%A8%E9%94%80%E6%AF%81%EF%BC%9A"><span class="toc-text">（5）链表销毁：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%93%BE%E8%A1%A8%E9%87%8D%E8%A6%81%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">4.链表重要操作：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%A4%B4%E6%8F%92%E6%B3%95%E5%BB%BA%E7%AB%8B%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">（1）头插法建立链表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%B0%BE%E6%8F%92%E6%B3%95%E5%BB%BA%E7%AB%8B%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">（2）尾插法建立链表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8C%89%E5%BA%8F%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%EF%BC%9A"><span class="toc-text">（3）按序查找元素：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E6%8C%89%E5%80%BC%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%EF%BC%9A"><span class="toc-text">（4）按值查找元素：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E6%8C%89%E5%BA%8F%E6%8F%92%E5%85%A5%EF%BC%9A"><span class="toc-text">（5）按序插入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E6%8C%89%E5%BA%8F%E5%88%A0%E9%99%A4%EF%BC%9A"><span class="toc-text">（6）按序删除：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%887%EF%BC%89%E6%8C%89%E5%80%BC%E5%88%A0%E9%99%A4%EF%BC%9A"><span class="toc-text">（7）按值删除：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">5.循环链表：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">（1）循环链表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="toc-text">（2）循环链表合并：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">6.双向链表：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">（1）双向链表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%EF%BC%9A"><span class="toc-text">（2）双向链表插入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E5%88%A0%E9%99%A4%EF%BC%9A"><span class="toc-text">（3）双向链表删除：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%A1%BA%E5%BA%8F%E8%A1%A8%E4%B8%8E%E9%93%BE%E8%A1%A8%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9A"><span class="toc-text">四、顺序表与链表的比较：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%BA%94%E7%94%A8"><span class="toc-text">五、线性表应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%90%88%E5%B9%B6"><span class="toc-text">1.线性表的合并</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%97%A0%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="toc-text">（1）无序表的合并：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%9C%89%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="toc-text">（2）有序表的合并：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%EF%BC%9A"><span class="toc-text">2.线性表其他应用：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%AF%86%E9%9B%86%E5%A4%9A%E9%A1%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">（1）密集多项式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%A8%80%E7%96%8F%E5%A4%9A%E9%A1%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">（2）稀疏多项式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%A8%80%E7%96%8F%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">（3）稀疏多项式操作：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%EF%BC%9A"><span class="toc-text">（3）图书信息管理：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

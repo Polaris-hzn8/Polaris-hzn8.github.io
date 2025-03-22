@@ -1,0 +1,568 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第六章：图（上） | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第六章：图（上） 一、基本概念1.图G相关概念：1234Graph &#x3D; (Vertex, Edge)G &#x3D; (V, E)&#x2F;&#x2F;V:顶点（数据元素）的有穷非空集合&#x2F;&#x2F;E:边的有穷集合   无向图：每条边都是无方向的 有向图：每条边都是有方向的 完全图：任意两个点都有一条边相连 稀疏图：有很少边&#x2F;弧的图 稠密图：有较多边&#x2F;弧的图 网：边&#x2F;弧带有权重的图   2.顶点V相关概">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第六章：图（上）">
+<meta property="og:url" content="https://polaris-hzn8.github.io/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="第六章：图（上） 一、基本概念1.图G相关概念：1234Graph &#x3D; (Vertex, Edge)G &#x3D; (V, E)&#x2F;&#x2F;V:顶点（数据元素）的有穷非空集合&#x2F;&#x2F;E:边的有穷集合   无向图：每条边都是无方向的 有向图：每条边都是有方向的 完全图：任意两个点都有一条边相连 稀疏图：有很少边&#x2F;弧的图 稠密图：有较多边&#x2F;弧的图 网：边&#x2F;弧带有权重的图   2.顶点V相关概">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-02-28T09:08:00.000Z">
+<meta property="article:modified_time" content="2025-03-22T03:54:08.585Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="datestructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第六章：图（上）",
+  "url": "https://polaris-hzn8.github.io/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/",
+  "image": "https://avatars.githubusercontent.com/u/70149889",
+  "datePublished": "2023-02-28T09:08:00.000Z",
+  "dateModified": "2025-03-22T03:54:08.585Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Luo Chenhao",
+      "url": "https://polaris-hzn8.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第六章：图（上）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a><a class="nav-page-title" href="/"><span class="site-name">第六章：图（上）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第六章：图（上）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-02-28T09:08:00.000Z" title="Created 2023-02-28 17:08:00">2023-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-22T03:54:08.585Z" title="Updated 2025-03-22 11:54:08">2025-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>14mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-22 11:54:08&quot;}" hidden></div><h1 id="第六章：图（上）"><a href="#第六章：图（上）" class="headerlink" title="第六章：图（上）"></a>第六章：图（上）</h1><hr>
+<h3 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h3><h4 id="1-图G相关概念："><a href="#1-图G相关概念：" class="headerlink" title="1.图G相关概念："></a>1.图G相关概念：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Graph = (Vertex, Edge)</span><br><span class="line">G = (V, E)</span><br><span class="line"><span class="comment">//V:顶点（数据元素）的有穷非空集合</span></span><br><span class="line"><span class="comment">//E:边的有穷集合</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>无向图：每条边都是无方向的</li>
+<li>有向图：每条边都是有方向的</li>
+<li>完全图：任意两个点都有一条边相连</li>
+<li>稀疏图：有很少边&#x2F;弧的图</li>
+<li>稠密图：有较多边&#x2F;弧的图</li>
+<li>网：边&#x2F;弧带有权重的图</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221129104309288.png" alt="image-20221129104309288"></p>
+<h4 id="2-顶点V相关概念："><a href="#2-顶点V相关概念：" class="headerlink" title="2.顶点V相关概念："></a>2.顶点V相关概念：</h4><ol>
+<li>邻接：边&#x2F;弧相连的两个顶点之间的关系，例如：(vi, vj)称为vi和vj<font color='#BAOC2F'>互为邻接点</font>、&lt;vi, vj&gt;称vi邻接到vj，vj邻接于vi</li>
+<li>关联&#x2F;依附：边&#x2F;弧与顶点之间的关系，例如：(vi, vj)&#x2F;&lt;vi, vj&gt;称为该边&#x2F;弧关联于vi和vj</li>
+<li>顶点的度：与该顶点相关联的边的数目，记为TD(v)，在有向图中<font color='#BAOC2F'>顶点的度</font>等于<font color='#BAOC2F'>该顶点的入度与出度之和</font>。</li>
+<li>顶点的入度：<font color='#BAOC2F'>以v为终点</font>的有向边的条数，记作ID(v)</li>
+<li>顶点的出度：<font color='#BAOC2F'>以v为始点</font>的有向边的条数，记作OD(v)</li>
+</ol>
+<h4 id="3-边E相关的概念："><a href="#3-边E相关的概念：" class="headerlink" title="3.边E相关的概念："></a>3.边E相关的概念：</h4><ol>
+<li>路径：接续的边构成的顶点序列</li>
+<li>路径长度：路径上边&#x2F;弧的数目&#x2F;<font color='#BAOC2F'>权值之和</font></li>
+<li>回路：第一个顶点和最后一个顶点相同的路径。</li>
+<li>简单路径：除路径起点和终点<font color='#BAOC2F'>可以相同</font>外，<font color='#BAOC2F'>其余顶点均不相同</font>的路径。</li>
+<li>简单回路：除路径起点和终点<font color='#BAOC2F'>相同</font>外，其余顶点均不相同的路径。</li>
+<li>连通：无向图中两个顶点间有路径存在，则称为连通。</li>
+<li>强连通：有向图中两个顶点间有正向、逆向的路径，则称为强连通。</li>
+<li>连通图：无向图中任意两个顶点之间都是连通的，则称为连通图</li>
+<li>强连通图：有向图中任意两个顶点之间都是强连通的，则称为强连通图</li>
+</ol>
+<blockquote>
+<p>&#x3D;&#x3D;补充：有向图无向图边数问题&#x3D;&#x3D;</p>
+<ul>
+<li>对于n个顶点的无向图G，若G是<font color='#BAOC2F'>连通图</font>则最少有n-1条边，若G是<font color='#BAOC2F'>非连通图</font>则最多可能有$C_{n-1}^2$条边</li>
+<li>对于n个顶点的有向图G，若G是<font color='#BAOC2F'>强连通图</font>则最少有n条边（即形成一条回路）</li>
+</ul>
+</blockquote>
+<h4 id="4-子图G相关概念："><a href="#4-子图G相关概念：" class="headerlink" title="4.子图G相关概念："></a>4.子图G相关概念：</h4><ol>
+<li><p>连通分量：无向图中的<font color='#BAOC2F'>极大连通子图</font>称为连通分量（子图必须连通，且包含尽可能多的顶点和边）</p>
+</li>
+<li><p>强连通分量：有向图中的<font color='#BAOC2F'>极大强连通子图</font>称为强连通分量（子图必须强连通，同时保留尽可能多的边）</p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221130070416074.png" alt="image-20221130070416074"></p>
+</li>
+<li><p>生成树：是一个<font color='#BAOC2F'>连通图</font>中，<font color='#BAOC2F'>包含全部顶点</font>的一个<font color='#BAOC2F'>极小连通子图</font>（边尽可能的少，但要保持连通）。</p>
+<p> 若图中顶点数为n则它的生成树含有n-1条边，对生成树而言若砍去1条边则变成非连通图，若加上1条边则会形成回路。</p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221130085552087.png" alt="image-20221130085552087"></p>
+</li>
+<li><p>生成森林：是一个<font color='#BAOC2F'>非连通图</font>中，<font color='#BAOC2F'>连通分量的生成树</font>构成了非连通图的生成森林。</p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221130093933281.png" alt="image-20221130093933281"></p>
+</li>
+</ol>
+<h3 id="二、图的存储结构"><a href="#二、图的存储结构" class="headerlink" title="二、图的存储结构"></a>二、图的存储结构</h3><h4 id="1-数组表示法AdjacencyMatrix"><a href="#1-数组表示法AdjacencyMatrix" class="headerlink" title="1.数组表示法AdjacencyMatrix"></a>1.数组表示法AdjacencyMatrix</h4><p>顶点表是一个一维数组<code>Vexs[n]</code>用于存放各个顶点的信息：</p>
+<p>邻接矩阵是一个二维数组<code>A.arcs[n][n]</code>用于存放各个顶点之间边的关系：<br>$$<br>A.arc[i][j]&#x3D;\begin{cases}<br>1,~~~~~if~(Vi, Vj)∈E ~~或&lt;Vi,Vj&gt;∈E \<br>\<br>\<br>0,~~~~~else<br>\end{cases}<br>$$</p>
+<h5 id="（1）无向图邻接矩阵表示"><a href="#（1）无向图邻接矩阵表示" class="headerlink" title="（1）无向图邻接矩阵表示"></a>（1）无向图邻接矩阵表示</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220609102834944.png" alt="image-20220609102834944"></p>
+<ol>
+<li>只要确定了顶点编号，图的邻接矩阵表示方式唯一</li>
+<li>顶点<code>i</code>的度 &#x3D; 第<code>i</code>行&#x2F;列中1的个数</li>
+<li>无向图的邻接矩阵是<font color='#BAOC2F'>对称的</font></li>
+<li><font color='#BAOC2F'>完全图</font>的邻接矩阵中，对角元素为0其余全为1</li>
+<li>设图G的邻接矩阵为A（矩阵元素为0&#x2F;1），则A<sup>n</sup>的元素$A^n[i][j]$等于由顶点<code>i</code>到顶点<code>j</code>的长度为<code>n</code>的路径的数目。</li>
+</ol>
+<h5 id="（2）有向图邻接矩阵表示"><a href="#（2）有向图邻接矩阵表示" class="headerlink" title="（2）有向图邻接矩阵表示"></a>（2）有向图邻接矩阵表示</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221129113028397.png" alt="image-20221129113028397"></p>
+<ol>
+<li>有向图的邻接矩阵可能是<font color='#BAOC2F'>不对称的</font></li>
+<li>顶点的出度&#x3D;第<code>i</code>行元素之和、顶点的入度&#x3D;第<code>i</code>列元素之和</li>
+<li>顶点的度&#x3D;第<code>i</code>行元素之和+第<code>i</code>列元素之和</li>
+</ol>
+<blockquote>
+<p>&#x3D;&#x3D;补充&#x3D;&#x3D;：由<font color='#BAOC2F'>邻接矩阵表示有向图</font>可引出，<font color='#BAOC2F'>邻接矩阵表示有向网</font>：</p>
+<p>其中邻接矩阵重新定义为<code>A.arcs[n][n]</code>：<br>$$<br>A.arc[i][j]&#x3D;\begin{cases}<br>Wij,~~~~~if<del>(Vi, Vj)∈E ~~或&lt;Vi,Vj&gt;∈E \<br>\<br>\<br>\infty,~~~~~else</del>(无边&#x2F;弧)<br>\end{cases}<br>$$<br>如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220609111055234.png" alt="image-20220609111055234"></p>
+</blockquote>
+<h5 id="（3）邻接矩阵建立无向网★"><a href="#（3）邻接矩阵建立无向网★" class="headerlink" title="（3）邻接矩阵建立无向网★"></a>（3）邻接矩阵建立无向网★</h5><p>邻接矩阵的存储表示：用两个数组分别存储<font color='#BAOC2F'>顶点表</font>和<font color='#BAOC2F'>邻接矩阵</font>，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum<span class="comment">//最大顶点数</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MaxInt IFINITY<span class="comment">//表示极大值无穷</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> VerTexType;<span class="comment">//设置边的权值类型为整型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> AcrType;<span class="comment">//设置顶点的数据类型字符型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    VerTexType vexs[MVNum];<span class="comment">//顶点表</span></span><br><span class="line">    AcrType arcs[MVNum][MVNum];<span class="comment">//邻接矩阵or边表</span></span><br><span class="line">    <span class="type">int</span> vexnum, arcnum;<span class="comment">//图的当前顶点数和边数</span></span><br><span class="line">&#125; AMGraph;<span class="comment">//Adjacency Matrix Graph</span></span><br></pre></td></tr></table></figure>
+
+<p>采用邻接矩阵表示法创建<font color='#BAOC2F'>无向网</font>：</p>
+<ol>
+<li>输入总顶点vexnum数和总边数arcnum</li>
+<li>建立顶点表：依次输入点的信息存入顶点表中</li>
+<li>初始化邻接矩阵，使每个<font color='#BAOC2F'>权值初始化为极大值</font></li>
+<li>根据图G的边的情况构造邻接矩阵</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">createUDN</span><span class="params">(AMGraph &amp;G)</span> </span>&#123;<span class="comment">//采用邻接矩阵表示法，创建Undirected Net无向网</span></span><br><span class="line">    <span class="comment">//1.输入图的顶点数与边数</span></span><br><span class="line">    cin &gt;&gt; G.vexnum &gt;&gt; G.arcnum;</span><br><span class="line">    <span class="comment">//2.输入顶点信息</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vernum; ++i) cin &gt;&gt; G.vex[i];</span><br><span class="line">    <span class="comment">//3.初始化邻接矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; G.vexnum; ++j)</span><br><span class="line">            G.arcs[i][j] = MaxInt;<span class="comment">//边的权值均设为最大值</span></span><br><span class="line">    <span class="comment">//4.构造邻接矩阵（输入边信息）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.arcnums; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; v1 &gt;&gt; v2 &gt;&gt; w;<span class="comment">//输入一条边所依附的顶点及边的权值</span></span><br><span class="line">        i = <span class="built_in">LocateVex</span>(G, v1);</span><br><span class="line">        j = <span class="built_in">LocateVex</span>(G, v2);<span class="comment">//确定v1和v2在G中的位置</span></span><br><span class="line">        G.arcs[i][j] = w;<span class="comment">//边&lt;v1, v2&gt;的权值置为w</span></span><br><span class="line">        G.arcs[j][i] = G.arcs[i][j];<span class="comment">//对称边&lt;v2, v1&gt;的权值置为w</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220609114146677.png" alt="image-20220609114146677"></p>
+<h5 id="（4）邻接矩阵表示法分析："><a href="#（4）邻接矩阵表示法分析：" class="headerlink" title="（4）邻接矩阵表示法分析："></a>（4）邻接矩阵表示法分析：</h5><table>
+<thead>
+<tr>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>直观、简单、易于理解</td>
+</tr>
+<tr>
+<td>便于检查<font color='#BAOC2F'>任意一对顶点</font>之间是否存在联系（边）</td>
+</tr>
+<tr>
+<td>便于找到<font color='#BAOC2F'>任意顶点</font>的所有邻接点（有联系的点）</td>
+</tr>
+<tr>
+<td>便于计算<font color='#BAOC2F'>任意顶点</font>的度：从该点出发的边数为出度、指向该点的边数为入度</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不利于增加和删除顶点</td>
+</tr>
+<tr>
+<td>浪费空间—存储稀疏图，点很多而边很少有大量无效元素</td>
+</tr>
+<tr>
+<td>浪费时间—统计稀疏图中一共有多少条边</td>
+</tr>
+</tbody></table>
+<h4 id="2-链式表示法AdjacencyList"><a href="#2-链式表示法AdjacencyList" class="headerlink" title="2.链式表示法AdjacencyList"></a>2.链式表示法AdjacencyList</h4><p>建立一个<font color='#BAOC2F'>顶点表</font>记录各个顶点的信息 和一个<font color='#BAOC2F'>线性链表</font>记录关联着同一顶点的边的信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221129125459135.png" alt="image-20221129125459135"></p>
+<h5 id="（1）无向图邻接表表示"><a href="#（1）无向图邻接表表示" class="headerlink" title="（1）无向图邻接表表示"></a>（1）无向图邻接表表示</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220609120726654.png" alt="image-20220609120726654"></p>
+<ol>
+<li>邻接表<font color='#BAOC2F'>不是唯一的</font>，链表结点的顺序是可调换的。</li>
+<li>无向图中顶点<code>vi</code>的度即为第<code>i</code>个单链表中的<font color='#BAOC2F'>节点数</font>。</li>
+<li>若无向图中有n个顶点与e条边，则邻接表需要n个头结点与2e个表结点来存储（更适合<font color='#BAOC2F'>稀疏矩阵的存储</font>）</li>
+</ol>
+<h5 id="（2）有向图邻接表表示"><a href="#（2）有向图邻接表表示" class="headerlink" title="（2）有向图邻接表表示"></a>（2）有向图邻接表表示</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220609121444700.png" alt="image-20220609121444700"></p>
+<ol>
+<li>有向图中顶点<code>Vi</code>的<font color='#BAOC2F'>出度</font>即为第<code>i</code>个单链表中的<font color='#BAOC2F'>结点数</font>。</li>
+<li>有向图中顶点<code>Vi</code>的<font color='#BAOC2F'>入度</font>即为<font color='#BAOC2F'>整个单链表中的邻接点域值</font>为<code>i-1</code>的<font color='#BAOC2F'>结点数</font>（困难）。</li>
+</ol>
+<h5 id="（3）邻接表建立无向图★"><a href="#（3）邻接表建立无向图★" class="headerlink" title="（3）邻接表建立无向图★"></a>（3）邻接表建立无向图★</h5><p>邻接表的存储表示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221129130505524.png" alt="image-20221129130505524"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MVNum 100<span class="comment">//最大顶点数</span></span></span><br><span class="line"><span class="comment">//顶点的结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">VNode</span> &#123;</span><br><span class="line">    VerTexTyped data;<span class="comment">//顶点信息</span></span><br><span class="line">    ArcNode *firstarc;<span class="comment">//指向第一条依附该顶点的边的指针</span></span><br><span class="line">&#125; VNode, AdjList[MVNum];<span class="comment">//AdjList表示邻接表类型，即AdjList v;相当于VNode v[MVNum];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//边的结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">ArcNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> adjvex;<span class="comment">//该边所指向的顶点的位置</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">ArcNode</span> *nextarc;<span class="comment">//指向下一条边的指针</span></span><br><span class="line">    OtherInfo info;<span class="comment">//与边相关的信息</span></span><br><span class="line">&#125; ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//图的结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    AdjList vertices;<span class="comment">//vertexs</span></span><br><span class="line">    <span class="type">int</span> vexnum, arcnum;<span class="comment">//图的当前顶点数和边数</span></span><br><span class="line">&#125; ALGraph;</span><br></pre></td></tr></table></figure>
+
+<p>采用邻接表表示法创建<font color='#BAOC2F'>无向图</font>：</p>
+<ol>
+<li><p>输入总顶点vexnum数和总边数arcnum</p>
+</li>
+<li><p>建立顶点表：依次输入点的信息存入顶点表中，并且使每个<font color='#BAOC2F'>表头结点的指针域</font>初始化为NULL</p>
+</li>
+<li><p>根据图G的边的情况构造邻接表（单链表）：</p>
+<p> 依次输入每条边依附的两个顶点，查找两个顶点的序号<code>i</code>和<code>j</code>建立边结点</p>
+<p> 将此边结点分别插入到<code>vi</code>和<code>vj</code>对应的两个<font color='#BAOC2F'>边链表</font>的头部</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">createUDG</span><span class="params">(ALGraph &amp;G)</span> </span>&#123;<span class="comment">//采用邻接表表示法，创建Undirected Graph无向网</span></span><br><span class="line">    <span class="comment">//1.输入图的顶点数与边数</span></span><br><span class="line">    cin &gt;&gt; G.vexnum &gt;&gt; G.arcnum;</span><br><span class="line">    <span class="comment">//2.输入表头顶点信息 构造表头结点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vernum; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; G.vertices[i].data;<span class="comment">//输入顶点值</span></span><br><span class="line">        G.vertices[i].firstarc = <span class="literal">NULL</span>;<span class="comment">//初始化表头结点的指针域</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.输入边结点信息 构造邻接表</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.arcnums; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; v1 &gt;&gt; v2;<span class="comment">//输入一条边所依附的两个顶点</span></span><br><span class="line">        i = <span class="built_in">LocateVex</span>(G, v1);</span><br><span class="line">        j = <span class="built_in">LocateVex</span>(G, v2);<span class="comment">//确定v1和v2在G中的位置</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//(1)生成一个新的边结点*p1</span></span><br><span class="line">        p1 = <span class="keyword">new</span> ArcNode;</span><br><span class="line">        p1-&gt;adjvex = j;<span class="comment">//邻接点序号为j</span></span><br><span class="line">        p1-&gt;nextarc = G.vertices[i].firstarc;</span><br><span class="line">        G.vertices[i].firstarc = p1;<span class="comment">//将新结点*p1插入顶点Vi的边表头部</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//(2)生成一个新的对称边结点*p2</span></span><br><span class="line">        p2 = <span class="keyword">new</span> ArcNode;</span><br><span class="line">        p2-&gt;adjvex = i;<span class="comment">//邻接点序号为i</span></span><br><span class="line">        p2-&gt;nextarc = G.vertices[j].firstarc;</span><br><span class="line">        G.vertices[j].firstarc = p2;<span class="comment">//将新结点*p2插入顶点Vj的边表头部</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（4）邻接表表示法分析："><a href="#（4）邻接表表示法分析：" class="headerlink" title="（4）邻接表表示法分析："></a>（4）邻接表表示法分析：</h5><table>
+<thead>
+<tr>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>节约稀疏图的空间：需要N个头指针+2E个结点（每个结点至少2个域）</td>
+</tr>
+<tr>
+<td>便于找到<font color='#BAOC2F'>任意顶点</font>的所有邻接点（有联系的点）</td>
+</tr>
+<tr>
+<td>便于计算<font color='#BAOC2F'>任意顶点</font>的度：对于无向图方便，对于有向图只能计算出度，入度需要逆邻接表来计算</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不便于检查<font color='#BAOC2F'>任意一对顶点</font>之间是否存在联系（边）</td>
+</tr>
+</tbody></table>
+<p>&#x3D;&#x3D;邻接矩阵与邻接表之间的对比&#x3D;&#x3D;：</p>
+<p>联系：邻接表中每个<font color='#BAOC2F'>链表</font>对应于邻接<font color='#BAOC2F'>矩阵中的一行</font>，链表中<font color='#BAOC2F'>结点的个数</font>等于矩阵<font color='#BAOC2F'>行中非零元素的个数</font>。</p>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>邻接矩阵</th>
+<th>邻接表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>复杂度</td>
+<td>邻接矩阵的空间复杂度为O（n<sup>2</sup>）</td>
+<td>邻接表的空间复杂度为O（n+e）顶点数+边数</td>
+</tr>
+<tr>
+<td>应用性</td>
+<td>邻接矩阵多用于稠密图</td>
+<td>邻接表多用于稀疏图</td>
+</tr>
+<tr>
+<td>表示方式</td>
+<td>邻接矩阵是唯一的（行列号与顶点编号一致）</td>
+<td>邻接表不是唯一的（链表次序与顶点编号无关）对于任意<font color='#BAOC2F'>无向图</font></td>
+</tr>
+<tr>
+<td>邻边查找</td>
+<td>邻接矩阵必须遍历对应的行&#x2F;列</td>
+<td>邻接表找<font color='#BAOC2F'>有向图入边</font>不方便（其余很方便）</td>
+</tr>
+</tbody></table>
+<h4 id="3-链式表示法的改进："><a href="#3-链式表示法的改进：" class="headerlink" title="3.链式表示法的改进："></a>3.链式表示法的改进：</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610133350668.png" alt="image-20220610133350668"></p>
+<table>
+<thead>
+<tr>
+<th>邻接表缺点</th>
+<th>方案</th>
+<th>具体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有向图时<font color='#BAOC2F'>度计算困难</font>（邻接表便于求出度、逆邻接表便于求入度）</td>
+<td>十字链表</td>
+<td><font color='#BAOC2F'>邻接表</font>和<font color='#BAOC2F'>逆邻接表</font>结合形成的链表。</td>
+</tr>
+<tr>
+<td>存储无向图时<font color='#BAOC2F'>每条边重复存储</font>的问题</td>
+<td>邻接多重表</td>
+<td>删除边、删除结点等操作十分的方便</td>
+</tr>
+</tbody></table>
+<h5 id="（1）十字链表："><a href="#（1）十字链表：" class="headerlink" title="（1）十字链表："></a>（1）十字链表：</h5><p>十字链表Orthogonal List，</p>
+<ol>
+<li>是<font color='#BAOC2F'>只能用于存储有向图</font>的一种链式存储结构，</li>
+<li>为了解决<font color='#BAOC2F'>有向图度</font>计算困难问题，将有向图的<font color='#BAOC2F'>邻接表</font>和<font color='#BAOC2F'>逆邻接表</font>结合起来形成的链表。</li>
+<li>有向图中的弧对应十字链表中的<font color='#BAOC2F'>弧结点</font>，有向图中的<font color='#BAOC2F'>顶点</font>在十字链表中有对应的<font color='#BAOC2F'>顶点结点</font>。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201083212734.png" alt="image-20221201083212734"></p>
+<p>&#x3D;&#x3D;案例演示&#x3D;&#x3D;：根据如下有向图<font color='#BAOC2F'>建立十字链表</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610140800222.png" alt="image-20220610140800222"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610141020464.png" alt="image-20220610141020464"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610141030988.png" alt="image-20220610141030988"></p>
+<p>十字链表建立完毕</p>
+<h5 id="（2）邻接多重表："><a href="#（2）邻接多重表：" class="headerlink" title="（2）邻接多重表："></a>（2）邻接多重表：</h5><p>邻接多重表，</p>
+<ol>
+<li>是<font color='#BAOC2F'>只能用于存储无向图</font>的一种链式存储结构，</li>
+<li>为了解决邻接表存储无向图时<font color='#BAOC2F'>每条边重复存储</font>的问题而提出的。</li>
+<li>删除边、删除结点等操作十分的方便</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201090033627.png" alt="image-20221201090033627"></p>
+<p>&#x3D;&#x3D;案例演示&#x3D;&#x3D;：根据如下无向图<font color='#BAOC2F'>建立邻接多重表</font>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610172039776.png" alt="image-20220610172039776"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610173331143.png" alt="image-20220610173331143"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610173341423.png" alt="image-20220610173341423"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220610173350462.png" alt="image-20220610173350462"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201091650171.png" alt="image-20221201091650171"></p>
+<h3 id="三、图的遍历"><a href="#三、图的遍历" class="headerlink" title="三、图的遍历"></a>三、图的遍历</h3><blockquote>
+<p>注：遍历的实质就是找到<font color='#BAOC2F'>每一个顶点的邻接点</font>的过程（需要设置visit数组避免重复访问结点的问题）</p>
+</blockquote>
+<h4 id="1-广度优先搜索BFS"><a href="#1-广度优先搜索BFS" class="headerlink" title="1.广度优先搜索BFS"></a>1.广度优先搜索BFS</h4><h5 id="（1）BFS思想："><a href="#（1）BFS思想：" class="headerlink" title="（1）BFS思想："></a>（1）BFS思想：</h5><blockquote>
+<p>注：连通图的广度优先遍历类似于<font color='#BAOC2F'>树的层次遍历</font>，需要一个<font color='#BAOC2F'>辅助队列</font>。</p>
+</blockquote>
+<ol>
+<li>从图中某结点出发，首先依次访问该结点的<font color='#BAOC2F'>所有相邻邻接结点</font>vi1、vi2、…vin（同一层）</li>
+<li>再按照这些顶点被访问的先后次序，依次访问与它们<font color='#BAOC2F'>相邻的</font>所有<font color='#BAOC2F'>未被访问的</font>顶点</li>
+<li>重复此过程，直到所有顶点均被访问为止</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220611102814351.png" alt="image-20220611102814351"></p>
+<p>&#x3D;&#x3D;BFS具体过程如下&#x3D;&#x3D;：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220611104125870.png" alt="image-20220611104125870"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201104427135.png" alt="image-20221201104427135"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201104546092.png" alt="image-20221201104546092"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201104842078.png" alt="image-20221201104842078"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201105009924.png" alt="image-20221201105009924"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201105321891.png" alt="image-20221201105321891"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201105330345.png" alt="image-20221201105330345"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201105442729.png" alt="image-20221201105442729"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221201105523979.png" alt="image-20221201105523979"></p>
+<h5 id="（2）BFS的实现："><a href="#（2）BFS的实现：" class="headerlink" title="（2）BFS的实现："></a>（2）BFS的实现：</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> visited[MAX_VERTEX_NUM];<span class="comment">//访问标记数组（初始值都为false）</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(Graph G)</span> </span>&#123;<span class="comment">//对图G进行广度优先遍历（处理非连通图）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; ++i) visited[i] = FALSE;<span class="comment">//对访问标记数组初始化</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(Q);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; ++i) &#123;<span class="comment">//从0号顶点开始遍历</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i]) &#123;<span class="comment">//对每个连通分量调用一次BFS</span></span><br><span class="line">            <span class="built_in">BFS</span>(G, i);<span class="comment">//Vi未访问过则从vi开始BFS</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(Graph G, <span class="type">int</span> v)</span> </span>&#123;<span class="comment">//从顶点v出发 广度优先遍历图G</span></span><br><span class="line">    <span class="built_in">visit</span>(v);<span class="comment">//访问初始顶点v</span></span><br><span class="line">    visited[v] = TRUE;<span class="comment">//对v做已标记访问</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(Q);<span class="comment">//辅助队列Q初始化 置空</span></span><br><span class="line">    <span class="built_in">EnQueue</span>(Q, v);<span class="comment">//v入队列Q</span></span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isEmpty</span>(Q)) &#123;</span><br><span class="line">        <span class="built_in">DeQueue</span>(Q, u);<span class="comment">//队头元素出队</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> w = <span class="built_in">FirstNeighbor</span>(G, u); w &gt;= <span class="number">0</span>; w = <span class="built_in">NextNeighbor</span>(G, u, w)) &#123;</span><br><span class="line">            <span class="comment">//w为u的尚未访问的邻接顶点</span></span><br><span class="line">            <span class="keyword">if</span> (!visited[w]) &#123;</span><br><span class="line">                <span class="built_in">visit</span>(w);</span><br><span class="line">                visited[w] = TRUE;</span><br><span class="line">                <span class="built_in">EnQueue</span>(Q, W);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）算法分析："><a href="#（3）算法分析：" class="headerlink" title="（3）算法分析："></a>（3）算法分析：</h5><ul>
+<li>用邻接矩阵来表示图，BFS对于每一个被访问到的顶点，都要循环检测矩阵中的完整一行（n个元素），时间复杂度为O（n<sup>2</sup>）</li>
+<li>用邻接表来表示图，虽然有2e个<font color='#BAOC2F'>表结点</font>但是只需扫描e个结点即可，加上访问n个<font color='#BAOC2F'>头结点</font>的时间，时间复杂度为O（n + e）</li>
+<li>同一个图的<font color='#BAOC2F'>邻接矩阵表示方式唯一</font>，因此广度优先遍历序列唯一</li>
+<li>同一个图的<font color='#BAOC2F'>邻接表表示方式不唯一</font>，因此广度优先遍历序列不唯一</li>
+</ul>
+<h4 id="2-深度优先搜索DFS"><a href="#2-深度优先搜索DFS" class="headerlink" title="2.深度优先搜索DFS"></a>2.深度优先搜索DFS</h4><h5 id="（1）DFS思想："><a href="#（1）DFS思想：" class="headerlink" title="（1）DFS思想："></a>（1）DFS思想：</h5><blockquote>
+<p>注：连通图的深度优先遍历类似于<font color='#BAOC2F'>树的先根遍历</font>，需要一个<font color='#BAOC2F'>辅助栈</font>。</p>
+</blockquote>
+<ol>
+<li><p>在访问图中起始顶点<code>v</code>之后，由顶点<code>v</code>出发访问它的任一<font color='#BAOC2F'>邻接顶点</font><code>v1</code></p>
+</li>
+<li><p>在访问图中邻接顶点<code>v1</code>之后，由顶点<code>v1</code>出发访问它的任一<font color='#BAOC2F'>邻接但是还没有被访问过的</font>顶点<code>v2</code></p>
+</li>
+<li><p>在访问图中邻接顶点<code>v2</code>之后，进行类似的访问v3、v4、v5…直到所有的邻接顶点都被访问过为止</p>
+</li>
+<li><p>当在<font color='#BAOC2F'>某顶点时</font>其<font color='#BAOC2F'>所有邻接顶点都被访问过</font>，退到<font color='#BAOC2F'>上一个访问过的顶点</font>检测其是否还有<font color='#BAOC2F'>没有被访问过的</font>邻接顶点（回溯）</p>
+<p> 如果有则对该<font color='#BAOC2F'>未访问顶点</font>进行访问，再从该顶点出发，进行类似的访问v3、v4、v5…直到所有的邻接顶点都被访问过为止</p>
+<p> 如果没有则<font color='#BAOC2F'>再退到上一个访问过的顶点</font>检测其是否还有<font color='#BAOC2F'>没有被访问过的</font>邻接顶点（继续回溯）</p>
+</li>
+<li><p>重复上述过程，直到连通图中的所有顶点都被访问过为止。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220611100033459.png" alt="image-20220611100033459"></p>
+<h5 id="（2）DFS的实现："><a href="#（2）DFS的实现：" class="headerlink" title="（2）DFS的实现："></a>（2）DFS的实现：</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> visited[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(Graph G)</span> </span>&#123;<span class="comment">//对图G进行深度优先遍历</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; ++i) visited[i] = FALSE;<span class="comment">//初始标记化数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; G,vexnum; ++i) &#123;<span class="comment">//从v = 0开始遍历</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i]) &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G, v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(Graph G, <span class="type">int</span> v)</span> </span>&#123;<span class="comment">//从顶点v出发 深度优先遍历图G</span></span><br><span class="line">    <span class="built_in">visit</span>(v);<span class="comment">//访问顶点v</span></span><br><span class="line">    visited[v] = TRUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> w = <span class="built_in">FirstNeighbor</span>(G, v); w &gt;= <span class="number">0</span>; w = <span class="built_in">NextNeighbor</span>(G, v, w)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[w]) &#123;<span class="comment">//w为u的尚未访问的邻接结点</span></span><br><span class="line">            <span class="built_in">DFS</span>(G, w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>如果图的存储结构确定（此处邻接矩阵结构确定）时，则DFS遍历的顺序只有一种</li>
+<li>回溯的过程即为if不执行的情况，无需书写！</li>
+</ol>
+<h5 id="（3）算法分析：-1"><a href="#（3）算法分析：-1" class="headerlink" title="（3）算法分析："></a>（3）算法分析：</h5><ul>
+<li>用邻接矩阵来表示图，遍历图中的每一个顶点都要<font color='#BAOC2F'>从头扫描该顶点所在的行</font>，时间复杂度为O（n<sup>2</sup>）</li>
+<li>用邻接表来表示图，虽然有2e个<font color='#BAOC2F'>表结点</font>但是只需扫描e个结点即可，加上访问n个<font color='#BAOC2F'>头结点</font>的时间，时间复杂度为O（n + e）</li>
+</ul>
+<p>&#x3D;&#x3D;DFS与BFS算法效率比较&#x3D;&#x3D;：</p>
+<ol>
+<li>空间复杂度相同O（n）：DFS借用了栈，而BFS借用了队列</li>
+<li>时间复杂度<font color='#BAOC2F'>只与存储结构有关</font>，而与搜索的路径无关DFS&#x2F;BFS</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/">https://polaris-hzn8.github.io/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/datestructure/">datestructure</a></div><div class="post-share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/02/28/dataStructure/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA/" title="第一章：绪论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第一章：绪论</div></div><div class="info-2"><div class="info-item-1">第一章：绪论 一、基本概念1.Data数据Data数据：是能够输入计算机且能被计算机处理的各种符号的集合。 Data数据包括：  数值型数据：整数、实数 非数值型数据：文字、图像、图形、声音等  2.DataElement数据元素DataElement数据元素（元素&#x2F;记录&#x2F;结点&#x2F;顶点）：是Data数据的基本单位，在计算机程序中通常被作为一个整体进行考虑和处理  3.DataItem数据项DataItem数据项：是构成数据元素的不可分割的最小单位。   数据三者之间的关系：数据 &gt; 数据元素  &gt;...</div></div></div></a><a class="pagination-related" href="/2023/02/27/dataStructure/10.%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E6%8E%92%E5%BA%8F/" title="第八章排序"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-27</div><div class="info-item-2">第八章排序</div></div><div class="info-2"><div class="info-item-1">第八章：排序    分类标准 类别1 类别2    按存储介质 内部排序：数据量不大数据在内存，无需内外存交换数据 外部排序：数据量较大数据在外存（文件排序）   按比较器个数 串行排序：单处理机（同一时刻比较一对元素） 并行排序：多处理机（同一时刻比较多对元素）   按主要操作 比较排序：使用比较的方法，包括插入排序、交换排序、选择排序、归并排序 基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置   按辅助空间 原地排序：辅助空间用量为O(1) 非原地排序   按稳定性 稳定排序：使任何数值相等的元素，排序以后相对次序不变 非稳定排序   按自然性 自然排序：输入数据越有序，排序的速度越快 非自然排序    外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 排序稳定性只对结构类型的数据排序有意义，例如student类型 排序方法是否稳定，并不能衡量一个排序算法的优劣  123456//案例中使用的数据结构#define MAXLENGTH 50typedef struct &#123;    int...</div></div></div></a><a class="pagination-related" href="/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/" title="第四章：串与数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第四章：串与数组</div></div><div class="info-2"><div class="info-item-1">第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(&amp;T, S1, S2);    	SubString(&amp;Sub, S, pos, len);    	StrCopy(&amp;T, S);        StrEmpty(S);    	ClearString(&amp;S);    	Index(S, T, pos);//字符串匹配算法        Replace(&amp;S, T, V);    	StrInsert(&amp;S, pos, T);    	StrDelete(&amp;S, pos, len);    	DestroyString(&amp;S);&#125; ADT...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="toc-text">第六章：图（上）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">一、基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9B%BEG%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">1.图G相关概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A1%B6%E7%82%B9V%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">2.顶点V相关概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%BE%B9E%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">3.边E相关的概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AD%90%E5%9B%BEG%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">4.子图G相关概念：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-text">二、图的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%95%B0%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%B3%95AdjacencyMatrix"><span class="toc-text">1.数组表示法AdjacencyMatrix</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%97%A0%E5%90%91%E5%9B%BE%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-text">（1）无向图邻接矩阵表示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%9C%89%E5%90%91%E5%9B%BE%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-text">（2）有向图邻接矩阵表示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%BB%BA%E7%AB%8B%E6%97%A0%E5%90%91%E7%BD%91%E2%98%85"><span class="toc-text">（3）邻接矩阵建立无向网★</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">（4）邻接矩阵表示法分析：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%93%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95AdjacencyList"><span class="toc-text">2.链式表示法AdjacencyList</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%97%A0%E5%90%91%E5%9B%BE%E9%82%BB%E6%8E%A5%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="toc-text">（1）无向图邻接表表示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%9C%89%E5%90%91%E5%9B%BE%E9%82%BB%E6%8E%A5%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="toc-text">（2）有向图邻接表表示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%BB%BA%E7%AB%8B%E6%97%A0%E5%90%91%E5%9B%BE%E2%98%85"><span class="toc-text">（3）邻接表建立无向图★</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E9%82%BB%E6%8E%A5%E8%A1%A8%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">（4）邻接表表示法分析：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%93%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B%EF%BC%9A"><span class="toc-text">3.链式表示法的改进：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8%EF%BC%9A"><span class="toc-text">（1）十字链表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8%EF%BC%9A"><span class="toc-text">（2）邻接多重表：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-text">三、图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2BFS"><span class="toc-text">1.广度优先搜索BFS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89BFS%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="toc-text">（1）BFS思想：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89BFS%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-text">（2）BFS的实现：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">（3）算法分析：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2DFS"><span class="toc-text">2.深度优先搜索DFS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89DFS%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="toc-text">（1）DFS思想：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89DFS%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-text">（2）DFS的实现：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="toc-text">（3）算法分析：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

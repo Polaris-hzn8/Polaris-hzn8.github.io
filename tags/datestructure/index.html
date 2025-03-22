@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tag: datestructure | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="this is a description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Polaris-hzn8">
+<meta property="og:url" content="https://polaris-hzn8.github.io/tags/datestructure/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="this is a description">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="keyword1 keyword2 keyword3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/tags/datestructure/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Tag: datestructure',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'tag'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">datestructure</h1></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA/" title="第一章：绪论">第一章：绪论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T15:08:00.000Z" title="Created 2023-02-28 23:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第一章：绪论 一、基本概念1.Data数据Data数据：是能够输入计算机且能被计算机处理的各种符号的集合。 Data数据包括：  数值型数据：整数、实数 非数值型数据：文字、图像、图形、声音等  2.DataElement数据元素DataElement数据元素（元素&#x2F;记录&#x2F;结点&#x2F;顶点）：是Data数据的基本单位，在计算机程序中通常被作为一个整体进行考虑和处理  3.DataItem数据项DataItem数据项：是构成数据元素的不可分割的最小单位。   数据三者之间的关系：数据 &gt; 数据元素  &gt;...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="第二章：线性表">第二章：线性表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T14:08:00.000Z" title="Created 2023-02-28 22:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第二章：线性表 一、线性表线性表：具有相同特性的数据元素的一个有限序列，数据元素的个数定义为表的长度。 线性表ADT的定义如下： 1234567891011ADT List &#123;    数据对象:    	D = &#123;ai | ai属于Element, (i = 1, 2, ..., n)&#125;    数据关系:    	R = &#123;&lt;ai-1, ai&gt; | ai-1, ai属于D, (i = 1, 2, ..., n)&#125;    基本操作:    	InitList(&amp;L);    	DestroyList(&amp;L);    	ListInsert(&amp;L, i, e);    	ListDelete(&amp;L, i, &amp;e);&#125; ADT...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/3.%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" title="第三章：栈与队列">第三章：栈与队列</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T13:08:00.000Z" title="Created 2023-02-28 21:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第三章：栈与队列 栈Stack和队列是线性表的子集，是限定插入和删除只能在表的端点进行的线性表。 一、顺序栈栈Stack是一个特殊的线性表，限定仅在一端（通常是表尾&#x2F;栈顶）进行插入和删除操作的线性表。 栈的特点：  逻辑结构：与线性表相同 存储结构：用顺序栈或链栈均可，顺序栈更为常见 运算规则：只能在栈顶进行运算，访问结点时按照后进先出的LIFO原则 实现方式：关键在于入栈与出栈函数，具体实现顺序栈与链栈不同。  栈的相关问题：  数制转换 表达式求值 括号匹配的检验 八皇后问题 迷宫求解 函数调用 递归调用的实现 行编辑程序  1.顺序栈（1）顺序栈表示：利用一组地址连续的存储单元依次存放自栈底到栈顶的数据元素，栈底一般在低地址端。  123456#define MAXSIZE 100typedef struct &#123;    SElemType *base;    SElemType *top;    int stackSize;&#125;...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/" title="第四章：串与数组">第四章：串与数组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T12:08:00.000Z" title="Created 2023-02-28 20:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(&amp;T, S1, S2);    	SubString(&amp;Sub, S, pos, len);    	StrCopy(&amp;T, S);        StrEmpty(S);    	ClearString(&amp;S);    	Index(S, T, pos);//字符串匹配算法        Replace(&amp;S, T, V);    	StrInsert(&amp;S, pos, T);    	StrDelete(&amp;S, pos, len);    	DestroyString(&amp;S);&#125; ADT...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/5.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8A%EF%BC%89/" title="第五章：二叉树（上）">第五章：二叉树（上）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T11:08:00.000Z" title="Created 2023-02-28 19:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第五章：BT（上） 一、BT概述1.概念 根结点：非空树中无前驱结点的结点 分支结点：度!=0 非终端结点则称为分支结点 内部结点：除开根节点以外的分支结点称为内部结点 叶子结点：度== 0则称为叶子结点 结点的度：结点有几个孩子（分支） 树的度Degree：树内各节点度的最大值 树的深度&#x2F;高度Depth：树中结点的最大层次   2.T性质： 3.BT性质：   4.特殊二叉树： 二、BT存储结构1.顺序二叉树  实现：按照满二叉树的结点层次编号，用数组依次存放二叉树中的数据元素，结点关系蕴含在元素的存储位置中。 缺点：深度为k的二叉树只有k个结点的单支树需要长度为2k-1的一维数组（存储空间浪费），适于存储满二叉树和完全二叉树。  12345678//顺序存储#define MAXTSIZE 100struct TreeNode &#123;    ElemType value;    bool isEmpty;&#125;;TreeNode SqBiTree[MAXTSIZE];for (int i = 0; i &lt; MAXTSIZE; ++i)...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第五章：二叉树（下）">第五章：二叉树（下）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T10:08:00.000Z" title="Created 2023-02-28 18:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第五章：二叉树（下） 一、树与森林1.树存储结构（1）双亲表示法：实现：定义结构数组存放树的结点，每个结点含两个域（找双亲容易、找孩子难）  数据域：存放结点本身信息 双亲域：指示本结点的双亲结点在数组中的位置。   12345678910#define MAXTSIZE 100typedef struct PTNode &#123;    ElemType data;    int parent;//双亲位置域&#125; PTNode;typedef struct &#123;    PTNode nodes[MAXTSIZE];    int r;//根结点的位置    int n;//结点的个数&#125; PTree;  （2）孩子链表表示法：实现：将每个结点的孩子结点排列用单链表存储，而n个头指针又组成一个线性表用顺序表存储（找孩子容易、找双亲难）  123456789101112131415//孩子结点结构：child + nexttypedef struct CTNode &#123;    int child;    struct CTNode...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/28/dataStructure/7.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/" title="第六章：图（上）">第六章：图（上）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-28T09:08:00.000Z" title="Created 2023-02-28 17:08:00">2023-02-28</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第六章：图（上） 一、基本概念1.图G相关概念：1234Graph = (Vertex, Edge)G = (V, E)//V:顶点（数据元素）的有穷非空集合//E:边的有穷集合   无向图：每条边都是无方向的 有向图：每条边都是有方向的 完全图：任意两个点都有一条边相连 稀疏图：有很少边&#x2F;弧的图 稠密图：有较多边&#x2F;弧的图 网：边&#x2F;弧带有权重的图   2.顶点V相关概念： 邻接：边&#x2F;弧相连的两个顶点之间的关系，例如：(vi, vj)称为vi和vj互为邻接点、&lt;vi, vj&gt;称vi邻接到vj，vj邻接于vi 关联&#x2F;依附：边&#x2F;弧与顶点之间的关系，例如：(vi, vj)&#x2F;&lt;vi,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/27/dataStructure/9.%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%9A%E6%9F%A5%E6%89%BE/" title="第七章：查找">第七章：查找</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-27T07:08:00.000Z" title="Created 2023-02-27 15:08:00">2023-02-27</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第七章：查找  主关键字：可唯一标识记录的关键字 次关键字：用以识别若干记录的关键字 关键字的平均比较次数，平均查找长度ASL（Average Search Length）  $$ASL &#x3D; \sum_{i&#x3D;1}^np_ic_i$$    参数 说明    n 记录的个数   pi 查找到第i个记录的概率   ci 查找到第i个记录所需的比较次数   一、线性表的查找1.顺序查找应用范围：顺序表或线性表表示的静态查找表（表内元素无序） 12345typedef struct &#123;    ElemType *R;//表基址    int length;//表长&#125; SSTable;//Sequential Search TableSSTable ST;//定义顺序表ST    注意到每执行一次循环都要进行两次比较， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/27/dataStructure/8.%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%9B%BE%EF%BC%88%E4%B8%8B%EF%BC%89/" title="第七章：查找">第七章：查找</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-27T07:08:00.000Z" title="Created 2023-02-27 15:08:00">2023-02-27</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第七章：查找  主关键字：可唯一标识记录的关键字 次关键字：用以识别若干记录的关键字 关键字的平均比较次数，平均查找长度ASL（Average Search Length）  $$ASL &#x3D; \sum_{i&#x3D;1}^np_ic_i$$    参数 说明    n 记录的个数   pi 查找到第i个记录的概率   ci 查找到第i个记录所需的比较次数   一、线性表的查找1.顺序查找应用范围：顺序表或线性表表示的静态查找表（表内元素无序） 12345typedef struct &#123;    ElemType *R;//表基址    int length;//表长&#125; SSTable;//Sequential Search TableSSTable ST;//定义顺序表ST    注意到每执行一次循环都要进行两次比较， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/02/27/dataStructure/10.%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E6%8E%92%E5%BA%8F/" title="第八章排序">第八章排序</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-02-27T06:08:00.000Z" title="Created 2023-02-27 14:08:00">2023-02-27</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/datestructure/">datestructure</a></span></div><div class="content">第八章：排序    分类标准 类别1 类别2    按存储介质 内部排序：数据量不大数据在内存，无需内外存交换数据 外部排序：数据量较大数据在外存（文件排序）   按比较器个数 串行排序：单处理机（同一时刻比较一对元素） 并行排序：多处理机（同一时刻比较多对元素）   按主要操作 比较排序：使用比较的方法，包括插入排序、交换排序、选择排序、归并排序 基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置   按辅助空间 原地排序：辅助空间用量为O(1) 非原地排序   按稳定性 稳定排序：使任何数值相等的元素，排序以后相对次序不变 非稳定排序   按自然性 自然排序：输入数据越有序，排序的速度越快 非自然排序    外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 排序稳定性只对结构类型的数据排序有意义，例如student类型 排序方法是否稳定，并不能衡量一个排序算法的优劣  123456//案例中使用的数据结构#define MAXLENGTH 50typedef struct &#123;    int...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/datestructure/" style="font-size: 1.45em; color: rgb(50, 85, 50);">datestructure</a><a href="/tags/operating-system/" style="font-size: 1.15em; color: rgb(190, 132, 78);">operating system</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">15</div></div><div class="webinfo-item"><div class="item-name">Total Word Count :</div><div class="item-count">70.5k</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-03-22T07:50:27.116Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

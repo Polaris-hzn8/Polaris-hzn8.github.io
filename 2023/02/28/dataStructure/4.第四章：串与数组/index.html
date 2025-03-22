@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第四章：串与数组 | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &amp;#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章：串与数组">
+<meta property="og:url" content="https://polaris-hzn8.github.io/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &amp;#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-02-28T12:08:00.000Z">
+<meta property="article:modified_time" content="2025-03-22T03:54:08.585Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="datestructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第四章：串与数组",
+  "url": "https://polaris-hzn8.github.io/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/",
+  "image": "https://avatars.githubusercontent.com/u/70149889",
+  "datePublished": "2023-02-28T12:08:00.000Z",
+  "dateModified": "2025-03-22T03:54:08.585Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Luo Chenhao",
+      "url": "https://polaris-hzn8.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第四章：串与数组',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a><a class="nav-page-title" href="/"><span class="site-name">第四章：串与数组</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第四章：串与数组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-02-28T12:08:00.000Z" title="Created 2023-02-28 20:08:00">2023-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-22T03:54:08.585Z" title="Updated 2025-03-22 11:54:08">2025-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>8mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-22 11:54:08&quot;}" hidden></div><h1 id="第四章：串与数组"><a href="#第四章：串与数组" class="headerlink" title="第四章：串与数组"></a>第四章：串与数组</h1><hr>
+<h3 id="一、串"><a href="#一、串" class="headerlink" title="一、串"></a>一、串</h3><p>String串是指零个or多个任意字符串组成的有限序列。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ADT String &#123;</span><br><span class="line">    数据对象：</span><br><span class="line">    数据关系：</span><br><span class="line">    基本操作：</span><br><span class="line">        <span class="built_in">StrAssign</span>(&amp;T, chars);</span><br><span class="line">        <span class="built_in">StrCompare</span>(S, T);</span><br><span class="line">    	<span class="built_in">StrLength</span>(s);</span><br><span class="line">    	<span class="built_in">Concat</span>(&amp;T, S1, S2);</span><br><span class="line">    	<span class="built_in">SubString</span>(&amp;Sub, S, pos, len);</span><br><span class="line">    	<span class="built_in">StrCopy</span>(&amp;T, S);</span><br><span class="line">        <span class="built_in">StrEmpty</span>(S);</span><br><span class="line">    	<span class="built_in">ClearString</span>(&amp;S);</span><br><span class="line">    	<span class="built_in">Index</span>(S, T, pos);<span class="comment">//字符串匹配算法</span></span><br><span class="line">        <span class="built_in">Replace</span>(&amp;S, T, V);</span><br><span class="line">    	<span class="built_in">StrInsert</span>(&amp;S, pos, T);</span><br><span class="line">    	<span class="built_in">StrDelete</span>(&amp;S, pos, len);</span><br><span class="line">    	<span class="built_in">DestroyString</span>(&amp;S);</span><br><span class="line">&#125; ADT String</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-存储结构："><a href="#1-存储结构：" class="headerlink" title="1.存储结构："></a>1.存储结构：</h4><p>串中元素逻辑关系与线性表相同，串可以采用与线性表相同的存储结构：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423074636654.png" alt="image-20220423074636654"></p>
+<h5 id="（1）顺序串："><a href="#（1）顺序串：" class="headerlink" title="（1）顺序串："></a>（1）顺序串：</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN 255</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</span><br><span class="line">    <span class="type">char</span> ch[MAXLEN + <span class="number">1</span>];<span class="comment">//存储串的一维数组</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//串当前的长度</span></span><br><span class="line">&#125;SString;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）链串："><a href="#（2）链串：" class="headerlink" title="（2）链串："></a>（2）链串：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913083259566.png" alt="image-20220913083259566"></p>
+<p>&#x3D;&#x3D;块链结构&#x3D;&#x3D;对普通的链串进行优化，提高存储密度：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> CHUNKSIZE 80 <span class="comment">//块的大小</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">Chunk</span> &#123;</span><br><span class="line">    <span class="type">char</span> ch[CHUNKSIZE];</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Chunk</span> *next;</span><br><span class="line">&#125;Chunk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    Chunk *head, *tail;<span class="comment">//串的头指针和尾指针</span></span><br><span class="line">    <span class="type">int</span> curlen;<span class="comment">//串的当前长度</span></span><br><span class="line">&#125;LString;<span class="comment">//字符串的块链结构</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：在实际中相较于链串，<font color='#BAOC2F'>顺序串</font>使用更多（对字符串的插入、删除运算较少，顺序结构更利于匹配、查找操作）</p>
+</blockquote>
+<h4 id="2-模式匹配算法："><a href="#2-模式匹配算法：" class="headerlink" title="2.模式匹配算法："></a>2.模式匹配算法：</h4><ul>
+<li>算法目的：确定主串中所含子串（模式串）第一次出现的位置（字符串定位算法）</li>
+<li>算法应用：搜索引擎7拼写检查、语言翻译、数据压缩</li>
+<li>算法种类：Brute-Force算法（经典朴素穷举算法）、KMP算法（速度快）</li>
+</ul>
+<h5 id="（1）BF算法："><a href="#（1）BF算法：" class="headerlink" title="（1）BF算法："></a>（1）BF算法：</h5><p>Btute-Force算法（模式匹配算法）采用了穷举法的思路：从主串的<font color='#BAOC2F'>每一个字符开始</font>依次进行匹配。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913075255943.png" alt="image-20220913075255943"></p>
+<ol>
+<li>将主串的第pos个字符和模式串的第一个字符进行比较</li>
+<li>若相等则继续逐个比较后续的字符</li>
+<li>若不相等则从主串的下一个字符开始，重新与模式串的第一个字符进行比较（回溯<code>j=1</code>、<code>i=i-j+2</code>）</li>
+<li>直到与主串的1个<font color='#BAOC2F'>连续子串字符序列</font>与模式串相等，返回S中与T匹配的子序列第一个字符的序号（匹配成功）</li>
+<li>否则匹配失败返回0</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法1：从主串的第一个位置开始查找</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Index_BF</span><span class="params">(SString S, SString T)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= S.length &amp;&amp; j &lt;= T.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (S.ch[i] == T.ch[j]) &#123;<span class="comment">//主串和子串匹配则加1继续下一个字符</span></span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">//主串和子串不匹配则将指针回溯重新开始下一次匹配</span></span><br><span class="line">            i = i - j + <span class="number">2</span>;</span><br><span class="line">            j = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt;= T.length) &#123;<span class="comment">//返回匹配的第一个字符的下标</span></span><br><span class="line">        <span class="keyword">return</span> i - T.length;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法2：从主串的pos位置开始查找</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Index_BF</span><span class="params">(SString S, SString T, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = pos, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= S.length &amp;&amp; j &lt;= T.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (S.ch[i] == T.ch[j]) &#123;<span class="comment">//主串和子串匹配则加1继续下一个字符</span></span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">//主串和子串不匹配则将指针回溯重新开始下一次匹配</span></span><br><span class="line">            i = i - j + <span class="number">2</span>;</span><br><span class="line">            j = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt;= T.length) &#123;<span class="comment">//返回匹配的第一个字符的下标</span></span><br><span class="line">        <span class="keyword">return</span> i - T.length;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度最好情况为<code>O(m)</code>，</li>
+<li>时间复杂度最差为<code>O(n-m)*m + m</code>，</li>
+<li>时间复杂度平均情况为O<code>(n*m)</code></li>
+</ul>
+<h5 id="（2）KMP算法："><a href="#（2）KMP算法：" class="headerlink" title="（2）KMP算法："></a>（2）KMP算法：</h5><p>KMP算法相较于BF算法中<code>i</code>指针可不必回溯、<code>j</code>指针尽量减少回溯步数，算法时间复杂度可提速到<code>O(n+m)</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913094356218.png" alt="image-20220913094356218"></p>
+<p>定义<code>next[j]</code>函数，用于确定当模式中第<code>j</code>个字符与主串中相应字符<font color='#BAOC2F'>失配</font>时需要回溯的位置，回溯规则如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913095521263.png" alt="image-20220913095521263"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913101650769.png" alt="image-20220913101650769"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Index_KMP</span><span class="params">(SString S, SString T, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = pos, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; S.length &amp;&amp; j &lt; T.legngth) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">0</span> || S.ch[i] == T.ch[j]) &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            j = next[j];<span class="comment">//根据j的值在next表中查找，获取j指针的回溯位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt; T.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> i - T.length;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//next表的计算方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getNext</span><span class="params">(SString T, <span class="type">int</span> &amp;next[])</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; T.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">0</span> || T.ch[i] == T.ch[j]) &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            j = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）KMP算法改进："><a href="#（3）KMP算法改进：" class="headerlink" title="（3）KMP算法改进："></a>（3）KMP算法改进：</h5><p>&#x3D;&#x3D;针对KMP算法中的next函数进行改进&#x3D;&#x3D;：根据next值求出nextval的值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423104107769.png" alt="image-20220423104107769"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423104125226.png" alt="image-20220423104125226"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Index_KMP</span><span class="params">(SString S, SString T, <span class="type">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = pos, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; S.length &amp;&amp; j &lt; T.legngth) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">0</span> || S.ch[i] == T.ch[j]) &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            j = next[j];<span class="comment">//根据j的值在next表中查找，获取j指针的回溯位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt; T.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> i - T.length;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//next表的计算方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getNext</span><span class="params">(SString T, <span class="type">int</span> &amp;next[])</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; T.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">0</span> || T.ch[i] == T.ch[j]) &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">            <span class="keyword">if</span> (T.ch[i] != T.ch[j]) nextval[i] = j;</span><br><span class="line">            <span class="keyword">else</span> nextval[i] = nextval[j];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            j = nextval[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-应用病毒感染检测："><a href="#3-应用病毒感染检测：" class="headerlink" title="3.应用病毒感染检测："></a>3.应用病毒感染检测：</h4><p>研究者将人的DNA和病毒DNA均表示成由一些字幕组成的字符串序列，</p>
+<p>然后检测某种病毒DNA序列是否在患者的DNA序列中出现过（如果出现过则此人感染了病毒，否则没有感染病毒）</p>
+<blockquote>
+<p>注意：人的DNA序列式线性的，而病毒的DNA序列是环状的</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220913104409322.png" alt="image-20220913104409322"></p>
+<ul>
+<li>病毒感染检测：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Linux518/article/details/119120547">https://blog.csdn.net/Linux518/article/details/119120547</a></li>
+</ul>
+<ol>
+<li>对于每一个待检测的任务假设病毒DNA序列的长度为m，因为病毒DNA序列是环状的，为了取到每个可行的长度为m的模式串可将存储病毒DNA序列的字符串长度扩大为2m（将病毒DNA序列连续存储两次）</li>
+<li>然后循环m次，依次取得每个长度为m的环状字符串，将该字符串作为模式串、人的DNA序列作为主串，调用BF算法进行模式匹配</li>
+<li>只要匹配成功既可终止循环，表明该人感染了对应的病毒，否则循环m次结束循环。</li>
+</ol>
+<h3 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h3><h4 id="1-数组定义："><a href="#1-数组定义：" class="headerlink" title="1.数组定义："></a>1.数组定义：</h4><p>数组：按照一定格式排列起来的，<font color='#BAOC2F'>具有相同类型</font>的数据元素的集合。</p>
+<ul>
+<li>一维数组：若线性表中的数据元素为<font color='#BAOC2F'>非结构的简单元素</font>，则称为一维数组（定长的线性表）。</li>
+<li>二维数组：若一维数组中的元素又是一个一维数组结构，则称为二维数组。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220914162819207.png" alt="image-20220914162819207"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> array[m][n];</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> array1[n];</span><br><span class="line"><span class="keyword">typedef</span> array1 array2[m];<span class="comment">//m行n列的二维数组</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>三维数组：若二维数组中的元素又是一个一维数组，则称作三维数组。</li>
+</ul>
+<h4 id="2-数组存储结构："><a href="#2-数组存储结构：" class="headerlink" title="2.数组存储结构："></a>2.数组存储结构：</h4><p>由于数组结构固定维数与界数基本不变且一般不作插入删除操作，所以很少采用链式存储结构（常采用顺序存储结构表示数组）。</p>
+<p>因此在存储数组结构之前，需要解决将<font color='#BAOC2F'>多维关系映射到一维关系</font>的问题。</p>
+<h5 id="（1）一维数组："><a href="#（1）一维数组：" class="headerlink" title="（1）一维数组："></a>（1）一维数组：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915082825923.png" alt="image-20220915082825923"></p>
+<h5 id="（2）二维数组："><a href="#（2）二维数组：" class="headerlink" title="（2）二维数组："></a>（2）二维数组：</h5><p>二维数组有两种顺序存储方式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915082210543.png" alt="image-20220915082210543"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915082624667.png" alt="image-20220915082624667"></p>
+<p>&#x3D;&#x3D;以行序为主序的顺序存储&#x3D;&#x3D;：</p>
+<p>设数组存储位置<code>LOC(0,0)</code>每个元素需要L个存储单元，则<code>a[i][j]</code>的存储位置为<code>LOC(i,j)=LOC(0,0)+(n*i+j)*L</code></p>
+<h5 id="（3）三维数组："><a href="#（3）三维数组：" class="headerlink" title="（3）三维数组："></a>（3）三维数组：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423113215415.png" alt="image-20220423113215415"></p>
+<p>&#x3D;&#x3D;页优先的顺序存储&#x3D;&#x3D;：</p>
+<p>设数组存储位置<code>LOC(0,0,0)</code>每个元素需要L个存储单元，且各维元素的个数为m1,m2,m3</p>
+<p>则<code>a[i][j][k]</code>的存储位置为<code>LOC(i,j,k)=a + i*m2*m3 + j*m3 + k;</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915083627613.png" alt="image-20220915083627613"></p>
+<h4 id="3-特殊矩阵的压缩存储"><a href="#3-特殊矩阵的压缩存储" class="headerlink" title="3.特殊矩阵的压缩存储"></a>3.特殊矩阵的压缩存储</h4><h5 id="（1）对称矩阵："><a href="#（1）对称矩阵：" class="headerlink" title="（1）对称矩阵："></a>（1）对称矩阵：</h5><p>存储方式：只存储上or下三角（包括主对角线）的数据元素，以<font color='#BAOC2F'>行序为主序</font>将元素存放在一维数组<code>arr[n(n+1)/2]</code>中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915085704481.png" alt="image-20220915085704481"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915090002956.png" alt="image-20220915090002956"></p>
+<h5 id="（2）三角矩阵："><a href="#（2）三角矩阵：" class="headerlink" title="（2）三角矩阵："></a>（2）三角矩阵：</h5><p>存储方法：重复的元素常数c可以共享一个元素存储空间，占用<code>n(n+1)/2+1</code>个空间</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915090255224.png" alt="image-20220915090255224"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915090419196.png" alt="image-20220915090419196"></p>
+<h5 id="（3）对角矩阵："><a href="#（3）对角矩阵：" class="headerlink" title="（3）对角矩阵："></a>（3）对角矩阵：</h5><p>存储方式：以对角线的顺序存储</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915090744329.png" alt="image-20220915090744329"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915090818814.png" alt="image-20220915090818814"></p>
+<h5 id="（4）稀疏矩阵："><a href="#（4）稀疏矩阵：" class="headerlink" title="（4）稀疏矩阵："></a>（4）稀疏矩阵：</h5><p>定义：在n行m列的矩阵中有t个非零元素，当<code>t/m*n) ≤ 0.05</code>时称为该矩阵为稀疏矩阵。</p>
+<p>存储方式：只存储各个<font color='#BAOC2F'>非零元素的值</font>、<font color='#BAOC2F'>行列位置</font>和矩阵的行列数，三元组的<font color='#BAOC2F'>不同表示方法</font>可决定稀疏矩阵<font color='#BAOC2F'>不同的压缩存储方法</font>。</p>
+<p>&#x3D;&#x3D;顺序存储结构&#x3D;&#x3D;：三元组存储</p>
+<ul>
+<li>三元组顺序表的优点：非零元素在表中<font color='#BAOC2F'>按行序有序存储</font>，因此便于进行按行顺序处理的<font color='#BAOC2F'>矩阵运算</font>。</li>
+<li>三元组顺序表的缺点：<font color='#BAOC2F'>不能随机存储</font>。若按行号存取某一行中的非零元素，则需要从头开始进行查找。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423122249443.png" alt="image-20220423122249443"></p>
+<p>&#x3D;&#x3D;链式存储结构&#x3D;&#x3D;：十字链表存储</p>
+<p>在十字链表中矩阵的每1个非零元素用1个结点表示，结点除了<code>(row, col, value)</code>以外，还需要两个域：</p>
+<ul>
+<li>right：用于链接同一行中的下一个非零元素</li>
+<li>down：用于链接同一列中的下一个非零元素</li>
+<li>链式存储结构的优点：能够<font color='#BAOC2F'>灵活的插入</font>因运算而产生的新的非零元素，<font color='#BAOC2F'>删除</font>因运算而产生的新的零元素，实现矩阵的各种运算。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220915091830639.png" alt="image-20220915091830639"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423152025118.png" alt="image-20220423152025118"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220423152137937.png" alt="image-20220423152137937"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/">https://polaris-hzn8.github.io/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/datestructure/">datestructure</a></div><div class="post-share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/02/28/dataStructure/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA/" title="第一章：绪论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第一章：绪论</div></div><div class="info-2"><div class="info-item-1">第一章：绪论 一、基本概念1.Data数据Data数据：是能够输入计算机且能被计算机处理的各种符号的集合。 Data数据包括：  数值型数据：整数、实数 非数值型数据：文字、图像、图形、声音等  2.DataElement数据元素DataElement数据元素（元素&#x2F;记录&#x2F;结点&#x2F;顶点）：是Data数据的基本单位，在计算机程序中通常被作为一个整体进行考虑和处理  3.DataItem数据项DataItem数据项：是构成数据元素的不可分割的最小单位。   数据三者之间的关系：数据 &gt; 数据元素  &gt;...</div></div></div></a><a class="pagination-related" href="/2023/02/27/dataStructure/10.%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E6%8E%92%E5%BA%8F/" title="第八章排序"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-27</div><div class="info-item-2">第八章排序</div></div><div class="info-2"><div class="info-item-1">第八章：排序    分类标准 类别1 类别2    按存储介质 内部排序：数据量不大数据在内存，无需内外存交换数据 外部排序：数据量较大数据在外存（文件排序）   按比较器个数 串行排序：单处理机（同一时刻比较一对元素） 并行排序：多处理机（同一时刻比较多对元素）   按主要操作 比较排序：使用比较的方法，包括插入排序、交换排序、选择排序、归并排序 基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置   按辅助空间 原地排序：辅助空间用量为O(1) 非原地排序   按稳定性 稳定排序：使任何数值相等的元素，排序以后相对次序不变 非稳定排序   按自然性 自然排序：输入数据越有序，排序的速度越快 非自然排序    外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 排序稳定性只对结构类型的数据排序有意义，例如student类型 排序方法是否稳定，并不能衡量一个排序算法的优劣  123456//案例中使用的数据结构#define MAXLENGTH 50typedef struct &#123;    int...</div></div></div></a><a class="pagination-related" href="/2023/02/28/dataStructure/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="第二章：线性表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第二章：线性表</div></div><div class="info-2"><div class="info-item-1">第二章：线性表 一、线性表线性表：具有相同特性的数据元素的一个有限序列，数据元素的个数定义为表的长度。 线性表ADT的定义如下： 1234567891011ADT List &#123;    数据对象:    	D = &#123;ai | ai属于Element, (i = 1, 2, ..., n)&#125;    数据关系:    	R = &#123;&lt;ai-1, ai&gt; | ai-1, ai属于D, (i = 1, 2, ..., n)&#125;    基本操作:    	InitList(&amp;L);    	DestroyList(&amp;L);    	ListInsert(&amp;L, i, e);    	ListDelete(&amp;L, i, &amp;e);&#125; ADT...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84"><span class="toc-text">第四章：串与数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%B2"><span class="toc-text">一、串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-text">1.存储结构：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%A1%BA%E5%BA%8F%E4%B8%B2%EF%BC%9A"><span class="toc-text">（1）顺序串：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E9%93%BE%E4%B8%B2%EF%BC%9A"><span class="toc-text">（2）链串：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-text">2.模式匹配算法：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89BF%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-text">（1）BF算法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89KMP%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-text">（2）KMP算法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89KMP%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%EF%BC%9A"><span class="toc-text">（3）KMP算法改进：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%BA%94%E7%94%A8%E7%97%85%E6%AF%92%E6%84%9F%E6%9F%93%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="toc-text">3.应用病毒感染检测：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E7%BB%84"><span class="toc-text">二、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%95%B0%E7%BB%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-text">1.数组定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-text">2.数组存储结构：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%9A"><span class="toc-text">（1）一维数组：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%9A"><span class="toc-text">（2）二维数组：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%B8%89%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%9A"><span class="toc-text">（3）三维数组：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-text">3.特殊矩阵的压缩存储</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="toc-text">（1）对称矩阵：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="toc-text">（2）三角矩阵：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="toc-text">（3）对角矩阵：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="toc-text">（4）稀疏矩阵：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

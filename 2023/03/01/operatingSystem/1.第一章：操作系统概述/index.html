@@ -1,0 +1,460 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第一章：操作系统概述 | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一章：操作系统概述 一、基本概念1.OS的概念：操作系统是指满足以下特征的程序的集合。  控制和管理整个计算机系统的硬件和软件资源（OS是系统资源的管理者） 并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境（向上层提供方便易用的服务）  2.OS的特征（1）并发Concurrence：并发：指两个&#x2F;多个事件在同一时间间隔内发生（宏观上是同时发生、微观上是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章：操作系统概述">
+<meta property="og:url" content="https://polaris-hzn8.github.io/2023/03/01/operatingSystem/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="第一章：操作系统概述 一、基本概念1.OS的概念：操作系统是指满足以下特征的程序的集合。  控制和管理整个计算机系统的硬件和软件资源（OS是系统资源的管理者） 并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境（向上层提供方便易用的服务）  2.OS的特征（1）并发Concurrence：并发：指两个&#x2F;多个事件在同一时间间隔内发生（宏观上是同时发生、微观上是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-03-01T04:08:00.000Z">
+<meta property="article:modified_time" content="2025-03-22T03:54:09.317Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="operating system">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第一章：操作系统概述",
+  "url": "https://polaris-hzn8.github.io/2023/03/01/operatingSystem/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/",
+  "image": "https://avatars.githubusercontent.com/u/70149889",
+  "datePublished": "2023-03-01T04:08:00.000Z",
+  "dateModified": "2025-03-22T03:54:09.317Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Luo Chenhao",
+      "url": "https://polaris-hzn8.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/2023/03/01/operatingSystem/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第一章：操作系统概述',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a><a class="nav-page-title" href="/"><span class="site-name">第一章：操作系统概述</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第一章：操作系统概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-01T04:08:00.000Z" title="Created 2023-03-01 12:08:00">2023-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-22T03:54:09.317Z" title="Updated 2025-03-22 11:54:09">2025-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>8mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-22 11:54:09&quot;}" hidden></div><h1 id="第一章：操作系统概述"><a href="#第一章：操作系统概述" class="headerlink" title="第一章：操作系统概述"></a>第一章：操作系统概述</h1><hr>
+<h3 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h3><h4 id="1-OS的概念："><a href="#1-OS的概念：" class="headerlink" title="1.OS的概念："></a>1.OS的概念：</h4><p>操作系统是指满足以下特征的<font color='#BAOC2F'>程序的集合</font>。</p>
+<ul>
+<li><font color='#BAOC2F'>控制和管理</font>整个计算机系统的<font color='#BAOC2F'>硬件和软件资源</font>（OS是系统资源的管理者）</li>
+<li>并合理地<font color='#BAOC2F'>组织调度</font>计算机的<font color='#BAOC2F'>工作和资源的分配</font>，以提供给用户和其他软件方便的接口和环境（向上层提供方便易用的服务）</li>
+</ul>
+<h4 id="2-OS的特征"><a href="#2-OS的特征" class="headerlink" title="2.OS的特征"></a>2.OS的特征</h4><h5 id="（1）并发Concurrence："><a href="#（1）并发Concurrence：" class="headerlink" title="（1）并发Concurrence："></a>（1）并发Concurrence：</h5><p>并发：指两个&#x2F;多个事件在<font color='#BAOC2F'>同一时间间隔内</font>发生（宏观上是同时发生、微观上是交替发生）</p>
+<p>OS并发性：计算机系统中同时运行着多个程序，这些程序宏观上同时运行的微观上看是交替运行的。</p>
+<blockquote>
+<ol>
+<li>操作系统的并发与共享是<font color='#BAOC2F'>两个最基本的特征</font>，二者<font color='#BAOC2F'>互为存在条件</font>。</li>
+<li>操作系统就是伴随着多道程序技术而出现的，因此<font color='#BAOC2F'>操作系统和程序并发是一起诞生</font>的。</li>
+</ol>
+</blockquote>
+<h5 id="（2）共享Sharing："><a href="#（2）共享Sharing：" class="headerlink" title="（2）共享Sharing："></a>（2）共享Sharing：</h5><p>共享：即资源共享，是指<font color='#BAOC2F'>系统中的资源</font>可供<font color='#BAOC2F'>内存中的多个并发执行的进程</font>共同使用。</p>
+<p><mark>两种资源共享的方式</mark>：</p>
+<ul>
+<li>互斥共享：系统中的某些资源，虽然可以提供给多个进程使用，但<font color='#BAOC2F'>1个时间段只能允许1个进程</font>访问。</li>
+<li>同时共享：系统中的某些资源，允许<font color='#BAOC2F'>1个时间段内由多个进程</font>同时访问</li>
+</ul>
+<h5 id="（3）虚拟Virtual："><a href="#（3）虚拟Virtual：" class="headerlink" title="（3）虚拟Virtual："></a>（3）虚拟Virtual：</h5><p>虚拟：将物理上的实体变为若干个逻辑上的对应实体（物理实体是实际存在的，而逻辑上对应的实体则是用户感受到的）。</p>
+<p><mark>操作系统中的虚拟技术</mark>包括：虚拟处理器、虚拟内存、虚拟外部设备等</p>
+<ol>
+<li>虚拟处理器：通过多道程序设计技术、采用多道程序并发执行的方式，来分时使用一个处理器（时分复用技术）</li>
+<li>虚拟存储器：采用虚拟存储技术、将物理存储器变为虚拟存储器，实现逻辑上扩充存储器的容量（空分复用技术）</li>
+<li>虚拟外部设备：</li>
+</ol>
+<blockquote>
+<p>注：如果失去了并发性1个时间段内只需运行1到程序，则失去了实现虚拟性的意义（没有并发性就谈不上虚拟性）。</p>
+</blockquote>
+<h5 id="（4）异步Asynchronism："><a href="#（4）异步Asynchronism：" class="headerlink" title="（4）异步Asynchronism："></a>（4）异步Asynchronism：</h5><p>异步：在多道程序环境下允许多个程序并发执行，但由于资源有限进程的执行不是一贯到底的。</p>
+<blockquote>
+<p>注：如果失去了并发性系统只能串行地运行各个程序，每个程序的执行就会一贯到底（拥有并发性才有可能导致异步性）。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220824231808418.png" alt="image-20220824231808418"></p>
+<h4 id="3-OS的功能："><a href="#3-OS的功能：" class="headerlink" title="3.OS的功能："></a>3.OS的功能：</h4><h5 id="（1）作为系统资源管理者："><a href="#（1）作为系统资源管理者：" class="headerlink" title="（1）作为系统资源管理者："></a>（1）作为系统资源管理者：</h5><p>操作系统作为系统资源的管理者，应具有以下几方面的功能：处理机管理、存储器管理、文件管理和设备管理。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220824234321892.png" alt="image-20220824234321892"></p>
+<h5 id="（2）作为用户与硬件系统之间的接口："><a href="#（2）作为用户与硬件系统之间的接口：" class="headerlink" title="（2）作为用户与硬件系统之间的接口："></a>（2）作为用户与硬件系统之间的接口：</h5><p>为了方便用户使用操作系统，操作系统还必须向用户提供接口。</p>
+<p>封装思想：将<font color='#BAOC2F'>底层的硬件功能</font>封装成易用的服务，用户能更方便地使用计算机，而无需关心底层硬件原理。</p>
+<ul>
+<li>联机命令接口：交互式命令接口（cmd命令行）</li>
+<li>脱机命令接口：批处理命令接口（bat批处理文件）</li>
+<li>程序接口：可以在程序中<font color='#BAOC2F'>进行系统调用</font>来使用程序接口，普通用户不能直接使用程序接口，只能通过<font color='#BAOC2F'>程序代码间接使用</font>。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220824233656220.png" alt="image-20220824233656220"></p>
+<h5 id="（3）实现对计算机资源的扩展："><a href="#（3）实现对计算机资源的扩展：" class="headerlink" title="（3）实现对计算机资源的扩展："></a>（3）实现对计算机资源的扩展：</h5><p>操作系统可用来扩充机器，以提供更方便的服务、更高的资源利用率。</p>
+<p>没有任何软件支持的计算机成为裸机。在裸机上安装的操作系统可以提供资源管理功能和方便用户的服务功能。通常把覆盖了软件的机器成为扩充机器，又称之为虚拟机。</p>
+<h3 id="二、发展与分类"><a href="#二、发展与分类" class="headerlink" title="二、发展与分类"></a>二、发展与分类</h3><h4 id="1-手工操作阶段"><a href="#1-手工操作阶段" class="headerlink" title="1.手工操作阶段"></a>1.手工操作阶段</h4><p>用户独占全机、人机速度矛盾导致资源的利用率极低</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220824233102819.png" alt="image-20220824233102819"></p>
+<h4 id="2-批处理阶段"><a href="#2-批处理阶段" class="headerlink" title="2.批处理阶段"></a>2.批处理阶段</h4><h5 id="（1）单道批处理系统："><a href="#（1）单道批处理系统：" class="headerlink" title="（1）单道批处理系统："></a>（1）单道批处理系统：</h5><p>引入脱机输入&#x2F;输出技术（外围机+磁带实现），并由<font color='#BAOC2F'>监督程序</font>负责控制作业的输入、输出。</p>
+<table>
+<thead>
+<tr>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">单道批处理系统缓解了一定程度的人机速度矛盾，资源利用率有所提升。</td>
+<td align="center">资源利用率依然很低</td>
+</tr>
+</tbody></table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220824233254854.png" alt="image-20220824233254854"></p>
+<h5 id="（2）多道批处理系统（OS-debut）："><a href="#（2）多道批处理系统（OS-debut）：" class="headerlink" title="（2）多道批处理系统（OS debut）："></a>（2）多道批处理系统（OS debut）：</h5><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>多道程序并发执行，</td>
+<td>用户响应时间长没有人机交互功能</td>
+</tr>
+<tr>
+<td>共享计算机资源（资源利用率提升）CPU和其他资源更能<font color='#BAOC2F'>保持忙碌状态</font>，<font color='#BAOC2F'>系统吞吐量增大</font>。</td>
+<td>用户提交自己的作业后就只能等待，中间不能控制自己作业的执行</td>
+</tr>
+</tbody></table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220704153403136.png" alt="image-20220704153403136"></p>
+<h4 id="3-分时操作系统"><a href="#3-分时操作系统" class="headerlink" title="3.分时操作系统"></a>3.分时操作系统</h4><p>分时操作系统：计算机以<font color='#BAOC2F'>时间片</font>为单位<font color='#BAOC2F'>轮流为各个用户&#x2F;作业服务</font>，各个用户可通过终端与计算机进行交互。</p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户的请求<font color='#BAOC2F'>可以被即使响应</font>，解决了人机交互问题。</td>
+<td><font color='#BAOC2F'>不能优先处理一些紧急的任务</font></td>
+</tr>
+<tr>
+<td>允许多个用户同时使用一台计算机，并且用户对计算机的操作相互独立，感受不到其他人的存在。</td>
+<td>操作系统对各个用户&#x2F;作业都是完全公平的，循环地为每个用户&#x2F;作业服务一个时间片。</td>
+</tr>
+</tbody></table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220704154053071.png" alt="image-20220704154053071"></p>
+<h4 id="4-实时操作系统"><a href="#4-实时操作系统" class="headerlink" title="4.实时操作系统"></a>4.实时操作系统</h4><p>在实时操作系统的控制下，计算机系统接收到外部信号后及时进行处理，并且要求在严格的时限内处理完事件。</p>
+<ul>
+<li>优点：能够优先响应一些紧急任务，某些紧急任务不需时间片排队（及时性、可靠性）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220704155007551.png" alt="image-20220704155007551"></p>
+<h3 id="三、运行环境"><a href="#三、运行环境" class="headerlink" title="三、运行环境"></a>三、运行环境</h3><h4 id="1-处理器运行机制"><a href="#1-处理器运行机制" class="headerlink" title="1.处理器运行机制"></a>1.处理器运行机制</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705154600363.png" alt="image-20220705154600363"></p>
+<p><mark>内核态与用户态</mark>：</p>
+<ul>
+<li>特权指令：指不允许用户直接使用的指令，如IO指令、置中断指令、存取用于内存保护的寄存器的等的指令</li>
+<li>非特权指令：指允许用户直接使用的指令，指令不能访问系统中的软硬件资源、仅限于访问用户的地址空间</li>
+<li>内核态（管态）：说明正在运行的是内核程序，此时可以执行特权指令</li>
+<li>用户态（目态）：说明正在运行的是应用程序，此时只能执行非特权指令</li>
+</ul>
+<blockquote>
+<p>注：CPU中有一个程序状态字寄存器PSW，其中有1个二进制位用于记录表示CPU目前处于的状态（内核态1、用户态0）</p>
+</blockquote>
+<p><mark>内核态用户态间的切换</mark>：</p>
+<ul>
+<li>内核态切换为用户态：执行一条特权指令修改PSW标志位为用户态，该动作意味着<font color='#BAOC2F'>操作系统将主动让出CPU使用权</font>。</li>
+<li>用户态切换为内核态：由<font color='#BAOC2F'>中断引发</font>硬件自动完成变态过程，触发中断信号意味着<font color='#BAOC2F'>操作系统将强行夺回CPU使用权</font>。</li>
+</ul>
+<blockquote>
+<p>注：除了非法使用特权指令之外还有很多事件会触发中断信号，但凡<font color='#BAOC2F'>需要操作系统介入</font>之处都会触发中断信号。</p>
+</blockquote>
+<h4 id="2-中断和异常"><a href="#2-中断和异常" class="headerlink" title="2.中断和异常"></a>2.中断和异常</h4><h5 id="（1）中断和异常概念："><a href="#（1）中断和异常概念：" class="headerlink" title="（1）中断和异常概念："></a>（1）中断和异常概念：</h5><blockquote>
+<p>注：中断是让操作系统内核夺回CPU使用权的唯一途径</p>
+</blockquote>
+<ul>
+<li>中断&#x2F;外中断：与当前执行的指令无关（中断信号来自CPU外部），常用于信息IO。如设备发出的IO结束中断、时钟中断。</li>
+<li>异常&#x2F;内中断：与当前执行的指令有关（中断信号来自CPU内部），如程序的非法操作码、地址越界、运算溢出、虚拟系统缺页。</li>
+</ul>
+<p><mark>中断的分类</mark>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705160537503.png" alt="image-20220705160537503"></p>
+<ol>
+<li>可屏蔽中断INTR，通过改变屏蔽字可以实现多重中断，从而使中断处理更加灵活。</li>
+<li>不可屏蔽中断NMI，通过是紧急的硬件故障，如电源掉电（异常不能被屏蔽）。</li>
+<li>故障Fault：由指令执行引起的异常，如非法操作码、缺页故障、除数为0、运算溢出等。</li>
+<li>自陷Trap：是一种实现安排的异常事件，用于在用户态下<font color='#BAOC2F'>调用操作系统内核程序</font>（主动将CPU控制权还给内核），如条件陷阱指令</li>
+<li>终止Abort：是指出现了使得CPU无法继续执行的<font color='#BAOC2F'>硬件故障</font>，如控制器出错、存储器校验错误等</li>
+</ol>
+<h5 id="（2）中断处理的过程："><a href="#（2）中断处理的过程：" class="headerlink" title="（2）中断处理的过程："></a>（2）中断处理的过程：</h5><p>不同的中断信号，需要用不同的中断处理程序来处理。</p>
+<p>当CPU检测到中断信号后，会根据中断信号的类型去查询中断向量表，以此来找到<font color='#BAOC2F'>相应的中断处理程序</font>在内存中的位置。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705163021349.png" alt="image-20220705163021349"></p>
+<h4 id="3-系统调用"><a href="#3-系统调用" class="headerlink" title="3.系统调用"></a>3.系统调用</h4><h5 id="（1）系统调用："><a href="#（1）系统调用：" class="headerlink" title="（1）系统调用："></a>（1）系统调用：</h5><p>OS作为用户和硬件间的接口，需要向上层提供服务主要包括命令接口和程序接口。其中程序接口由一组系统调用组成。</p>
+<p>系统调用可以通过操作系统，提供给应用程序使用的接口（可理解为可供应用程序调用的特殊函数）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705181815304.png" alt="image-20220705181815304"></p>
+<h5 id="（2）系统调用过程："><a href="#（2）系统调用过程：" class="headerlink" title="（2）系统调用过程："></a>（2）系统调用过程：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705231804043.png" alt="image-20220705231804043"></p>
+<ol>
+<li>陷入指令是<font color='#BAOC2F'>在用户态执行</font>的，执行陷入指令之后会立即引发一个内中断，使CPU进入核心态。</li>
+<li>发出系统调用<font color='#BAOC2F'>请求是在用户态</font>，而对系统调用的相应处理在核心态下进行。</li>
+</ol>
+<h3 id="四、体系结构"><a href="#四、体系结构" class="headerlink" title="四、体系结构"></a>四、体系结构</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20221119163117839.png" alt="image-20221119163117839"></p>
+<h4 id="1-大内核-x2F-微内核"><a href="#1-大内核-x2F-微内核" class="headerlink" title="1.大内核&#x2F;微内核"></a>1.大内核&#x2F;微内核</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705232540293.png" alt="image-20220705232540293"></p>
+<table>
+<thead>
+<tr>
+<th>大内核</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>概念</td>
+<td>将操作系统的主要功能模块都作为系统内核，运行在核心态</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>高性能</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>内核代码庞大、结构混乱难以维护</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>微内核</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>概念</td>
+<td>只把最基本的功能保留在内核中</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>内核功能少、结构清晰便于维护</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>需要频繁的在核心态与用户态之间切换，性能较低</td>
+</tr>
+</tbody></table>
+<ol>
+<li>操作系统的内核需要运行在内核态，非内核功能运行在用户态</li>
+<li>典型的大内核OS：Linux、UNXI、</li>
+<li>典型的微内核OS：Window NT</li>
+</ol>
+<h4 id="2-分层结构-x2F-模块化-x2F-外核"><a href="#2-分层结构-x2F-模块化-x2F-外核" class="headerlink" title="2.分层结构&#x2F;模块化&#x2F;外核"></a>2.分层结构&#x2F;模块化&#x2F;外核</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220705233443859.png" alt="image-20220705233443859"></p>
+<h3 id="五、操作系统引导"><a href="#五、操作系统引导" class="headerlink" title="五、操作系统引导"></a>五、操作系统引导</h3><p>操作系统引导是指计算机利用CPU运行特定程序，通过识别硬盘分区、分区上的操作系统、最后通过程序启动操作系统的过程。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220706002301850.png" alt="image-20220706002301850"></p>
+<ul>
+<li>Step1：CPU从一个特定主存地址开始取指令，执行<font color='#BAOC2F'>ROM中的引导程序</font>（先进行硬件自检、再开机）</li>
+<li>Step2：将磁盘的第一块（主引导记录）读入内存，执行磁盘引导程序扫描分区表</li>
+<li>Step3：从活动分区（主分区OS安装分区）读入分区引导记录，执行其中的程序</li>
+<li>Step4：从根目录下找<font color='#BAOC2F'>完整的操作系统初始化程序</font>并执行，完成开机一系列动作</li>
+</ul>
+<h3 id="六、虚拟机"><a href="#六、虚拟机" class="headerlink" title="六、虚拟机"></a>六、虚拟机</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220706002733308.png" alt="image-20220706002733308"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/operatingSystem/image-20220706002838243.png" alt="image-20220706002838243"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io/2023/03/01/operatingSystem/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">https://polaris-hzn8.github.io/2023/03/01/operatingSystem/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/operating-system/">operating system</a></div><div class="post-share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/03/01/operatingSystem/2.%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" title="第二章：进程管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="info-item-2">第二章：进程管理</div></div><div class="info-2"><div class="info-item-1">第二章：进程管理 一、进程与线程1.进程概述 （1）进程PCB：进程是进程实体的运行过程，是系统进行资源分配和调度的一个单位。    概念 说明    程序 是指静态的存放在磁盘里、的可执行的文件，实际上为一系列的指令集合   进程 是指动态的、程序的一次执行过程    一个程序可以同时创建多个进程，当进程被创建时操作系统会为该进程分配唯一不重复的身份证号PID。 PCB是进程存在的唯一标志，当进程被创建时系统会为其创建PCB，结束时会收回其PCB。   这些信息都将被保存在一个数据结构PCB（Process Control...</div></div></div></a><a class="pagination-related" href="/2023/03/01/operatingSystem/3.%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="第三章：内存管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="info-item-2">第三章：内存管理</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2023/03/01/operatingSystem/5.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9AIO%E7%AE%A1%E7%90%86/" title="第五章：IO管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="info-item-2">第五章：IO管理</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-text">第一章：操作系统概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">一、基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-OS%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">1.OS的概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-OS%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-text">2.OS的特征</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%B9%B6%E5%8F%91Concurrence%EF%BC%9A"><span class="toc-text">（1）并发Concurrence：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%85%B1%E4%BA%ABSharing%EF%BC%9A"><span class="toc-text">（2）共享Sharing：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%99%9A%E6%8B%9FVirtual%EF%BC%9A"><span class="toc-text">（3）虚拟Virtual：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%BC%82%E6%AD%A5Asynchronism%EF%BC%9A"><span class="toc-text">（4）异步Asynchronism：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-OS%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-text">3.OS的功能：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%BD%9C%E4%B8%BA%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E8%80%85%EF%BC%9A"><span class="toc-text">（1）作为系统资源管理者：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BD%9C%E4%B8%BA%E7%94%A8%E6%88%B7%E4%B8%8E%E7%A1%AC%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="toc-text">（2）作为用户与硬件系统之间的接口：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%B5%84%E6%BA%90%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="toc-text">（3）实现对计算机资源的扩展：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8F%91%E5%B1%95%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-text">二、发展与分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%89%8B%E5%B7%A5%E6%93%8D%E4%BD%9C%E9%98%B6%E6%AE%B5"><span class="toc-text">1.手工操作阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%89%B9%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-text">2.批处理阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8D%95%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="toc-text">（1）单道批处理系统：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%A4%9A%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88OS-debut%EF%BC%89%EF%BC%9A"><span class="toc-text">（2）多道批处理系统（OS debut）：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%88%86%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">3.分时操作系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.实时操作系统</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-text">三、运行环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">1.处理器运行机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8"><span class="toc-text">2.中断和异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-text">（1）中断和异常概念：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-text">（2）中断处理的过程：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">3.系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%EF%BC%9A"><span class="toc-text">（1）系统调用：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-text">（2）系统调用过程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">四、体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A4%A7%E5%86%85%E6%A0%B8-x2F-%E5%BE%AE%E5%86%85%E6%A0%B8"><span class="toc-text">1.大内核&#x2F;微内核</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84-x2F-%E6%A8%A1%E5%9D%97%E5%8C%96-x2F-%E5%A4%96%E6%A0%B8"><span class="toc-text">2.分层结构&#x2F;模块化&#x2F;外核</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="toc-text">五、操作系统引导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">六、虚拟机</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

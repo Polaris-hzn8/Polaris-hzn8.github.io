@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第五章：二叉树（下） | Polaris-hzn8</title><meta name="author" content="Luo Chenhao"><meta name="copyright" content="Luo Chenhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第五章：二叉树（下） 一、树与森林1.树存储结构（1）双亲表示法：实现：定义结构数组存放树的结点，每个结点含两个域（找双亲容易、找孩子难）  数据域：存放结点本身信息 双亲域：指示本结点的双亲结点在数组中的位置。   12345678910#define MAXTSIZE 100typedef struct PTNode &amp;#123;    ElemType data;    int parent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章：二叉树（下）">
+<meta property="og:url" content="https://polaris-hzn8.github.io/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Polaris-hzn8">
+<meta property="og:description" content="第五章：二叉树（下） 一、树与森林1.树存储结构（1）双亲表示法：实现：定义结构数组存放树的结点，每个结点含两个域（找双亲容易、找孩子难）  数据域：存放结点本身信息 双亲域：指示本结点的双亲结点在数组中的位置。   12345678910#define MAXTSIZE 100typedef struct PTNode &amp;#123;    ElemType data;    int parent">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/70149889">
+<meta property="article:published_time" content="2023-02-28T10:08:00.000Z">
+<meta property="article:modified_time" content="2025-03-22T03:54:08.585Z">
+<meta property="article:author" content="Luo Chenhao">
+<meta property="article:tag" content="datestructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/70149889"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第五章：二叉树（下）",
+  "url": "https://polaris-hzn8.github.io/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/",
+  "image": "https://avatars.githubusercontent.com/u/70149889",
+  "datePublished": "2023-02-28T10:08:00.000Z",
+  "dateModified": "2025-03-22T03:54:08.585Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Luo Chenhao",
+      "url": "https://polaris-hzn8.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Luo Chenhao","link":"Link: ","source":"Source: Polaris-hzn8","info":"Copyright belongs to the author. For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source."}},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第五章：二叉树（下）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2023/02/28/j7EIT5CMw9t8iKx.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Polaris-hzn8</span></a><a class="nav-page-title" href="/"><span class="site-name">第五章：二叉树（下）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第五章：二叉树（下）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-02-28T10:08:00.000Z" title="Created 2023-02-28 18:08:00">2023-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-22T03:54:08.585Z" title="Updated 2025-03-22 11:54:08">2025-03-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>10mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-22 11:54:08&quot;}" hidden></div><h1 id="第五章：二叉树（下）"><a href="#第五章：二叉树（下）" class="headerlink" title="第五章：二叉树（下）"></a>第五章：二叉树（下）</h1><hr>
+<h3 id="一、树与森林"><a href="#一、树与森林" class="headerlink" title="一、树与森林"></a>一、树与森林</h3><h4 id="1-树存储结构"><a href="#1-树存储结构" class="headerlink" title="1.树存储结构"></a>1.树存储结构</h4><h5 id="（1）双亲表示法："><a href="#（1）双亲表示法：" class="headerlink" title="（1）双亲表示法："></a>（1）双亲表示法：</h5><p>实现：定义<font color='#BAOC2F'>结构数组</font>存放树的结点，每个结点含两个域（找双亲容易、找孩子难）</p>
+<ul>
+<li>数据域：存放结点本身信息</li>
+<li>双亲域：指示本结点的<font color='#BAOC2F'>双亲结点在数组中的位置</font>。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011210412633.png" alt="image-20221011210412633"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXTSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">PTNode</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="type">int</span> parent;<span class="comment">//双亲位置域</span></span><br><span class="line">&#125; PTNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    PTNode nodes[MAXTSIZE];</span><br><span class="line">    <span class="type">int</span> r;<span class="comment">//根结点的位置</span></span><br><span class="line">    <span class="type">int</span> n;<span class="comment">//结点的个数</span></span><br><span class="line">&#125; PTree;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）孩子链表表示法："><a href="#（2）孩子链表表示法：" class="headerlink" title="（2）孩子链表表示法："></a>（2）孩子链表表示法：</h5><p>实现：将每个结点的孩子结点排列用单链表存储，而n个头指针又组成一个线性表用顺序表存储（找孩子容易、找双亲难）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011210604058.png" alt="image-20221011210604058"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//孩子结点结构：child + next</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">CTNode</span> &#123;</span><br><span class="line">    <span class="type">int</span> child;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">CTNode</span> *next;</span><br><span class="line">&#125; *ChildPtr;</span><br><span class="line"><span class="comment">//双亲结点结构：data + firstchild</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">CTBox</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    ChildPtr firstchild;<span class="comment">//孩子链表头指针</span></span><br><span class="line">&#125; CTBox;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    CTBox nodes[MAXTSIZE];</span><br><span class="line">    <span class="type">int</span> n;<span class="comment">//结点个数</span></span><br><span class="line">    <span class="type">int</span> r;<span class="comment">//根节点的位置</span></span><br><span class="line">&#125; CTree;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）孩子兄弟表示法："><a href="#（3）孩子兄弟表示法：" class="headerlink" title="（3）孩子兄弟表示法："></a>（3）孩子兄弟表示法：</h5><p>二叉链表表示法&#x2F;二叉树表示法&#x2F;孩子兄弟表示法，</p>
+<p>实现：用<font color='#BAOC2F'>二叉链表</font>表示数的存储结构，链表中每个结点的<font color='#BAOC2F'>两个指针域</font>分别指向其<font color='#BAOC2F'>第一个孩子结点</font>和<font color='#BAOC2F'>下一个兄弟结点</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011210814446.png" alt="image-20221011210814446"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">CSNode</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">CSNode</span> *firstchild, *nextsibling;</span><br><span class="line">&#125; CSNode, *CSTree;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-树与二叉树互转"><a href="#2-树与二叉树互转" class="headerlink" title="2.树与二叉树互转"></a>2.树与二叉树互转</h4><p>将树转化为二叉树进行处理，<font color='#BAOC2F'>利用二叉树的算法</font>来实现对树的操作，由于树和二叉树都可以<font color='#BAOC2F'>用二叉树链表</font>作存储结构，则以二叉链表做媒介可以<font color='#BAOC2F'>导出树与二叉树之间的对应关系</font>。给定一棵树，可以找到唯一的二叉树与之对应</p>
+<h5 id="（1）树转换为二叉树："><a href="#（1）树转换为二叉树：" class="headerlink" title="（1）树转换为二叉树："></a>（1）树转换为二叉树：</h5><ul>
+<li>理解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nJ411V7bd?p=98&t=100">树转换为二叉树</a></li>
+</ul>
+<p>二叉树转换步骤（兄弟相连留长子）：</p>
+<ol>
+<li>加线：在兄弟之间加一根连线</li>
+<li>抹线：对每个结点除了其左孩子外，去除其与其他孩子之间的关系</li>
+<li>旋转：以树的根结点为轴心，将整树顺时针旋转45度</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220520121828484.png" alt="image-20220520121828484"></p>
+<h5 id="（2）二叉树转换为树："><a href="#（2）二叉树转换为树：" class="headerlink" title="（2）二叉树转换为树："></a>（2）二叉树转换为树：</h5><ul>
+<li>理解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nJ411V7bd?p=98&t=765">二叉树转换为树</a></li>
+</ul>
+<p>树转换步骤（左孩右右连双亲，去掉原来右孩线）：</p>
+<ol>
+<li>加线：若p为双亲结点的左孩子，则将p的右孩子、右孩子的右孩子…沿分支找到所有的右孩子与双亲连接</li>
+<li>抹线：抹掉原二叉树中双亲与右孩子之间的连线</li>
+<li>调整：将结点按层次排列，形成树结构</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220520122552480.png" alt="image-20220520122552480"></p>
+<h4 id="3-森林与二叉树互转"><a href="#3-森林与二叉树互转" class="headerlink" title="3.森林与二叉树互转"></a>3.森林与二叉树互转</h4><h5 id="（1）森林转为二叉树："><a href="#（1）森林转为二叉树：" class="headerlink" title="（1）森林转为二叉树："></a>（1）森林转为二叉树：</h5><ul>
+<li>理解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nJ411V7bd?p=99&t=33">森林转为二叉树</a></li>
+</ul>
+<p>森林转为二叉树（树变二叉根相连）</p>
+<ol>
+<li>将各棵树分别转换为二叉树</li>
+<li>将每棵树的根结点用线相连</li>
+<li>以第一棵树根结点为二叉树的根，再以根结点为轴心顺时针旋转，构成二叉树形结构</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221010084216865.png" alt="image-20221010084216865"></p>
+<h5 id="（2）二叉树转为森林："><a href="#（2）二叉树转为森林：" class="headerlink" title="（2）二叉树转为森林："></a>（2）二叉树转为森林：</h5><ul>
+<li>理解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nJ411V7bd?p=99&t=249">二叉树转为森林</a></li>
+</ul>
+<p>二叉树转为森林（去掉全部右孩线，孤立二叉再还原）。</p>
+<ol>
+<li>抹线：将二叉树中根节点与其右孩子连线，及沿右分支搜索到的所有右孩子间连线全部抹掉（产生许多孤立的二叉树）</li>
+<li>还原：将孤立的二叉树还原为树</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220526090235671.png" alt="image-20220526090235671"></p>
+<h4 id="4-树与森林的遍历"><a href="#4-树与森林的遍历" class="headerlink" title="4.树与森林的遍历"></a>4.树与森林的遍历</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011211235498.png" alt="image-20221011211235498"></p>
+<h5 id="（1）树的遍历："><a href="#（1）树的遍历：" class="headerlink" title="（1）树的遍历："></a>（1）树的遍历：</h5><blockquote>
+<p>注：树的遍历没有中根遍历的情况，因为<font color='#BAOC2F'>无法确定根的中序位置</font>。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011211554764.png" alt="image-20221011211554764"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">PreOrder</span><span class="params">(TreeNode *R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (R != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">visit</span>(R);</span><br><span class="line">        <span class="keyword">while</span> (R-&gt;nextTree != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">PreOrder</span>(T);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011211751651.png" alt="image-20221011211751651"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">PostOrder</span><span class="params">(TreeNode *R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (R != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (R-&gt;nextTree != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">PostOrder</span>(T);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">visit</span>(R);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011212301859.png" alt="image-20221011212301859"></p>
+<h5 id="（2）森林的遍历："><a href="#（2）森林的遍历：" class="headerlink" title="（2）森林的遍历："></a>（2）森林的遍历：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011212632535.png" alt="image-20221011212632535"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011212858231.png" alt="image-20221011212858231"></p>
+<h3 id="二、哈夫曼树"><a href="#二、哈夫曼树" class="headerlink" title="二、哈夫曼树"></a>二、哈夫曼树</h3><h4 id="1-哈夫曼树构造"><a href="#1-哈夫曼树构造" class="headerlink" title="1.哈夫曼树构造"></a>1.哈夫曼树构造</h4><p>在含有n个带权结点的二叉树中，其中带<font color='#BAOC2F'>权路径长度WPL最小的二叉树</font>称为哈夫曼树，也称为最优二叉树。</p>
+<p>根据哈夫曼树中<font color='#BAOC2F'>权越大的叶子</font>离<font color='#BAOC2F'>根结点越近</font>的规律，利用贪心算法的思想：构造哈夫曼树时<font color='#BAOC2F'>首先选择权值小</font>的叶子结点。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011213639654.png" alt="image-20221011213639654"></p>
+<p>&#x3D;&#x3D;哈夫曼树性质&#x3D;&#x3D;：</p>
+<ol>
+<li>每个初始结点最终都会成为叶结点，且权值越小的结点到根节点的路径长度越大</li>
+<li>包含n个叶子结点的哈夫曼树中共有2n-1个结点</li>
+<li>哈夫曼树结点的度数为0或者2，没有度为1的结点</li>
+<li>哈夫曼树的构造并不唯一，但是路径长度WPL必然相同且为最优</li>
+<li>包含n棵树的森林要经过n-1次合并才能形成哈夫曼树，共产生n-1个新结点</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221010091234228.png" alt="image-20221010091234228"></p>
+<h4 id="2-哈夫曼树构造算法"><a href="#2-哈夫曼树构造算法" class="headerlink" title="2.哈夫曼树构造算法"></a>2.哈夫曼树构造算法</h4><p>采用顺序存储结构，一维数组实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="type">int</span> weight;</span><br><span class="line">    <span class="type">int</span> parent, lch rch;</span><br><span class="line">&#125; HTNode, *HuffmanTree;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（1）数组初始化："><a href="#（1）数组初始化：" class="headerlink" title="（1）数组初始化："></a>（1）数组初始化：</h5><ol>
+<li>初始化<code>HT[1...2n-1]</code>：<code>lch = rch = parent=0</code></li>
+<li>输入初始化<font color='#BAOC2F'>n个叶子结点</font>：设置<code>HT[1...n]</code>的weight值</li>
+</ol>
+<h5 id="（2）结点的n-1次合并："><a href="#（2）结点的n-1次合并：" class="headerlink" title="（2）结点的n-1次合并："></a>（2）结点的n-1次合并：</h5><p>对结点进行n-1次合并，依次产生n-1个结点<code>HT[i]，i=n+1, n+2, …2n-1</code></p>
+<ol>
+<li><p>在HT[1…i-1]中选取两个<font color='#BAOC2F'>未被选过</font>（parent&#x3D;&#x3D;0）<font color='#BAOC2F'>且weight最小</font>的结点<code>HT[s1]</code>和<code>HT[s2]</code></p>
+</li>
+<li><p>修改HT[s1]和HT[s2]的parent值：<code>HT[s1].parent=i;</code>、<code>HT[s2].parent=i;</code></p>
+</li>
+<li><p>修改新产生的HT[i]：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HT[i].weight = HT[s1].weight + HT[s2].weight;</span><br><span class="line">HT[i].lch = s1;</span><br><span class="line">HT[i].rch = s2;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreatHuffmanTree</span><span class="params">(HuffmanTree HT, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//1.数组初始化</span></span><br><span class="line">    m = <span class="number">2</span> *n - <span class="number">1</span>;<span class="comment">//数组共2n-1个元素</span></span><br><span class="line">    HT = <span class="keyword">new</span> HTNode[m + <span class="number">1</span>];<span class="comment">//0号单元未用，HT[m]表示根节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        HT[i].lch = <span class="number">0</span>;</span><br><span class="line">        HT[i].rch = <span class="number">0</span>;</span><br><span class="line">        HT[i].parent = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) cin &gt;&gt; HT[i].weight;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.开始构造哈夫曼树（合并产生n-1个结点）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n + <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="built_in">Select</span>(HT, i - <span class="number">1</span>, s1, s2);<span class="comment">//在HT[k]中选择两个其双亲域为0、且权值最小的结点，并返回他们在HT中的序号s1、s2</span></span><br><span class="line">        HT[s1].parent = i; HT[s2].parent = i;<span class="comment">//从F中删除s1, s2</span></span><br><span class="line">        HT[i].lch = s1; HT[i].rch = s2;<span class="comment">//s1，s2分别作为i的左右孩子</span></span><br><span class="line">        HT[i].weight = HT[s1].weight + HT[s2].weight; <span class="comment">//i的权值为左右孩子权值之和</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-哈夫曼树应用哈夫曼编码"><a href="#3-哈夫曼树应用哈夫曼编码" class="headerlink" title="3.哈夫曼树应用哈夫曼编码"></a>3.哈夫曼树应用哈夫曼编码</h4><h5 id="（1）问题引入："><a href="#（1）问题引入：" class="headerlink" title="（1）问题引入："></a>（1）问题引入：</h5><p>&#x3D;&#x3D;固定长度编码&#x3D;&#x3D;：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011214237395.png" alt="image-20221011214237395"></p>
+<p>&#x3D;&#x3D;可变长度编码&#x3D;&#x3D;：允许对不同字符用不等长的二进制位表示，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011214340487.png" alt="image-20221011214340487"></p>
+<p>&#x3D;&#x3D;哈夫曼编码&#x3D;&#x3D;：字符集中的每个字符作为一个叶子结点，各个<font color='#BAOC2F'>字符出现的频度</font>作为结点的权值，来构造哈夫曼树：</p>
+<ol>
+<li>统计字符集中每个字符在电文中出现的平均概论（概率越大、要求编码越短）</li>
+<li>将每个字符的平均概论作为权值，利用哈夫曼树的特点（权值越大的叶子离根越近）构造哈夫曼树。（概率越大的结点路径越短）</li>
+<li>在哈夫曼树的<font color='#BAOC2F'>每个结点分支上标记0和1</font>（左分支0，右分支1）</li>
+<li>把<font color='#BAOC2F'>从根到每个叶子的路径上的标号</font>连接起来，作为该叶子代表的字符编码</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221010093337744.png" alt="image-20221010093337744"></p>
+<blockquote>
+<ol>
+<li>哈夫曼编码是<font color='#BAOC2F'>前缀码</font>（没有一片树叶是另一片树叶的祖先）</li>
+<li>哈夫曼编码是<font color='#BAOC2F'>最优前缀码</font>（哈夫曼树的带权路径长度最短，字符编码总长度一定是最短的）</li>
+</ol>
+</blockquote>
+<h5 id="（2）哈夫曼编码："><a href="#（2）哈夫曼编码：" class="headerlink" title="（2）哈夫曼编码："></a>（2）哈夫曼编码：</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220526204908201.png" alt="image-20220526204908201"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从叶子到根逆向求每个字符的哈夫曼编码，存储在编码表HC中</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreatHuffmanCode</span><span class="params">(HuffmanTree HT, HuffmanCode &amp;HT, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    HC = <span class="keyword">new</span> <span class="type">char</span>*[n + <span class="number">1</span>];<span class="comment">//分配n个字符编码的头指针矢量</span></span><br><span class="line">    cd = <span class="keyword">new</span> <span class="type">char</span>[n];<span class="comment">//分配临时存放编码的动态数组空间</span></span><br><span class="line">    cd[n - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;<span class="comment">//编码结束符</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;<span class="comment">//逐个字符求哈夫曼编码</span></span><br><span class="line">        start = n - <span class="number">1</span>; c = i; f = HT[i].parent;</span><br><span class="line">        <span class="keyword">while</span> (f != <span class="number">0</span>) &#123;<span class="comment">//从叶子结点开始向上回溯直到根节点</span></span><br><span class="line">            start--;<span class="comment">//回溯一次start向前指一个位置</span></span><br><span class="line">            <span class="keyword">if</span> (HT[f].lchild == c) &#123;</span><br><span class="line">                cd[start] = <span class="string">&#x27;0&#x27;</span>;<span class="comment">//结点c是f的左孩子，则生成代码0</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cd[start] = <span class="string">&#x27;1&#x27;</span>;<span class="comment">//结点c是f的右孩子，则生成代码1</span></span><br><span class="line">            &#125;</span><br><span class="line">            c = i; f = HT[i].parent;<span class="comment">//继续向上回溯</span></span><br><span class="line">        &#125;<span class="comment">//求出第i个字符的编码</span></span><br><span class="line">        HC[i] = <span class="keyword">new</span> <span class="type">char</span>[n - start];<span class="comment">//为第i个字符串编码分配空间</span></span><br><span class="line">        <span class="built_in">strpy</span>(HC[i], &amp;cd[start]);<span class="comment">//将求得的编码从临时空间cd复制到HC的当前行中</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> cd;<span class="comment">//释放临时空间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、并查集"><a href="#三、并查集" class="headerlink" title="三、并查集"></a>三、并查集</h3><h4 id="1-并查集（双亲表示法）"><a href="#1-并查集（双亲表示法）" class="headerlink" title="1.并查集（双亲表示法）"></a>1.并查集（双亲表示法）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011215536023.png" alt="image-20221011215536023"></p>
+<p>使用<font color='#BAOC2F'>双亲表示法</font>，每个结点中保存指向双亲的指针，并和查的方式更加方便。（声明一个数组S即可表示集合的关系）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011215732244.png" alt="image-20221011215732244"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXTSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">PTNode</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="type">int</span> parent;<span class="comment">//双亲位置域</span></span><br><span class="line">&#125; PTNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    PTNode nodes[MAXTSIZE];<span class="comment">//双亲表示</span></span><br><span class="line">    <span class="type">int</span> r;<span class="comment">//根结点的位置</span></span><br><span class="line">    <span class="type">int</span> n;<span class="comment">//结点的个数</span></span><br><span class="line">&#125; PTree;</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011215812129.png" alt="image-20221011215812129"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//并查集初始化</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 13</span></span><br><span class="line"><span class="type">int</span> UFSets[SIZE];<span class="comment">//集合元素数组</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Initial</span><span class="params">(<span class="type">int</span> S[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; SIZE; ++i) S[i] = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//并查集基本操作</span></span><br><span class="line"><span class="comment">//Find查操作，找到x所属集合（返回x所属根结点）	时间复杂度O(n)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(S[x] &gt;= <span class="number">0</span>) x = S[x];</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Union并操作，将两个结合合并为一个	时间复杂度O(1)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> Root1, <span class="type">int</span> Root2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Root1 == Root2) <span class="keyword">return</span>;<span class="comment">//要求Root1与Root2是不同的集合</span></span><br><span class="line">    S[Root2] = Root1;<span class="comment">//将根Root2连接到另一根Root1的下面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-并查集优化Union（小树并大树）："><a href="#2-并查集优化Union（小树并大树）：" class="headerlink" title="2.并查集优化Union（小树并大树）："></a>2.并查集优化Union（小树并大树）：</h4><p>在并查集的Find操作中，若<font color='#BAOC2F'>结点数量为n</font>则Find最坏时间复杂度为<code>O(n)</code></p>
+<p>优化思路：在每次Union操作构建树的时候，尽可能让<font color='#BAOC2F'>树不长太高</font>（小树合并到大树）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220011086.png" alt="image-20221011220011086"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220036683.png" alt="image-20221011220036683"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//并查集基本操作</span></span><br><span class="line"><span class="comment">//Find查操作，找到x所属集合（返回x所属根结点）	时间复杂度O(log2n)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(S[x] &gt;= <span class="number">0</span>) x = S[x];</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Union并操作，小树合并到大树	时间复杂度O(1)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> Root1, <span class="type">int</span> Root2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Root1 == Root2) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (S[Root2] &gt; S[Root1]) &#123;<span class="comment">//Root2结点数更少</span></span><br><span class="line">        S[Root1] += S[Root2];<span class="comment">//累加结点总数</span></span><br><span class="line">        S[Root2] = Root1;<span class="comment">//小树合并到大树</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">//Root1结点数更少</span></span><br><span class="line">        S[Root2] += S[Root1];</span><br><span class="line">        S[Root1] = Root2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该方法构造的树高度不超过[log2n] + 1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220141745.png" alt="image-20221011220141745"></p>
+<h4 id="3-并查集进一步优化Find（路径压缩）："><a href="#3-并查集进一步优化Find（路径压缩）：" class="headerlink" title="3.并查集进一步优化Find（路径压缩）："></a>3.并查集进一步优化Find（路径压缩）：</h4><p>Find操作的优化：压缩路径，先找到根节点、再将查找路径上的<font color='#BAOC2F'>所有结点</font>都<font color='#BAOC2F'>挂到根结点下面</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220212030.png" alt="image-20221011220212030"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220228477.png" alt="image-20221011220228477"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//并查集基本操作</span></span><br><span class="line"><span class="comment">//Find查操作优化，先找到根节点再进行路径压缩</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> root = x;</span><br><span class="line">    <span class="keyword">while</span> (S[root] &gt;= <span class="number">0</span>) root = S[root];<span class="comment">//循环查找根</span></span><br><span class="line">    <span class="keyword">while</span> (x != root) &#123;<span class="comment">//压缩路径</span></span><br><span class="line">        <span class="type">int</span> t = S[x];<span class="comment">//t指向x的父节点</span></span><br><span class="line">        S[x] = root;<span class="comment">//x直接挂到根节点下</span></span><br><span class="line">        x = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;<span class="comment">//返回根节点编号</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Union并操作，小树合并到大树	时间复杂度O(1)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> S[], <span class="type">int</span> Root1, <span class="type">int</span> Root2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Root1 == Root2) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (S[Root2] &gt; S[Root1]) &#123;<span class="comment">//Root2结点数更少</span></span><br><span class="line">        S[Root1] += S[Root2];<span class="comment">//累加结点总数</span></span><br><span class="line">        S[Root2] = Root1;<span class="comment">//小树合并到大树</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">//Root1结点数更少</span></span><br><span class="line">        S[Root2] += S[Root1];</span><br><span class="line">        S[Root1] = Root2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该方法构造的树高度不超过[log2n] + 1</span></span><br></pre></td></tr></table></figure>
+
+<p>优化后的	并查集的Find、Union操作时间复杂度都很低。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220310016.png" alt="image-20221011220310016"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20221011220618604.png" alt="image-20221011220618604"></p>
+<h3 id="四、二叉树经典问题"><a href="#四、二叉树经典问题" class="headerlink" title="四、二叉树经典问题"></a>四、二叉树经典问题</h3><h4 id="1-数据压缩"><a href="#1-数据压缩" class="headerlink" title="1.数据压缩"></a>1.数据压缩</h4><ul>
+<li>数据压缩：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144562146">https://zhuanlan.zhihu.com/p/144562146</a></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220505065115558.png" alt="image-20220505065115558"></p>
+<h4 id="2-表达式求值"><a href="#2-表达式求值" class="headerlink" title="2.表达式求值"></a>2.表达式求值</h4><ul>
+<li>Cpp：<a target="_blank" rel="noopener" href="https://www.pudn.com/news/62ac953fca7ee606dccd7b69.html">https://www.pudn.com/news/62ac953fca7ee606dccd7b69.html</a></li>
+<li>Java：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44028290/article/details/106376961">https://blog.csdn.net/qq_44028290&#x2F;article&#x2F;details&#x2F;106376961</a></li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220505065410225.png" alt="image-20220505065410225"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://raw.githubusercontent.com/Polaris-hzn8/TyporaImg/main/hexo/dataStructure/image-20220506074421842.png" alt="image-20220506074421842"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io">Luo Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://polaris-hzn8.github.io/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/">https://polaris-hzn8.github.io/2023/02/28/dataStructure/6.%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/datestructure/">datestructure</a></div><div class="post-share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/70149889" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/02/28/dataStructure/1.%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA/" title="第一章：绪论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第一章：绪论</div></div><div class="info-2"><div class="info-item-1">第一章：绪论 一、基本概念1.Data数据Data数据：是能够输入计算机且能被计算机处理的各种符号的集合。 Data数据包括：  数值型数据：整数、实数 非数值型数据：文字、图像、图形、声音等  2.DataElement数据元素DataElement数据元素（元素&#x2F;记录&#x2F;结点&#x2F;顶点）：是Data数据的基本单位，在计算机程序中通常被作为一个整体进行考虑和处理  3.DataItem数据项DataItem数据项：是构成数据元素的不可分割的最小单位。   数据三者之间的关系：数据 &gt; 数据元素  &gt;...</div></div></div></a><a class="pagination-related" href="/2023/02/27/dataStructure/10.%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E6%8E%92%E5%BA%8F/" title="第八章排序"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-27</div><div class="info-item-2">第八章排序</div></div><div class="info-2"><div class="info-item-1">第八章：排序    分类标准 类别1 类别2    按存储介质 内部排序：数据量不大数据在内存，无需内外存交换数据 外部排序：数据量较大数据在外存（文件排序）   按比较器个数 串行排序：单处理机（同一时刻比较一对元素） 并行排序：多处理机（同一时刻比较多对元素）   按主要操作 比较排序：使用比较的方法，包括插入排序、交换排序、选择排序、归并排序 基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置   按辅助空间 原地排序：辅助空间用量为O(1) 非原地排序   按稳定性 稳定排序：使任何数值相等的元素，排序以后相对次序不变 非稳定排序   按自然性 自然排序：输入数据越有序，排序的速度越快 非自然排序    外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。 排序稳定性只对结构类型的数据排序有意义，例如student类型 排序方法是否稳定，并不能衡量一个排序算法的优劣  123456//案例中使用的数据结构#define MAXLENGTH 50typedef struct &#123;    int...</div></div></div></a><a class="pagination-related" href="/2023/02/28/dataStructure/4.%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84/" title="第四章：串与数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="info-item-2">第四章：串与数组</div></div><div class="info-2"><div class="info-item-1">第四章：串与数组 一、串String串是指零个or多个任意字符串组成的有限序列。 123456789101112131415161718ADT String &#123;    数据对象：    数据关系：    基本操作：        StrAssign(&amp;T, chars);        StrCompare(S, T);    	StrLength(s);    	Concat(&amp;T, S1, S2);    	SubString(&amp;Sub, S, pos, len);    	StrCopy(&amp;T, S);        StrEmpty(S);    	ClearString(&amp;S);    	Index(S, T, pos);//字符串匹配算法        Replace(&amp;S, T, V);    	StrInsert(&amp;S, pos, T);    	StrDelete(&amp;S, pos, len);    	DestroyString(&amp;S);&#125; ADT...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/70149889" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Luo Chenhao</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/polaris-hzn8"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/polaris-hzn8" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://en-telegram.com/" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">welcome to this site, and have a nice day</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="toc-text">第五章：二叉树（下）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97"><span class="toc-text">一、树与森林</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-text">1.树存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%9A"><span class="toc-text">（1）双亲表示法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%AD%A9%E5%AD%90%E9%93%BE%E8%A1%A8%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%9A"><span class="toc-text">（2）孩子链表表示法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%9A"><span class="toc-text">（3）孩子兄弟表示法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BA%92%E8%BD%AC"><span class="toc-text">2.树与二叉树互转</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A"><span class="toc-text">（1）树转换为二叉树：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%A0%91%EF%BC%9A"><span class="toc-text">（2）二叉树转换为树：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%A3%AE%E6%9E%97%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BA%92%E8%BD%AC"><span class="toc-text">3.森林与二叉树互转</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A3%AE%E6%9E%97%E8%BD%AC%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A"><span class="toc-text">（1）森林转为二叉树：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E4%B8%BA%E6%A3%AE%E6%9E%97%EF%BC%9A"><span class="toc-text">（2）二叉树转为森林：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-text">4.树与森林的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%9A"><span class="toc-text">（1）树的遍历：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%A3%AE%E6%9E%97%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%9A"><span class="toc-text">（2）森林的遍历：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-text">二、哈夫曼树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E6%9E%84%E9%80%A0"><span class="toc-text">1.哈夫曼树构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E6%9E%84%E9%80%A0%E7%AE%97%E6%B3%95"><span class="toc-text">2.哈夫曼树构造算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A"><span class="toc-text">（1）数组初始化：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%BB%93%E7%82%B9%E7%9A%84n-1%E6%AC%A1%E5%90%88%E5%B9%B6%EF%BC%9A"><span class="toc-text">（2）结点的n-1次合并：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%BA%94%E7%94%A8%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="toc-text">3.哈夫曼树应用哈夫曼编码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5%EF%BC%9A"><span class="toc-text">（1）问题引入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%EF%BC%9A"><span class="toc-text">（2）哈夫曼编码：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-text">三、并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%89"><span class="toc-text">1.并查集（双亲表示法）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B9%B6%E6%9F%A5%E9%9B%86%E4%BC%98%E5%8C%96Union%EF%BC%88%E5%B0%8F%E6%A0%91%E5%B9%B6%E5%A4%A7%E6%A0%91%EF%BC%89%EF%BC%9A"><span class="toc-text">2.并查集优化Union（小树并大树）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B9%B6%E6%9F%A5%E9%9B%86%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BC%98%E5%8C%96Find%EF%BC%88%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%EF%BC%89%EF%BC%9A"><span class="toc-text">3.并查集进一步优化Find（路径压缩）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-text">四、二叉树经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="toc-text">1.数据压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-text">2.表达式求值</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Luo Chenhao</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Thanks for your reading</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
